@@ -11,11 +11,11 @@
     - #### *Create / Edit / Delete posts.*
     - #### *Create / Delete post comments.*
     - #### *Like / Unlike posts.*
-    - #### *Create / Edit / Delete discussions.*
+    - #### *Create / Edit / Delete discussions, filter subject, date.*
     - #### *Like / Unlike discussions.*
-    - #### *Create / Delete notes.*
-    - #### *Chat with users, search user.*
-    - #### *Find friends: search, filter user.*
+    - #### *Create / Delete note, Show user note.*
+    - #### *Chat with users, search name.*
+    - #### *Find friends: search name, filter user university, birthYear.*
 
 ## Inside directory create a .env file and add
 `REACT_APP_API_URL=http://localhost:8080`
