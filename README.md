@@ -17,7 +17,7 @@
 #### *Chat with users, search user.*
 #### *Find friends: search, filter user.*
 
-Inside directory create a .env file and add
+## Inside directory create a .env file and add
 `REACT_APP_API_URL=http://localhost:8080`
 
 ```bash
