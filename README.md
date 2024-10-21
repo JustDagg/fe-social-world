@@ -2,6 +2,8 @@
 
 ## MERN - social network for students
 
+<img src="https://imgur.com/yw2oQEM">
+
 - ### Frontend Reactjs
     - #### *SignUp / SignIn.*
     - #### *Google Oauth 2 Login.*
