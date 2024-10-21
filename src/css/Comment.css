@@ -1,0 +1,74 @@
+.panel-body {
+    max-height: 650px;
+    overflow: auto;
+}
+
+.media-list .media img {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e5e7e8;
+}
+
+.media-list .media {
+    border-bottom: 1px dashed #efefef;
+    margin-bottom: 25px;
+}
+
+/* deleteComment */
+.custom-confirm-alert {
+    width: 400px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.custom-confirm-alert-header {
+    background-color: #D19616;
+    color: #ffffff;
+    padding: 17px;
+    text-align: center;
+}
+
+.custom-confirm-alert-body {
+    padding: 20px;
+}
+
+.custom-confirm-alert-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.custom-confirm-alert-button {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.custom-confirm-alert-button-yes {
+    background-color: #1a73e8;
+    color: #ffffff;
+}
+
+.custom-confirm-alert-button-yes:hover {
+    background-color: #185abc;
+}
+
+.custom-confirm-alert-button-no {
+    background-color: #cb0e0e;
+    color: #ffffff;
+}
+
+.custom-confirm-alert-button-no:hover {
+    background-color: #850b0b;
+}
+
+
+.emoji-btn {
+    float: right;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}

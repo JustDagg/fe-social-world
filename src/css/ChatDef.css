@@ -1,0 +1,104 @@
+/* General Container */
+.chat-container1 {
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Chat Content */
+.chat-content1 {
+    width: 1200px;
+    display: flex;
+    border-radius: 1rem;
+    background: #f9f9f9;
+    margin: 20px auto;
+}
+
+/* Users Container */
+.users-container1 {
+    flex: 1;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    margin-right: 1rem; /* Add spacing between users list and chat area */
+}
+
+/* User List */
+.users1 {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Chat Item */
+.chat-item1 {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border: 1px solid transparent;
+}
+
+.chat-item1:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: #ddd;
+}
+
+.chat-avatar1 {
+    margin-right: 1rem;
+}
+
+.chat-avatar1 img {
+    object-fit: contain;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s;
+}
+
+.chat-avatar1 img:hover {
+    border-color: #007bff; /* Add a highlight effect on hover */
+}
+
+.chat-info1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-name1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.chat-name1:hover {
+    color: #007bff;
+    text-decoration: none;
+    border: none;
+}
+
+/* Empty State */
+.no-chats1 {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-size: 1rem;
+}

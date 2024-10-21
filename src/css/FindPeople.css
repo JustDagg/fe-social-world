@@ -1,0 +1,48 @@
+.find-friend-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.find-friend-card:hover {
+    transform: scale(1.05);
+}
+
+.profile-img-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+}
+
+.btn-view-profile {
+    background: #0cc6f5;
+    color: white;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.btn-view-profile:hover {
+    background: #032ea4;
+    color: white;
+}
+
+.btn-follow {
+    background: #0cc6f5;
+    color: white;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.btn-follow:hover {
+    background: #0544f0;
+    color: white;
+}

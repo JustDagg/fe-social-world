@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "noEmitOnError": true,  
+    "strict": true,  
+    "esModuleInterop": true, 
+    "skipLibCheck": true, 
+    "forceConsistentCasingInFileNames": true, 
+    "sourceMap": true  
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}
