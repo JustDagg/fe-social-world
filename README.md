@@ -6,12 +6,12 @@
     - #### *SignUp / SignIn.*
     - #### *Google Oauth 2 Login.*
     - #### *Forgot password send email reset password.*
-    - #### *Edit / Delete your profile.*
+    - #### *Edit (upload avatar) / Delete your profile.*
     - #### *Follow / Unfollow users.*
-    - #### *Create / Edit / Delete posts.*
+    - #### *Create (upload image) / Edit / Delete posts.*
     - #### *Create / Delete post comments.*
     - #### *Like / Unlike posts.*
-    - #### *Create / Edit / Delete discussions, filter subject, date.*
+    - #### *Create / Edit / Delete discussions, filter (subject, date).*
     - #### *Like / Unlike discussions.*
     - #### *Create / Delete note, Show user note.*
     - #### *Chat with users, search name.*
