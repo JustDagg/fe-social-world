@@ -40,10 +40,11 @@ class SocialLogin extends Component {
         if (redirectToReferrer) {
             return <Redirect to="/" />;
         }
+        
         if(this.props.for === "signup"){
             return (
                 <GoogleLogin
-                    clientId="109098577332-pdeuvr6jupqu74rqq1u66vej1hno9sbl.apps.googleusercontent.com"
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Signup with Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
@@ -52,7 +53,7 @@ class SocialLogin extends Component {
         } else {
             return (
                 <GoogleLogin
-                    clientId="109098577332-pdeuvr6jupqu74rqq1u66vej1hno9sbl.apps.googleusercontent.com"
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Login with Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
