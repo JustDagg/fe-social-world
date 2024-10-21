@@ -2,7 +2,7 @@
 
 ## MERN - social network for students
 
-<img src="https://imgur.com/a/LkX0W8s">
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/LkX0W8s" data-context="false" ><a href="//imgur.com/a/LkX0W8s"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 - ### Frontend Reactjs
     - #### *SignUp / SignIn.*
