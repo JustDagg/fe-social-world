@@ -2,7 +2,6 @@
 
 ## MERN - social network for students
 
-
 - ### Frontend Reactjs
     - #### *SignUp / SignIn.*
     - #### *Google Oauth 2 Login.*
@@ -18,16 +17,13 @@
     - #### *Chat with users, search name.*
     - #### *Find friends: search name, filter user university, birthYear.*
 
-
 ## Inside directory create a .env file and add
 - `REACT_APP_API_URL=http://localhost:8080`
 - `REACT_APP_GOOGLE_CLIENT_ID=''`
-
 
 ```bash
 npm install
 npm start
 ```
-
 
 Open your browser and enter url `http://localhost:3000`
