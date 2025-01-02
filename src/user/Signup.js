@@ -234,8 +234,8 @@ class Signup extends Component {
     render() {
         const { name, email, password, university, birthYear, error, open, loading, recaptcha } = this.state;
         return (
-            <Container component="main" maxWidth="100%">
-                <Paper elevation={3} style={{ padding: '20px', marginTop: '40px' }}>
+            <Container style={{ padding: "0px 100px 20px 100px", marginTop: "20px" }} component="main" maxWidth="100%">
+                <Paper elevation={5} style={{ padding: '20px' }}>
                     <Typography
                         style={{
                             fontWeight: 700,

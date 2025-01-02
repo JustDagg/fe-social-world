@@ -74,6 +74,11 @@ class Signin extends Component {
                 value={email}
                 type="email"
                 required
+                sx={{
+                    '& .MuiInputBase-input MuiOutlinedInput-input': {
+                        borderRadius: '22px',
+                    },
+                }}
             />
 
             {/* PASSWORD FIELD */}
@@ -144,8 +149,8 @@ class Signin extends Component {
             return <Redirect to="/" />;
         }
         return (
-            <Container component="main" maxWidth="100%">
-                <Paper elevation={3} style={{ padding: '20px', marginTop: '40px' }}>
+            <Container style={{ padding: "0px 100px 20px 100px", marginTop: "20px" }} component="main" maxWidth="100%">
+                <Paper elevation={5} style={{ padding: '20px' }}>
                     {/* Title */}
                     <Typography
                         style={{
