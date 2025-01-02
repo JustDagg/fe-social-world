@@ -381,16 +381,23 @@ class Profile extends Component {
                                     />
                                 </div>
 
-                                <div style={{ textAlign: 'left' }}>
+                                <div
+                                    style={{
+                                        textAlign: 'left',
+                                        padding: '20px',
+                                        borderRadius: '10px',
+                                        backgroundColor: '#f9f9f9'
+                                    }}
+                                >
                                     {/* User Name */}
-                                    <h2 style={{ margin: 0 }}>
-                                        <span style={{ fontWeight: "bold", fontSize: "30px" }}>{user.name}</span>
+                                    <h2 style={{ margin: 0, textAlign: 'center' }}>
+                                        <span style={{ fontWeight: 'bold', fontSize: '28px', color: '#333' }}>{user.name}</span>
                                         <i
                                             style={{
-                                                marginLeft: "5px",
-                                                fontSize: "15px",
-                                                color: "#3897f0",
-                                                verticalAlign: "top"
+                                                marginLeft: '8px',
+                                                fontSize: '18px',
+                                                color: '#3897f0',
+                                                verticalAlign: 'middle'
                                             }}
                                             className="fa fa-check-circle"
                                             aria-hidden="true"
@@ -398,34 +405,33 @@ class Profile extends Component {
                                     </h2>
 
                                     {/* User Email */}
-                                    <p style={{ fontSize: "15px", marginTop: "10px" }}>{user.email}</p>
+                                    <p style={{ fontSize: '14px', marginTop: '10px', textAlign: 'center', color: '#666' }}>{user.email}</p>
 
                                     {/* User Information */}
-                                    <div style={{ justifyContent: "center", alignItems: "center" }}>
-                                        {/* User Birth Year */}
-                                        {user.birthYear && (
-                                            <div style={{ display: "flex", alignItems: "center" }}>
-                                                <i
-                                                    style={{ fontSize: "20px" }}
-                                                    className="fa fa-birthday-cake"
-                                                    aria-hidden="true"
-                                                ></i>
-                                                <span style={{ marginLeft: "8px", fontSize: "20px" }}>{user.birthYear}</span>
-                                            </div>
-                                        )}
+                                    <div style={{ marginTop: '20px', backgroundColor: '#f9f9f9', margin: '0 auto' }}>
+                                        <table style={{ width: '100%', borderCollapse: 'collapse', border: 'none' }}>
+                                            <tbody>
+                                                {/* User Birth Year */}
+                                                {user.birthYear && (
+                                                    <tr style={{ borderBottom: '1px solid #ddd' }}>
+                                                        <td style={{ padding: '8px', fontSize: '16px', color: '#555', display: 'flex', alignItems: 'center' }}>
+                                                            <i title='Birth Year' className="fa fa-birthday-cake" style={{ fontSize: '18px', marginRight: '10px' }} aria-hidden="true"></i>
+                                                        </td>
+                                                        <td style={{ padding: '8px', textAlign: 'right', fontSize: '16px', color: '#333' }}>{user.birthYear}</td>
+                                                    </tr>
+                                                )}
 
-
-                                        {/* University */}
-                                        {user.university && (
-                                            <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
-                                                <i
-                                                    style={{ fontSize: "20px" }}
-                                                    className="fa fa-graduation-cap"
-                                                    aria-hidden="true"
-                                                ></i>
-                                                <span style={{ marginLeft: "8px", fontSize: "20px" }}>{user.university}</span>
-                                            </div>
-                                        )}
+                                                {/* University */}
+                                                {user.university && (
+                                                    <tr>
+                                                        <td style={{ padding: '8px', fontSize: '16px', color: '#555', display: 'flex', alignItems: 'center' }}>
+                                                            <i title='University' className="fa fa-graduation-cap" style={{ fontSize: '18px', marginRight: '10px' }} aria-hidden="true"></i>
+                                                        </td>
+                                                        <td style={{ padding: '8px', textAlign: 'right', fontSize: '16px', color: '#333' }}>{user.university}</td>
+                                                    </tr>
+                                                )}
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -550,7 +556,7 @@ class Profile extends Component {
                                             transition: "background-color 0.3s ease, transform 0.3s ease",
                                         }}
                                     >
-                                        <i style={{ marginRight: "5px" }} class="fa fa-plus-square" aria-hidden="true"></i> Create Post
+                                        <i style={{ marginRight: "15px" }} class="fa fa-plus-square" aria-hidden="true"></i> Create Post
                                     </Link>
 
                                     {/* EDIT PROFILE BUTTON */}
@@ -568,7 +574,7 @@ class Profile extends Component {
                                             transition: "background-color 0.3s ease, transform 0.3s ease",
                                         }}
                                     >
-                                        <i style={{ marginRight: "5px" }} class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
+                                        <i style={{ marginRight: "15px" }} class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
                                     </Link>
 
                                     {/* DELETE USER PROFILE */}
@@ -583,7 +589,7 @@ class Profile extends Component {
                                             style={{ borderRadius: "20px", padding: "10px 50px" }}
                                             to={`/chat/${isAuthenticated().user._id}/${user._id}`}
                                         >
-                                            <i style={{ marginRight: "5px" }} class="fa fa-commenting" aria-hidden="true"></i> Message
+                                            <i style={{ marginRight: "15px" }} class="fa fa-commenting" aria-hidden="true"></i> Message
                                         </Link>
                                     </div>
 
@@ -598,7 +604,7 @@ class Profile extends Component {
 
                         {/* Bio */}
                         <div className="section">
-                            <h3 style={{ fontSize: '24px', fontWeight: '600', color: '#333' }}>Bio</h3>
+                            <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#333' }}>BIO</h3>
                             <p style={{ fontSize: "18px", }}>{user.about}</p>
                         </div>
 

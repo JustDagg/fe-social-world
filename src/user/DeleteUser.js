@@ -35,10 +35,10 @@ class DeleteUser extends Component {
             customUI: ({ onClose }) => (
                 <div className="custom-confirm-alert">
                     <div className="custom-confirm-alert-header">
-                        <h1 style={{ fontSize: "26px", fontWeight: "bold" }}>Confirm Delete Account</h1>
+                        <h1 style={{ fontSize: "26px", fontWeight: "bold" }}>Confirm Delete Profile</h1>
                     </div>
                     <div className="custom-confirm-alert-body">
-                        <p>Are you sure you want to delete this account with name <b>{username}</b>?</p>
+                        <p>Are you sure you want to delete this profile with name <b>{username}</b>?</p>
                         <div className="custom-confirm-alert-buttons">
                             <button
                                 onClick={() => {
@@ -83,7 +83,7 @@ class DeleteUser extends Component {
                     transition: "background-color 0.3s ease, transform 0.3s ease",
                 }}
             >
-                <i style={{ marginRight: "5px" }} class="fa fa-minus-square" aria-hidden="true"></i> Delete Profile
+                <i style={{ marginRight: "15px" }} class="fa fa-minus-square" aria-hidden="true"></i> Delete Profile
             </button>
         );
     }

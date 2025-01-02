@@ -23,7 +23,7 @@ class FollowProfileButton extends Component {
                             className="btn btn-sm btn-info btn-raised"
                             style={{ borderRadius: "20px", padding: "10px 50px" }}
                         >
-                            <i style={{ marginRight: "5px" }} class="fa fa-smile-o" aria-hidden="true"></i>
+                            <i style={{ marginRight: "15px" }} class="fa fa-smile-o" aria-hidden="true"></i>
                             Follow
                         </button>
                     ) : (
@@ -33,7 +33,7 @@ class FollowProfileButton extends Component {
                             className="btn btn-sm btn-raised btn-danger"
                             style={{ borderRadius: "20px", padding: "10px 50px" }}
                         >
-                            <i style={{ marginRight: "5px" }} class="fa fa-frown-o" aria-hidden="true"></i>
+                            <i style={{ marginRight: "15px" }} class="fa fa-frown-o" aria-hidden="true"></i>
                             UnFollow
                         </button>
                     )
