@@ -94,7 +94,7 @@ const NewDiscussionPost = ({ history }) => {
                 <div style={styles.inputContainer}>
                     <i className="fa fa-book" aria-hidden="true" style={styles.icon}></i>
                     <textarea
-                        value={question}
+                        value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         placeholder="Enter your subject"
                         style={styles.input}

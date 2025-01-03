@@ -13,6 +13,8 @@ import { createNote, deleteNote, getNotesByUser, read } from "./apiUser";
 import '../css/Profile.css';
 import Footer from '../component/Footer';
 import NoteModal from './NoteModal';
+import { DisplayDateTime12Hour } from '../post/timeDifference';
+import { Box, Button, Icon, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from '../../node_modules/@material-ui/core/index';
 
 class Profile extends Component {
     constructor() {
@@ -27,7 +29,8 @@ class Profile extends Component {
             isAvatarModalOpen: false,
             isNoteModalOpen: false,
             note: "",
-            existingNote: null
+            existingNote: null,
+            openInfomatioModal: false,
         }
     }
 
@@ -174,8 +177,16 @@ class Profile extends Component {
         });
     };
 
+    handleOpenInformationModal = () => {
+        this.setState({ openInfomatioModal: true });
+    };
+
+    handleCloseInfomationModal = () => {
+        this.setState({ openInfomatioModal: false });
+    };
+
     renderProfile = () => {
-        const { user, following, posts, isAvatarModalOpen, isNoteModalOpen, existingNote, note } = this.state;
+        const { user, following, posts, isAvatarModalOpen, isNoteModalOpen, existingNote, note, openInfomatioModal } = this.state;
         const photoUrl = user._id ? `${process.env.REACT_APP_API_URL}/user/photo/${user._id}?${new Date().getTime()}` : DefaultProfile;
 
         // Kiểm tra người dùng hiện tại có phải là người đăng nhập không
@@ -537,6 +548,184 @@ class Profile extends Component {
                                 </p>
                             </div>
                         </div>
+
+                        {isLoggedInUser && (
+                            <>
+                                <Box sx={{ mt: 2 }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', pt: 2, pl: 6 }}>
+                                        <Tooltip title="Private Information View (Only you)" arrow placement={"top"}>
+                                            <Button
+                                                variant="contained"
+                                                color="warning"
+                                                startIcon={<Icon className="fa fa-exclamation-circle" />}
+                                                style={{
+                                                    fontSize: '18px',
+                                                    fontWeight: 'bold',
+                                                    borderRadius: '20px',
+                                                    padding: '8px 16px',
+                                                    textTransform: 'none',
+                                                    boxShadow: 2,
+                                                    '&:hover': {
+                                                        backgroundColor: '#FFB74D',
+                                                        boxShadow: 4,
+                                                    },
+                                                }}
+                                                onClick={this.handleOpenInformationModal}
+                                            >
+                                                User Details
+                                            </Button>
+                                        </Tooltip>
+                                    </Box>
+
+                                    <Modal
+                                        open={openInfomatioModal}
+                                        onClose={this.handleCloseInfomationModal}
+                                        aria-labelledby="modal-title"
+                                        aria-describedby="modal-description"
+                                    >
+                                        <Box
+                                            sx={{
+                                                position: "absolute",
+                                                top: "50%",
+                                                left: "50%",
+                                                transform: "translate(-50%, -50%)",
+                                                width: 500,
+                                                bgcolor: "background.paper",
+                                                border: "2px solid #000",
+                                                boxShadow: 24,
+                                                p: 4,
+                                                borderRadius: "8px",
+                                            }}
+                                        >
+                                            <TableContainer component={Paper} style={{ borderRadius: '8px' }}>
+                                                <Table>
+                                                    <TableBody>
+                                                        {/* User Birth Year */}
+                                                        {user.birthYear && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Birth Year</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {user.birthYear}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* University */}
+                                                        {user.university && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">University</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {user.university}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* Sex */}
+                                                        {user.sex && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Sex</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {user.sex}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* Nickname */}
+                                                        {user.nickname && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Nickname</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {user.nickname}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* Work Place */}
+                                                        {user.workPlace && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Work Place</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {user.workPlace}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* socialNetworkLink */}
+                                                        {user.socialNetworkLink && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Social Network Link</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    <a href={user.socialNetworkLink} target="_blank" rel="noopener noreferrer">
+                                                                        {user.socialNetworkLink}
+                                                                    </a>
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* Created Date */}
+                                                        {user.created && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Created Date</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {DisplayDateTime12Hour(new Date(user.created))}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* Updated Date */}
+                                                        {user.updated && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Updated Date</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {DisplayDateTime12Hour(new Date(user.updated))}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+                                                    </TableBody>
+                                                </Table>
+                                            </TableContainer>
+                                            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                                <Button
+                                                    onClick={this.handleCloseInfomationModal}
+                                                    variant="contained"
+                                                    color="primary"
+                                                    style={{
+                                                        marginTop: '10px',
+                                                        justifyContent: 'center',
+                                                        borderRadius: '20px',
+                                                        fontWeight: 'bold',
+                                                        padding: '8px 20px',
+                                                        boxShadow: 2,
+                                                        '&:hover': {
+                                                            backgroundColor: '#1976d2',
+                                                            boxShadow: 4,
+                                                        },
+                                                    }}
+                                                >
+                                                    Close
+                                                </Button>
+                                            </Box>
+                                        </Box>
+                                    </Modal>
+                                </Box>
+                            </>
+                        )}
 
                         <div className="button-container">
                             {isAuthenticated().user && isAuthenticated().user._id === user._id ? (

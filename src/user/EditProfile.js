@@ -17,6 +17,10 @@ class EditProfle extends Component {
             email: "",
             about: "",
             password: "",
+            sex: "",
+            nickname: "",
+            workPlace: "",
+            socialNetworkLink: "",
             university: "",
             birthYear: "",
             loading: false,
@@ -38,6 +42,10 @@ class EditProfle extends Component {
                         id: data._id,
                         name: data.name,
                         email: data.email,
+                        sex: data.sex,
+                        nickname: data.nickname,
+                        workPlace: data.workPlace,
+                        socialNetworkLink: data.socialNetworkLink,
                         university: data.university,
                         birthYear: data.birthYear,
                         error: "",
@@ -124,7 +132,7 @@ class EditProfle extends Component {
 
     };
 
-    signupForm = (name, email, university, birthYear, password, loading, about) => (
+    signupForm = (name, email, sex, nickname, workPlace, socialNetworkLink, university, birthYear, password, loading, about) => (
         <form style={{ padding: "0px 30px", marginBottom: "30px" }}>
 
             {/* PROFILE PHOTO FIELD */}
@@ -208,6 +216,110 @@ class EditProfle extends Component {
                     name="email"
                     type="email"
                     value={email}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
+            {/* SEX FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Sex
+                </label>
+                <select
+                    name="sex"
+                    value={sex}
+                    onChange={this.handleChange}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        width: '100%',
+                        outline: 'none',
+                        transition: 'border 0.3s ease',
+                        backgroundColor: '#fff',
+                    }}
+                    onFocus={(e) => (e.target.style.border = '1px solid #1a73e8')}
+                    onBlur={(e) => (e.target.style.border = '1px solid #dadce0')}
+                >
+                    <option value="" disabled></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            {/* NICKNAME FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Nickname
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="nickname"
+                    type="text"
+                    value={nickname}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
+            {/* WORKPLACE FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Work Place
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="workPlace"
+                    type="text"
+                    value={workPlace}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
+            {/* SOCIAL NETWORK LINK FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Social Network Link
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="socialNetworkLink"
+                    type="text"
+                    value={socialNetworkLink}
                     style={{
                         padding: '10px',
                         fontSize: '16px',
@@ -349,7 +461,7 @@ class EditProfle extends Component {
 
     render() {
 
-        const { id, name, email, university, birthYear, password, loading, redirectToProfile, error, about } = this.state;
+        const { id, name, email, sex, nickname, workPlace, socialNetworkLink, university, birthYear, password, loading, redirectToProfile, error, about } = this.state;
         if (redirectToProfile) {
             return <Redirect to={`/user/${isAuthenticated().user._id}`}></Redirect>
         }
@@ -405,7 +517,7 @@ class EditProfle extends Component {
                     {loading ? (
                         <Loading />
                     ) : (
-                        this.signupForm(name, email, university, birthYear, password, loading, about)
+                        this.signupForm(name, email, sex, nickname, workPlace, socialNetworkLink, university, birthYear, password, loading, about)
                     )}
 
                 </div>

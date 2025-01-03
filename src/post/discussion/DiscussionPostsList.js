@@ -456,6 +456,7 @@ const DiscussionPost = ({ discussion, onDelete, refreshData }) => {
                                 height: '40px',
                                 borderRadius: '50%',
                                 marginRight: '10px',
+                                objectFit: 'contain'
                             }}
                         />
 
