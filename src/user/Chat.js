@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/index';
 import { read, getChats, getChatList } from './apiUser';
 import '../css/Chat.css';
+import { Box, Divider, Tooltip } from '../../node_modules/@material-ui/core/index';
 
 const socketUrl = `${process.env.REACT_APP_API_URL}`;
 let socket;
@@ -28,6 +29,7 @@ class Chat extends Component {
             chatList: [], // Initialize as an empty array
             selectedIcon: '❤️',
             showEmojiSettings: false,
+            isDarkMode: false,
         };
     }
 
@@ -140,8 +142,34 @@ class Chat extends Component {
         );
     };
 
+    toggleTheme = () => {
+        this.setState((prevState) => ({
+            isDarkMode: !prevState.isDarkMode,
+        }));
+    };
+
     render() {
-        const { messages, receiver, sender, showPicker, loading, currentUser, chatList, showEmojiSettings, selectedIcon } = this.state;
+        const { messages, receiver, sender, showPicker, loading, currentUser, chatList, showEmojiSettings, selectedIcon, isDarkMode } = this.state;
+
+        const containerStyle = {
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '0px',
+            backgroundColor: isDarkMode ? '#333' : 'white',
+            color: isDarkMode ? 'white' : '#333',
+        };
+
+        const buttonStyle = {
+            marginTop: '20px',
+            padding: '10px 20px',
+            color: isDarkMode ? 'black' : 'white',
+            border: 'none',
+            borderRadius: '20px',
+            cursor: 'pointer',
+            background: isDarkMode ? 'white' : 'black',
+        };
+
         return (
             <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
                 {loading && <Loading />}
@@ -152,25 +180,25 @@ class Chat extends Component {
                             borderRight: '1px solid #ddd',
                             padding: '30px',
                             overflowY: 'auto',
-                            backgroundColor: 'white'
+                            backgroundColor: isDarkMode ? '#333' : 'white',
                         }}>
-                            <div style={{ marginBottom: '20px' }}>
+                            <div style={{ marginBottom: '10px' }}>
                                 {currentUser && (
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
                                         <img
                                             src={`${process.env.REACT_APP_API_URL}/user/photo/${currentUser._id}`}
                                             alt={currentUser.name}
                                             onError={i => (i.target.src = DefaultProfile)}
-                                            style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px', objectFit: "contain" }}
+                                            style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '10px', objectFit: 'contain' }}
                                         />
                                         <div>
-                                            <span style={{ fontWeight: 'bold' }}>{currentUser.name}</span>
+                                            <span style={{ fontWeight: 'bold', color: isDarkMode ? 'white' : 'black' }}>{currentUser.name}</span>
                                         </div>
                                     </div>
                                 )}
                             </div>
 
-                            <h6 style={{ margin: '20px 0 5px', fontSize: '16px', color: '#007bff' }}>Chat</h6>
+                            <h6 style={{ margin: '10px 0 5px', fontSize: '16px', color: '#007bff', fontWeight: 'bold' }}>Chat</h6>
 
                             <div>
                                 {chatList.map((user, i) => (
@@ -188,21 +216,23 @@ class Chat extends Component {
                                             style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '10px', objectFit: 'contain' }}
                                         />
                                         <div>
-                                            <span style={{ fontWeight: 'bold' }}>{user.name}</span>
+                                            <span style={{ fontWeight: 'bold', color: isDarkMode ? 'white' : 'black' }}>{user.name}</span>
                                         </div>
                                     </a>
                                 ))}
                             </div>
                         </div>
 
-                        <div style={{
-                            flex: 1,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            padding: '20px',
-                            backgroundColor: 'white'
-                        }}>
-                            <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', borderBottom: '1px solid #ddd' }}>
+                        <div style={containerStyle}>
+                            <Box
+                                sx={{
+                                    mx: 2,
+                                    position: 'relative',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                }}
+                            >
                                 {receiver && (
                                     <Link to={`/user/${receiver._id}`} style={{
                                         display: 'flex',
@@ -221,7 +251,7 @@ class Chat extends Component {
                                             <span
                                                 style={{
                                                     fontWeight: 'bold',
-                                                    transition: 'color 0.3s ease',
+                                                    color: isDarkMode ? 'white' : 'black'
                                                 }}
                                                 className="receiver-name"
                                             >
@@ -232,41 +262,38 @@ class Chat extends Component {
                                 )}
 
                                 {/* Change Icon Setting */}
-                                <div style={{ position: 'relative' }}>
-                                    <button
-                                        onMouseEnter={() => this.setState({ showTooltip: true })}
-                                        onMouseLeave={() => this.setState({ showTooltip: false })}
-                                        onClick={() => this.setState({ showEmojiSettings: !showEmojiSettings })}
-                                        style={{
-                                            background: 'transparent',
-                                            border: 'none',
-                                            cursor: 'pointer',
-                                            fontSize: '20px',
-                                            color: 'black',
-                                            marginRight: '10px'
-                                        }}
-                                    >
-                                        <i className="fas fa-cog"></i>
-                                    </button>
-                                    {this.state.showTooltip && (
-                                        <div style={{
-                                            position: 'absolute',
-                                            top: '40px',
-                                            right: '0',
-                                            backgroundColor: '#fff',
-                                            border: '1px solid #ccc',
-                                            borderRadius: '4px',
-                                            padding: '8px 12px',
-                                            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                                            zIndex: 1000,
-                                            fontSize: '12px',
-                                            color: '#333',
-                                            whiteSpace: 'nowrap',
-                                        }}>
-                                            Change Emoji
-                                        </div>
-                                    )}
-                                </div>
+                                <Box sx={{ position: 'relative', gap: 5, display: 'flex', p: 2 }}>
+                                    <Tooltip title="Change Emoji" arrow placement={"top"}>
+                                        <button
+                                            onClick={() => this.setState({ showEmojiSettings: !showEmojiSettings })}
+                                            style={buttonStyle}
+                                        >
+                                            <i className="fas fa-cog"
+                                                style={{
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                    fontSize: '20px',
+                                                }}
+                                            ></i>
+                                        </button>
+                                    </Tooltip>
+
+                                    {/* Change theme button */}
+                                    <Tooltip title="Dark Mode" arrow placement={"top"}>
+                                        <button
+                                            style={buttonStyle}
+                                            onClick={this.toggleTheme}
+                                        >
+                                            <i className={`fa ${isDarkMode ? 'fa-sun' : 'fa-moon'}`}
+                                                style={{
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                    fontSize: '20px',
+                                                }}
+                                            />
+                                        </button>
+                                    </Tooltip>
+                                </Box>
 
                                 {/* Emoji Settings Dropdown */}
                                 {showEmojiSettings && (
@@ -313,7 +340,9 @@ class Chat extends Component {
                                     </div>
                                 )}
 
-                            </div>
+                            </Box>
+
+                            <Divider />
 
                             {/* <ScrollToBottom style={{
                                 flex: 1,
@@ -340,7 +369,6 @@ class Chat extends Component {
                                     flex: 1,
                                     overflowY: 'auto',  // Allows scrolling manually
                                     backgroundColor: '#fff',
-                                    borderRadius: '8px',
                                     padding: '10px',
                                     marginBottom: '10px',
                                     maxHeight: '450px', // Limit the height to create a scrollable window effect
