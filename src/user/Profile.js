@@ -14,7 +14,7 @@ import '../css/Profile.css';
 import Footer from '../component/Footer';
 import NoteModal from './NoteModal';
 import { DisplayDateTime12Hour } from '../post/timeDifference';
-import { Box, Button, Icon, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from '../../node_modules/@material-ui/core/index';
+import { Box, Button, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from '../../node_modules/@material-ui/core/index';
 
 class Profile extends Component {
     constructor() {
@@ -549,34 +549,65 @@ class Profile extends Component {
                             </div>
                         </div>
 
-                        {isLoggedInUser && (
-                            <>
-                                <Box sx={{ mt: 2 }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', pt: 2, pl: 6 }}>
-                                        <Tooltip title="Private Information View (Only you)" arrow placement={"top"}>
-                                            <Button
-                                                variant="contained"
-                                                color="warning"
-                                                startIcon={<Icon className="fa fa-exclamation-circle" />}
-                                                style={{
-                                                    fontSize: '18px',
-                                                    fontWeight: 'bold',
-                                                    borderRadius: '20px',
-                                                    padding: '8px 16px',
-                                                    textTransform: 'none',
-                                                    boxShadow: 2,
-                                                    '&:hover': {
-                                                        backgroundColor: '#FFB74D',
-                                                        boxShadow: 4,
-                                                    },
-                                                }}
-                                                onClick={this.handleOpenInformationModal}
-                                            >
-                                                User Details
-                                            </Button>
-                                        </Tooltip>
-                                    </Box>
+                        <div className="button-container">
+                            {isAuthenticated().user && isAuthenticated().user._id === user._id ? (
+                                <>
+                                    {/* CREATE POST BUTTON */}
+                                    <Link
+                                        className="btn btn-sm btn-raised btn-dark"
+                                        to={`/post/create`}
+                                        style={{
+                                            backgroundColor: "#343a40",
+                                            borderRadius: "25px",
+                                            padding: "8px 16px",
+                                            fontSize: "14px",
+                                            textDecoration: "none",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            transition: "background-color 0.3s ease, transform 0.3s ease",
+                                        }}
+                                    >
+                                        <i style={{ marginRight: "15px" }} class="fa fa-plus-square" aria-hidden="true"></i> Create Post
+                                    </Link>
 
+                                    {/* EDIT PROFILE BUTTON */}
+                                    <Link
+                                        className="btn btn-sm btn-raised btn-dark"
+                                        to={`/user/edit/${user._id}`}
+                                        style={{
+                                            backgroundColor: "#343a40",
+                                            borderRadius: "25px",
+                                            padding: "8px 16px",
+                                            fontSize: "14px",
+                                            textDecoration: "none",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            transition: "background-color 0.3s ease, transform 0.3s ease",
+                                        }}
+                                    >
+                                        <i style={{ marginRight: "15px" }} class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
+                                    </Link>
+
+                                    {/* DELETE USER PROFILE */}
+                                    <DeleteUser userId={user._id} username={user.name} />
+
+                                    {/* PROFILE SHOW */}
+                                    <button
+                                        onClick={this.handleOpenInformationModal}
+                                        className="btn btn-sm btn-raised btn-dark"
+                                        style={{
+                                            backgroundColor: "#343a40",
+                                            borderRadius: "25px",
+                                            padding: "8px 16px",
+                                            fontSize: "14px",
+                                            textDecoration: "none",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            transition: "background-color 0.3s ease, transform 0.3s ease",
+                                        }}
+                                    >
+                                        <i style={{ marginRight: "15px" }} class="fa fa-exclamation-circle" aria-hidden="true"></i> User Details
+                                    </button>
                                     <Modal
                                         open={openInfomatioModal}
                                         onClose={this.handleCloseInfomationModal}
@@ -723,51 +754,6 @@ class Profile extends Component {
                                             </Box>
                                         </Box>
                                     </Modal>
-                                </Box>
-                            </>
-                        )}
-
-                        <div className="button-container">
-                            {isAuthenticated().user && isAuthenticated().user._id === user._id ? (
-                                <>
-                                    {/* CREATE POST BUTTON */}
-                                    <Link
-                                        className="btn btn-sm btn-raised btn-dark"
-                                        to={`/post/create`}
-                                        style={{
-                                            backgroundColor: "#343a40",
-                                            borderRadius: "25px",
-                                            padding: "8px 16px",
-                                            fontSize: "14px",
-                                            textDecoration: "none",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            transition: "background-color 0.3s ease, transform 0.3s ease",
-                                        }}
-                                    >
-                                        <i style={{ marginRight: "15px" }} class="fa fa-plus-square" aria-hidden="true"></i> Create Post
-                                    </Link>
-
-                                    {/* EDIT PROFILE BUTTON */}
-                                    <Link
-                                        className="btn btn-sm btn-raised btn-dark"
-                                        to={`/user/edit/${user._id}`}
-                                        style={{
-                                            backgroundColor: "#343a40",
-                                            borderRadius: "25px",
-                                            padding: "8px 16px",
-                                            fontSize: "14px",
-                                            textDecoration: "none",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            transition: "background-color 0.3s ease, transform 0.3s ease",
-                                        }}
-                                    >
-                                        <i style={{ marginRight: "15px" }} class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
-                                    </Link>
-
-                                    {/* DELETE USER PROFILE */}
-                                    <DeleteUser userId={user._id} username={user.name} />
                                 </>
                             ) : (
                                 <div className="row">
@@ -807,7 +793,7 @@ class Profile extends Component {
                             <Tab label={postsBadge} className="tab-title-name">
                                 <div className="row">
                                     {posts.map((post, i) => (
-                                        <div key={i} style={{ paddingBottom: "15px" }} className="col-md-4">
+                                        <div key={i} style={{ paddingBottom: "15px" }} className="col-md-2">
                                             {post.photo && post.photo.data ? (
                                                 // Nếu post có ảnh, hiển thị ảnh và biểu tượng trái tim với số lượt thích
                                                 <Link to={`/post/${post._id}`} >

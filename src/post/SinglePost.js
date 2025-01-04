@@ -337,7 +337,7 @@ class SinglePost extends Component {
                         position: 'relative',
                         border: '1px solid #ddd',
                         borderRadius: '8px',
-                        padding: '10px',
+                        padding: '15px',
                         backgroundColor: '#f9f9f9'
                     }}>
 
