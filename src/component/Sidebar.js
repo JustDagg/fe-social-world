@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { read } from '../user/apiUser';
 import { Typography } from '@material-ui/core';
-
+import DefaultProfile from '../images/avatar.jpg';
 import { isAuthenticated } from '../auth';
 import './Sidebar.css';
 
@@ -11,6 +11,8 @@ const Sidebar = () => {
     const [user, setUser] = useState(null);
     // state for authenticated
     const [authenticated, setAuthenticated] = useState(false);
+
+    const currentUser = isAuthenticated().user;
 
     // fetchUser
     useEffect(() => {
@@ -39,27 +41,29 @@ const Sidebar = () => {
 
     return (
         <div className="sidebar">
-            <div style={{ marginTop: "50px" }}>
-                {/* LOGO TITLE */}
-                <Typography
-                    variant="h4"
-                    component="h1"
-                    gutterBottom
-                    style={{
-                        fontFamily: 'Roboto, Arial, sans-serif',
-                        color: '#1E88E5',
-                        margin: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        fontWeight: "bold",
-                        textShadow: '1px 1px 3px rgba(0, 0, 0, 0.3)',
-                        fontSize: '2rem',
-                        marginBottom: '2.5rem',
-                        marginLeft: '25px'
-                    }}
-                >
-                    <span>Social World</span>
-                </Typography>
+            <div style={{ marginTop: "0px" }}>
+
+                {/* PROFILE */}
+                {currentUser && (
+                    <>
+                        <Link to={`/user/${currentUser._id}`} className="sidebar-link">
+                            <img
+                                src={`${process.env.REACT_APP_API_URL}/user/photo/${currentUser._id}`}
+                                alt={currentUser.name}
+                                onError={i => (i.target.src = DefaultProfile)}
+                                style={{
+                                    width: '30px',
+                                    height: '30px',
+                                    borderRadius: '50%',
+                                    marginRight: '15px',
+                                    cursor: 'pointer',
+                                    objectFit: 'contain'
+                                }}
+                            />
+                            <span style={{ color: 'white' }}>{currentUser.name}</span>
+                        </Link>
+                    </>
+                )}
 
                 {/* HOME LINK */}
                 <Link to="/" className="sidebar-link">
