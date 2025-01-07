@@ -22,6 +22,8 @@ class EditProfle extends Component {
             workPlace: "",
             socialNetworkLink: "",
             university: "",
+            major: "",
+            specialization: "",
             birthYear: "",
             loading: false,
             redirectToProfile: false,
@@ -47,6 +49,8 @@ class EditProfle extends Component {
                         workPlace: data.workPlace,
                         socialNetworkLink: data.socialNetworkLink,
                         university: data.university,
+                        major: data.major,
+                        specialization: data.specialization,
                         birthYear: data.birthYear,
                         error: "",
                         about: data.about,
@@ -132,7 +136,7 @@ class EditProfle extends Component {
 
     };
 
-    signupForm = (name, email, sex, nickname, workPlace, socialNetworkLink, university, birthYear, password, loading, about) => (
+    signupForm = (name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, password, loading, about) => (
         <form style={{ padding: "0px 30px", marginBottom: "30px" }}>
 
             {/* PROFILE PHOTO FIELD */}
@@ -360,6 +364,56 @@ class EditProfle extends Component {
                 />
             </div>
 
+            {/* MAJOR */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Major
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="major"
+                    type="text"
+                    value={major}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
+            {/* Specialization */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Specialization
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="specialization"
+                    type="text"
+                    value={specialization}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
             {/* BIRTH YEAR FIELD */}
             <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
                 <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
@@ -461,7 +515,7 @@ class EditProfle extends Component {
 
     render() {
 
-        const { id, name, email, sex, nickname, workPlace, socialNetworkLink, university, birthYear, password, loading, redirectToProfile, error, about } = this.state;
+        const { id, name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, password, loading, redirectToProfile, error, about } = this.state;
         if (redirectToProfile) {
             return <Redirect to={`/user/${isAuthenticated().user._id}`}></Redirect>
         }
@@ -517,7 +571,7 @@ class EditProfle extends Component {
                     {loading ? (
                         <Loading />
                     ) : (
-                        this.signupForm(name, email, sex, nickname, workPlace, socialNetworkLink, university, birthYear, password, loading, about)
+                        this.signupForm(name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, password, loading, about)
                     )}
 
                 </div>

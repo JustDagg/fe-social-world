@@ -413,6 +413,7 @@ class Profile extends Component {
                                             className="fa fa-check-circle"
                                             aria-hidden="true"
                                         />
+                                        <p style={{ fontWeight: 'bold', fontSize: '20px', color: '#333' }}>{user.nickname ? `(${user.nickname})` : ""}</p>
                                     </h2>
 
                                     {/* User Email */}
@@ -434,11 +435,21 @@ class Profile extends Component {
 
                                                 {/* University */}
                                                 {user.university && (
-                                                    <tr>
+                                                    <tr style={{ borderBottom: '1px solid #ddd' }}>
                                                         <td style={{ padding: '8px', fontSize: '16px', color: '#555', display: 'flex', alignItems: 'center' }}>
                                                             <i title='University' className="fa fa-graduation-cap" style={{ fontSize: '18px', marginRight: '10px' }} aria-hidden="true"></i>
                                                         </td>
                                                         <td style={{ padding: '8px', textAlign: 'right', fontSize: '16px', color: '#333' }}>{user.university}</td>
+                                                    </tr>
+                                                )}
+
+                                                {/* Major */}
+                                                {user.major && (
+                                                    <tr>
+                                                        <td style={{ padding: '8px', fontSize: '16px', color: '#555', display: 'flex', alignItems: 'center' }}>
+                                                            <i title='Major' className="fa fa-book" style={{ fontSize: '18px', marginRight: '10px' }} aria-hidden="true"></i>
+                                                        </td>
+                                                        <td style={{ padding: '8px', textAlign: 'right', fontSize: '16px', color: '#333' }}>{user.major}</td>
                                                     </tr>
                                                 )}
                                             </tbody>
@@ -651,6 +662,30 @@ class Profile extends Component {
                                                                 </TableCell>
                                                                 <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
                                                                     {user.university}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* Major */}
+                                                        {user.major && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Major</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {user.major}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* Specialization */}
+                                                        {user.specialization && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Specialization</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {user.specialization}
                                                                 </TableCell>
                                                             </TableRow>
                                                         )}

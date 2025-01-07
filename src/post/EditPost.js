@@ -13,6 +13,7 @@ class EditProfle extends Component {
         this.state = {
             id: '',
             title: '',
+            field: '',
             body: '',
             photo: '',
             postedBy: '',
@@ -32,6 +33,7 @@ class EditProfle extends Component {
                     this.setState({
                         id: data._id,
                         title: data.title,
+                        field: data.field,
                         body: data.body,
                         photo: data.photo,
                         postedBy: data.postedBy._id,
@@ -103,6 +105,7 @@ class EditProfle extends Component {
                     } else {
                         this.setState({
                             title: "",
+                            field: "",
                             body: "",
                             photo: "",
                             loading: false,
@@ -113,7 +116,7 @@ class EditProfle extends Component {
         }
     };
 
-    editPostForm = (title, body) => (
+    editPostForm = (title, field, body) => (
         <form style={{ padding: "0px 30px", marginBottom: "30px" }}>
 
             {/* PHOTO FIELD */}
@@ -188,6 +191,32 @@ class EditProfle extends Component {
                 />
             </div>
 
+            {/* FIELD FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Field
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="field"
+                    type="text"
+                    className="form-control"
+                    value={field}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => (e.target.style.border = '1px solid #1a73e8')}
+                    onBlur={(e) => (e.target.style.border = '1px solid #dadce0')}
+                />
+            </div>
+
             {/* DESCRIPTION FIELD */}
             <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
                 <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
@@ -234,7 +263,7 @@ class EditProfle extends Component {
     );
 
     render() {
-        const { id, title, body, loading, redirectToPost, error } = this.state;
+        const { id, title, field, body, loading, redirectToPost, error } = this.state;
         if (redirectToPost) {
             return <Redirect to={`/post/${id}`}></Redirect>
         }
@@ -288,7 +317,7 @@ class EditProfle extends Component {
                     {loading ? (
                         <Loading />
                     ) : (
-                        this.editPostForm(title, body)
+                        this.editPostForm(title, field, body)
                     )}
                 </div>
 

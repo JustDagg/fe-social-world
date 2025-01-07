@@ -14,6 +14,7 @@ class Signup extends Component {
             email: "",
             password: "",
             university: "",
+            major: "",
             birthYear: "",
             error: "",
             open: false,
@@ -88,6 +89,7 @@ class Signup extends Component {
                             email: "",
                             password: "",
                             university: "",
+                            major: "",
                             birthYear: "",
                             error: "",
                             open: true,
@@ -103,7 +105,7 @@ class Signup extends Component {
         }
     };
 
-    signupForm = (name, email, password, university, birthYear, loading, recaptcha) => (
+    signupForm = (name, email, password, university, major, birthYear, loading, recaptcha) => (
         <form style={{ display: loading ? "none" : "" }}>
 
             {/* NAME FIELD */}
@@ -154,6 +156,19 @@ class Signup extends Component {
                 onChange={this.handleChange}
                 name="university"
                 value={university}
+                type="text"
+                required
+            />
+
+            {/* MAJOR FIELD */}
+            <TextField
+                label="Major"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                onChange={this.handleChange}
+                name="major"
+                value={major}
                 type="text"
                 required
             />
@@ -232,7 +247,7 @@ class Signup extends Component {
     );
 
     render() {
-        const { name, email, password, university, birthYear, error, open, loading, recaptcha } = this.state;
+        const { name, email, password, university, major, birthYear, error, open, loading, recaptcha } = this.state;
         return (
             <Container style={{ padding: "0px 100px 20px 100px", marginTop: "20px" }} component="main" maxWidth="100%">
                 <Paper elevation={5} style={{ padding: '20px' }}>
@@ -266,7 +281,7 @@ class Signup extends Component {
                             New account is successfully created. Please <Link to='/signin'>Sign In</Link>.
                         </div>
                     )}
-                    {this.signupForm(name, email, password, university, birthYear, loading, recaptcha)}
+                    {this.signupForm(name, email, password, university, major, birthYear, loading, recaptcha)}
                     {loading && <Loading />}
                 </Paper>
             </Container>

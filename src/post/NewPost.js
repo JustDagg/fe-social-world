@@ -13,6 +13,7 @@ class NewPost extends Component {
         super();
         this.state = {
             title: "",
+            field: "",
             body: "",
             photo: "",
             error: "",
@@ -83,6 +84,7 @@ class NewPost extends Component {
                     } else {
                         this.setState({
                             title: "",
+                            field: "",
                             body: "",
                             photo: "",
                             loading: false,
@@ -108,7 +110,7 @@ class NewPost extends Component {
             });
     };
 
-    newPostForm = (title, body, tooltipVisible) => (
+    newPostForm = (title, field, body, tooltipVisible) => (
         <form
             style={{
                 maxWidth: '100%',
@@ -175,6 +177,32 @@ class NewPost extends Component {
                     type="text"
                     className="form-control"
                     value={title}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
+            {/* FIELD FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Field
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="field"
+                    type="text"
+                    className="form-control"
+                    value={field}
                     style={{
                         padding: '10px',
                         fontSize: '16px',
@@ -378,13 +406,13 @@ class NewPost extends Component {
                             padding: '20px',
                             height: '1000px',
                             width: '100%',
-                            marginTop: '-1px', 
+                            marginTop: '-1px',
                             background: '#fff'
                         }}>
                             {loading ? (
                                 <Loading />
                             ) : (
-                                activeTab === 'post' ? this.newPostForm(this.state.title, this.state.body) : <NewDiscussionPost />
+                                activeTab === 'post' ? this.newPostForm(this.state.title, this.state.field, this.state.body) : <NewDiscussionPost />
                             )}
                         </div>
                     </div>

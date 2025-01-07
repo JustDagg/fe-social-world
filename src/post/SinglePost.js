@@ -332,6 +332,14 @@ class SinglePost extends Component {
                     {/* TITLE */}
                     <h5 style={{ fontWeight: 'bold' }} className="card-title ml-3">{post.title}</h5>
 
+                    <h6 style={{ fontWeight: 'bold', marginTop: "20px" }} className="card-title ml-3">
+                        {post.field ? (
+                            <>
+                                <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Field: {post.field}
+                            </>
+                        ) : ""}
+                    </h6>
+
                     {/* DESCRIPTION */}
                     <div style={{
                         position: 'relative',

@@ -11,6 +11,7 @@ class CreatePostModal extends Component {
         super(props);
         this.state = {
             title: "",
+            field: "",
             body: "",
             photo: "",
             error: "",
@@ -86,6 +87,7 @@ class CreatePostModal extends Component {
                     } else {
                         this.setState({
                             title: "",
+                            field: "",
                             body: "",
                             photo: "",
                             loading: false
@@ -96,7 +98,7 @@ class CreatePostModal extends Component {
         }
     };
 
-    newPostForm = (title, body) => (
+    newPostForm = (title, field, body) => (
         <form>
             {/* PHOTO FIELD */}
             <div className="form-group" style={{ marginBottom: '1.5rem' }}>
@@ -170,6 +172,32 @@ class CreatePostModal extends Component {
                 />
             </div>
 
+            {/* FIELD FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Field
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="field"
+                    type="text"
+                    className="form-control"
+                    value={field}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
             {/* DESCRIPTION FIELD */}
             <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
                 <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
@@ -213,7 +241,7 @@ class CreatePostModal extends Component {
     );
 
     render() {
-        const { title, body, loading, error } = this.state;
+        const { title, field, body, loading, error } = this.state;
         const { isOpen, onClose } = this.props;
 
         if (!isOpen) return null;
@@ -233,7 +261,7 @@ class CreatePostModal extends Component {
                         <Loading />
                     ) : (
                         // Render Form
-                        this.newPostForm(title, body)
+                        this.newPostForm(title, field, body)
                     )}
                 </div>
             </div>,
