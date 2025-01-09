@@ -16,7 +16,7 @@ class EditProfle extends Component {
             name: "",
             email: "",
             about: "",
-            password: "",
+            hashed_password: "",
             sex: "",
             nickname: "",
             workPlace: "",
@@ -67,7 +67,7 @@ class EditProfle extends Component {
 
     // isValid
     isValid = () => {
-        const { name, email, password, fileSize } = this.state;
+        const { name, email, hashed_password, fileSize } = this.state;
         const userId = this.props.match.params.userId;
         if (userId !== isAuthenticated().user._id) {
             this.setState({ error: "You are not authorized to do this !!", loading: false });
@@ -88,8 +88,8 @@ class EditProfle extends Component {
             this.setState({ error: "Please enter a valid email address.", loading: false });
             return false;
         }
-        if (password.length >= 1 && password.length <= 5) {
-            this.setState({ error: "Password must be at least 6 characters long", loading: false });
+        if (hashed_password.length >= 1 && hashed_password.length <= 5) {
+            this.setState({ error: "hashed_password must be at least 6 characters long", loading: false });
             return false;
         }
         return true;
@@ -115,8 +115,8 @@ class EditProfle extends Component {
         e.preventDefault();
         this.setState({ loading: true })
         if (this.isValid()) {
-            //const { name, email, password } = this.state;
-            //const user = { name, email, password: password || undefined };
+            //const { name, email, hashed_password } = this.state;
+            //const user = { name, email, hashed_password: hashed_password || undefined };
             // console.log(user);
             const userId = this.props.match.params.userId;
             const token = isAuthenticated().token;
@@ -136,7 +136,7 @@ class EditProfle extends Component {
 
     };
 
-    signupForm = (name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, password, loading, about) => (
+    signupForm = (name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, about) => (
         <form style={{ padding: "0px 30px", marginBottom: "30px" }}>
 
             {/* PROFILE PHOTO FIELD */}
@@ -471,16 +471,16 @@ class EditProfle extends Component {
                 />
             </div>
 
-            {/* PASSWORD FIELD */}
+            {/* hashed_password FIELD */}
             <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
                 <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
                     Password
                 </label>
                 <input
                     onChange={this.handleChange}
-                    name="password"
+                    name="hashed_password"
                     type="password"
-                    value={password}
+                    value={hashed_password}
                     style={{
                         padding: '10px',
                         fontSize: '16px',
@@ -515,7 +515,7 @@ class EditProfle extends Component {
 
     render() {
 
-        const { id, name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, password, loading, redirectToProfile, error, about } = this.state;
+        const { id, name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, redirectToProfile, error, about } = this.state;
         if (redirectToProfile) {
             return <Redirect to={`/user/${isAuthenticated().user._id}`}></Redirect>
         }
@@ -571,7 +571,7 @@ class EditProfle extends Component {
                     {loading ? (
                         <Loading />
                     ) : (
-                        this.signupForm(name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, password, loading, about)
+                        this.signupForm(name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, about)
                     )}
 
                 </div>

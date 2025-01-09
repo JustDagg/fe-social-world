@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { forgotPassword } from "../auth";
+import { Box } from "../../node_modules/@material-ui/core/index";
 
 class ForgotPassword extends Component {
     state = {
@@ -46,65 +47,67 @@ class ForgotPassword extends Component {
                     <span style={{ fontWeight: "bold" }}>Return to Sign In</span>
                 </button>
 
-                <h2 style={{ fontWeight: "bold" }} className="mb-5 text-center">
-                    Forgot Password
-                    <i style={{ marginLeft: "15px" }} className="fa fa-key" aria-hidden="true"></i>
-                </h2>
+                <Box sx={{ mx: 10 }}>
+                    <h2 style={{ fontWeight: "bold" }} className="mb-5 text-center">
+                        Forgot Password
+                        <i style={{ marginLeft: "15px" }} className="fa fa-key" aria-hidden="true"></i>
+                    </h2>
 
-                <div className="alert alert-danger" style={{ display: error ? "" : "none" }}>
-                    {error}
-                </div>
-                <div className="alert alert-danger" style={{ display: message ? "" : "none" }}>
-                    {message}
-                </div>
-
-                <form style={{ padding: "0px 30px", marginBottom: "20px" }}>
-                    {/* EMAIL */}
-                    <div className="form-group mt-5">
-                        <input
-                            type="email"
-                            className="form-control"
-                            placeholder="Your email address"
-                            value={this.state.email}
-                            name="email"
-                            onChange={e =>
-                                this.setState({
-                                    email: e.target.value,
-                                    message: "",
-                                    error: ""
-                                })
-                            }
-                            autoFocus
-                            style={{
-                                padding: '20px',
-                                border: '1px solid #dadce0',
-                                borderRadius: '30px',
-                                boxShadow: 'none',
-                                transition: 'border 0.3s ease',
-                                width: '100%',
-                                outline: 'none'
-                            }}
-                            onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                            onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                        />
+                    <div className="alert alert-danger" style={{ display: error ? "" : "none" }}>
+                        {error}
+                    </div>
+                    <div className="alert alert-danger" style={{ display: message ? "" : "none" }}>
+                        {message}
                     </div>
 
-                    {/* ForgotPassword Button */}
-                    <button
-                        onClick={this.forgotPasswordFunction}
-                        className="btn btn-raised btn-primary"
-                        style={{
-                            width: "100%",
-                            marginTop: "20px",
-                            borderRadius: "20px",
-                            height: "3rem",
-                            backgroundColor: "#D19616",
-                            fontWeight: "bold"
-                        }}
-                    >
-                        Send Password Reset Link
-                    </button>
-                </form>
+                    <form style={{ padding: "0px 30px", marginBottom: "20px" }}>
+                        {/* EMAIL */}
+                        <div className="form-group mt-5">
+                            <input
+                                type="email"
+                                className="form-control"
+                                placeholder="Your email address"
+                                value={this.state.email}
+                                name="email"
+                                onChange={e =>
+                                    this.setState({
+                                        email: e.target.value,
+                                        message: "",
+                                        error: ""
+                                    })
+                                }
+                                autoFocus
+                                style={{
+                                    padding: '20px',
+                                    border: '1px solid #dadce0',
+                                    borderRadius: '30px',
+                                    boxShadow: 'none',
+                                    transition: 'border 0.3s ease',
+                                    width: '100%',
+                                    outline: 'none'
+                                }}
+                                onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                                onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                            />
+                        </div>
+
+                        {/* ForgotPassword Button */}
+                        <button
+                            onClick={this.forgotPasswordFunction}
+                            className="btn btn-raised btn-primary"
+                            style={{
+                                width: "100%",
+                                marginTop: "20px",
+                                borderRadius: "20px",
+                                height: "3rem",
+                                backgroundColor: "#D19616",
+                                fontWeight: "bold"
+                            }}
+                        >
+                            Send Password Reset Link
+                        </button>
+                    </form>
+                </Box>
             </div>
         );
     }
