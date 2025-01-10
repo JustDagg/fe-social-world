@@ -14,11 +14,11 @@ const NoteModal = ({ user, isOpen, onClose, existingNote, onDelete, onSave, note
 
     const handleChange = (e) => {
         const value = e.target.value; // Get the value from the TextField
-        if (value.length <= 10) {
+        if (value.length <= 20) {
             handleNoteChange(e); // Update the note if not exceeding 10 characters
             setError(''); // Clear any error message
         } else {
-            setError("Note cannot exceed 10 characters"); // Show error if exceeds 10 characters
+            setError("Note cannot exceed 20 characters"); // Show error if exceeds 10 characters
         }
     };
 
@@ -29,8 +29,8 @@ const NoteModal = ({ user, isOpen, onClose, existingNote, onDelete, onSave, note
             setError("Note cannot be empty");
             return false;
         }
-        if (text.length > 10) {
-            setError("Note cannot exceed 10 characters");
+        if (text.length > 20) {
+            setError("Note cannot exceed 20 characters");
             return false;
         }
         return true;

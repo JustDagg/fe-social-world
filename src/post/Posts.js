@@ -158,9 +158,9 @@ class Posts extends Component {
 
                                     <h5 style={{ fontWeight: 'bold' }}>{post.title}</h5>
                                     <h6 style={{ fontWeight: 'bold', marginTop: "20px" }}>
-                                        {post.field ? (
+                                        {post.category ? (
                                             <>
-                                                <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Field: {post.field}
+                                                <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Category: {post.category}
                                             </>
                                         ) : ""}
                                     </h6>

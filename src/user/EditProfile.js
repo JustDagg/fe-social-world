@@ -19,7 +19,8 @@ class EditProfle extends Component {
             hashed_password: "",
             sex: "",
             nickname: "",
-            workPlace: "",
+            city: "",
+            hometown: "",
             socialNetworkLink: "",
             university: "",
             major: "",
@@ -46,7 +47,8 @@ class EditProfle extends Component {
                         email: data.email,
                         sex: data.sex,
                         nickname: data.nickname,
-                        workPlace: data.workPlace,
+                        city: data.city,
+                        hometown: data.hometown,
                         socialNetworkLink: data.socialNetworkLink,
                         university: data.university,
                         major: data.major,
@@ -136,7 +138,7 @@ class EditProfle extends Component {
 
     };
 
-    signupForm = (name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, about) => (
+    signupForm = (name, email, sex, nickname, city, hometown, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, about) => (
         <form style={{ padding: "0px 30px", marginBottom: "30px" }}>
 
             {/* PROFILE PHOTO FIELD */}
@@ -289,16 +291,41 @@ class EditProfle extends Component {
                 />
             </div>
 
-            {/* WORKPLACE FIELD */}
+            {/* city FIELD */}
             <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
                 <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Work Place
+                    Province/City
                 </label>
                 <input
                     onChange={this.handleChange}
-                    name="workPlace"
+                    name="city"
                     type="text"
-                    value={workPlace}
+                    value={city}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
+            {/* hometown FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Hometown
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="hometown"
+                    type="text"
+                    value={hometown}
                     style={{
                         padding: '10px',
                         fontSize: '16px',
@@ -515,7 +542,7 @@ class EditProfle extends Component {
 
     render() {
 
-        const { id, name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, redirectToProfile, error, about } = this.state;
+        const { id, name, email, sex, nickname, city, hometown, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, redirectToProfile, error, about } = this.state;
         if (redirectToProfile) {
             return <Redirect to={`/user/${isAuthenticated().user._id}`}></Redirect>
         }
@@ -571,7 +598,7 @@ class EditProfle extends Component {
                     {loading ? (
                         <Loading />
                     ) : (
-                        this.signupForm(name, email, sex, nickname, workPlace, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, about)
+                        this.signupForm(name, email, sex, nickname, city, hometown, socialNetworkLink, university, major, specialization, birthYear, hashed_password, loading, about)
                     )}
 
                 </div>

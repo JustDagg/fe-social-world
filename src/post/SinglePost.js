@@ -333,9 +333,17 @@ class SinglePost extends Component {
                     <h5 style={{ fontWeight: 'bold' }} className="card-title ml-3">{post.title}</h5>
 
                     <h6 style={{ fontWeight: 'bold', marginTop: "20px" }} className="card-title ml-3">
-                        {post.field ? (
+                        {post.category ? (
                             <>
-                                <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Field: {post.field}
+                                <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Category: {post.category}
+                            </>
+                        ) : ""}
+                    </h6>
+
+                    <h6 style={{ fontWeight: 'bold', marginTop: "5px" }} className="card-title ml-3">
+                        {post.location ? (
+                            <>
+                                <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Location: {post.location}
                             </>
                         ) : ""}
                     </h6>

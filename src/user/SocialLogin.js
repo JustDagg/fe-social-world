@@ -40,14 +40,15 @@ class SocialLogin extends Component {
         if (redirectToReferrer) {
             return <Redirect to="/" />;
         }
-        
-        if(this.props.for === "signup"){
+
+        if (this.props.for === "signup") {
             return (
                 <GoogleLogin
                     clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Signup with Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
+                    prompt="select_account"
                 />
             );
         } else {
@@ -57,10 +58,11 @@ class SocialLogin extends Component {
                     buttonText="Login with Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
+                    prompt="select_account"
                 />
             );
         }
-        
+
     }
 }
 

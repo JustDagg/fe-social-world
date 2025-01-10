@@ -13,7 +13,8 @@ class NewPost extends Component {
         super();
         this.state = {
             title: "",
-            field: "",
+            category: "",
+            location: "",
             body: "",
             photo: "",
             error: "",
@@ -84,7 +85,8 @@ class NewPost extends Component {
                     } else {
                         this.setState({
                             title: "",
-                            field: "",
+                            category: "",
+                            location: "",
                             body: "",
                             photo: "",
                             loading: false,
@@ -110,7 +112,7 @@ class NewPost extends Component {
             });
     };
 
-    newPostForm = (title, field, body, tooltipVisible) => (
+    newPostForm = (title, category, location, body, tooltipVisible) => (
         <form
             style={{
                 maxWidth: '100%',
@@ -192,17 +194,43 @@ class NewPost extends Component {
                 />
             </div>
 
-            {/* FIELD FIELD */}
+            {/* category FIELD */}
             <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
                 <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Field
+                    Category
                 </label>
                 <input
                     onChange={this.handleChange}
-                    name="field"
+                    name="category"
                     type="text"
                     className="form-control"
-                    value={field}
+                    value={category}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '4px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
+            {/* location FIELD */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Location
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="location"
+                    type="text"
+                    className="form-control"
+                    value={location}
                     style={{
                         padding: '10px',
                         fontSize: '16px',
@@ -412,7 +440,7 @@ class NewPost extends Component {
                             {loading ? (
                                 <Loading />
                             ) : (
-                                activeTab === 'post' ? this.newPostForm(this.state.title, this.state.field, this.state.body) : <NewDiscussionPost />
+                                activeTab === 'post' ? this.newPostForm(this.state.title, this.state.category, this.state.location, this.state.body) : <NewDiscussionPost />
                             )}
                         </div>
                     </div>

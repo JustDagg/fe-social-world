@@ -237,7 +237,7 @@ class Profile extends Component {
                     zIndex: 10,
                     border: '1px solid #ccc',
                 }} onClick={this.toggleNoteModal}>
-                    Ghi chú...
+                    Note...
                 </span>
             )
         );
@@ -322,33 +322,79 @@ class Profile extends Component {
                 <div className="col-md-10">
                     <div className="profile-info-left">
 
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative' }}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                justifyContent: 'center',
+                                alignItems: 'flex-start',
+                                backgroundColor: '#f4f4f9',
+                                padding: '20px',
+                                borderRadius: '10px',
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                                width: '100%',
+                            }}
+                        >
                             {/* Left Side: Avatar and User Info */}
-                            <div style={{ flex: '1', display: 'flex', alignItems: 'center', position: 'relative' }}>
+                            <div
+                                style={{
+                                    flex: '1',
+                                    textAlign: 'center',
+                                    backgroundColor: '#fff',
+                                    padding: '20px',
+                                    borderRadius: '20px',
+                                    margin: '10px',
+                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                                }}
+                            >
+                                {/* Avatar Section */}
+                                <div style={{ position: 'relative', marginBottom: '20px', textAlign: 'center' }}>
+                                    {/* Note Display */}
+                                    <div
+                                        style={{
+                                            position: 'absolute',
+                                            top: '-20px',
+                                            left: '50%',
+                                            transform: 'translateX(-50%)',
+                                            backgroundColor: '#fff',
+                                            padding: '10px 50px',
+                                            zIndex: 2,
+                                            fontSize: '14px',
+                                            fontWeight: '500',
+                                            color: '#333',
+                                        }}
+                                    >
+                                        {noteDisplay}
+                                    </div>
+                                    {/* Notes Modal */}
+                                    <NoteModal
+                                        user={user}
+                                        isOpen={isNoteModalOpen}
+                                        onClose={this.toggleNoteModal}
+                                        existingNote={existingNote}
+                                        onDelete={this.deleteNote}
+                                        onSave={this.saveNote}
+                                        note={note}
+                                        handleNoteChange={this.handleNoteChange}
+                                    />
 
-                                {/* Container for Avatar and Note */}
-                                <div style={{ position: 'relative' }}>
-                                    {/* Avatar Image */}
+                                    {/* Avatar */}
                                     <img
                                         style={{
-                                            borderRadius: "50%",
-                                            objectFit: "contain",
-                                            width: "200px",
-                                            height: "200px",
-                                            display: "block",
-                                            marginRight: "20px",
-                                            cursor: "pointer",
+                                            borderRadius: '50%',
+                                            objectFit: 'cover',
+                                            width: '150px',
+                                            height: '150px',
+                                            border: '3px solid #f0f0f0',
+                                            cursor: 'pointer',
                                         }}
                                         src={photoUrl}
                                         alt={user.name}
                                         onError={(i) => (i.target.src = DefaultProfile)}
-                                        className="avatar img-circle"
-                                        onClick={this.toggleAvatarModal} // Open avatar modal on avatar click
+                                        onClick={this.toggleAvatarModal}
                                     />
-                                    {/* Modal to display full avatar image */}
                                     {isAvatarModalOpen && (
                                         <div
-                                            id="avatar-modal-background"
                                             style={{
                                                 position: 'fixed',
                                                 top: '0',
@@ -367,196 +413,158 @@ class Profile extends Component {
                                                 src={photoUrl}
                                                 alt={user.name}
                                                 style={{
-                                                    borderRadius: "5%",
+                                                    borderRadius: '10px',
                                                     maxWidth: '90%',
                                                     maxHeight: '90%',
-                                                    objectFit: 'contain',
                                                 }}
-                                                onError={(i) => (i.target.src = DefaultProfile)}
                                             />
                                         </div>
                                     )}
-
-                                    {/* noteDisplay */}
-                                    {noteDisplay}
-                                    {/* NoteModal */}
-                                    <NoteModal
-                                        user={user}
-                                        isOpen={isNoteModalOpen}
-                                        onClose={this.toggleNoteModal}
-                                        existingNote={existingNote}
-                                        onDelete={this.deleteNote}
-                                        onSave={this.saveNote}
-                                        note={note}
-                                        handleNoteChange={this.handleNoteChange}
-                                    />
                                 </div>
 
-                                <div
-                                    style={{
-                                        textAlign: 'left',
-                                        padding: '20px',
-                                        borderRadius: '10px',
-                                        backgroundColor: '#f9f9f9'
-                                    }}
-                                >
-                                    {/* User Name */}
-                                    <h2 style={{ margin: 0, textAlign: 'center' }}>
-                                        <span style={{ fontWeight: 'bold', fontSize: '28px', color: '#333' }}>{user.name}</span>
-                                        <i
-                                            style={{
-                                                marginLeft: '8px',
-                                                fontSize: '18px',
-                                                color: '#3897f0',
-                                                verticalAlign: 'middle'
-                                            }}
-                                            className="fa fa-check-circle"
-                                            aria-hidden="true"
-                                        />
-                                        <p style={{ fontWeight: 'bold', fontSize: '20px', color: '#333' }}>{user.nickname ? `(${user.nickname})` : ""}</p>
-                                    </h2>
+                                {/* User Info */}
+                                <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#333', marginBottom: '10px' }}>
+                                    {user.name}
+                                </h2>
+                                {user.nickname && (
+                                    <p style={{ fontSize: '18px', color: '#666', marginBottom: '5px' }}>({user.nickname})</p>
+                                )}
+                                <p style={{ fontSize: '14px', color: '#888' }}>{user.email}</p>
+                            </div>
 
-                                    {/* User Email */}
-                                    <p style={{ fontSize: '14px', marginTop: '10px', textAlign: 'center', color: '#666' }}>{user.email}</p>
+                            {/* Center: User Details */}
+                            <div
+                                style={{
+                                    flex: '2',
+                                    backgroundColor: '#fff',
+                                    padding: '20px',
+                                    borderRadius: '10px',
+                                    margin: '10px',
+                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                                }}
+                            >
+                                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#333', marginBottom: '20px' }}>User Information</h3>
+                                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                    <tbody>
+                                        {user.city && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Province/City</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>Living in {user.city}</td>
+                                            </tr>
+                                        )}
+                                        {user.hometown && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Hometown</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>From {user.hometown}</td>
+                                            </tr>
+                                        )}
+                                        {user.birthYear && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Birth Year</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.birthYear}</td>
+                                            </tr>
+                                        )}
+                                        {user.university && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>University</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.university}</td>
+                                            </tr>
+                                        )}
+                                        {user.major && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Major</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.major}</td>
+                                            </tr>
+                                        )}
+                                        {user.socialNetworkLink && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Social Network Link</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>
+                                                    <a href={user.socialNetworkLink} target="_blank" rel="noopener noreferrer">
+                                                        {user.socialNetworkLink}
+                                                    </a></td>
+                                            </tr>
+                                        )}
+                                        {user.created && (
+                                            <tr>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Join SocialWorld</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>
+                                                    {(() => {
+                                                        const CustomDateTime = (dateString) => {
+                                                            const date = new Date(dateString);
+                                                            const day = String(date.getDate()).padStart(2, '0');
+                                                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                                                            const year = date.getFullYear();
 
-                                    {/* User Information */}
-                                    <div style={{ marginTop: '20px', backgroundColor: '#f9f9f9', margin: '0 auto' }}>
-                                        <table style={{ width: '100%', borderCollapse: 'collapse', border: 'none' }}>
-                                            <tbody>
-                                                {/* User Birth Year */}
-                                                {user.birthYear && (
-                                                    <tr style={{ borderBottom: '1px solid #ddd' }}>
-                                                        <td style={{ padding: '8px', fontSize: '16px', color: '#555', display: 'flex', alignItems: 'center' }}>
-                                                            <i title='Birth Year' className="fa fa-birthday-cake" style={{ fontSize: '18px', marginRight: '10px' }} aria-hidden="true"></i>
-                                                        </td>
-                                                        <td style={{ padding: '8px', textAlign: 'right', fontSize: '16px', color: '#333' }}>{user.birthYear}</td>
-                                                    </tr>
-                                                )}
-
-                                                {/* University */}
-                                                {user.university && (
-                                                    <tr style={{ borderBottom: '1px solid #ddd' }}>
-                                                        <td style={{ padding: '8px', fontSize: '16px', color: '#555', display: 'flex', alignItems: 'center' }}>
-                                                            <i title='University' className="fa fa-graduation-cap" style={{ fontSize: '18px', marginRight: '10px' }} aria-hidden="true"></i>
-                                                        </td>
-                                                        <td style={{ padding: '8px', textAlign: 'right', fontSize: '16px', color: '#333' }}>{user.university}</td>
-                                                    </tr>
-                                                )}
-
-                                                {/* Major */}
-                                                {user.major && (
-                                                    <tr>
-                                                        <td style={{ padding: '8px', fontSize: '16px', color: '#555', display: 'flex', alignItems: 'center' }}>
-                                                            <i title='Major' className="fa fa-book" style={{ fontSize: '18px', marginRight: '10px' }} aria-hidden="true"></i>
-                                                        </td>
-                                                        <td style={{ padding: '8px', textAlign: 'right', fontSize: '16px', color: '#333' }}>{user.major}</td>
-                                                    </tr>
-                                                )}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                                            // Format: dd/MM/yyyy, hh:mm
+                                                            return `${day}/${month}/${year}`;
+                                                        };
+                                                        return CustomDateTime(user.created);
+                                                    })()}
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
                             </div>
 
                             {/* Right Side: Statistics */}
-                            <div style={{ flex: '1', textAlign: 'left' }}>
-                                <h3 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '20px', color: '#333' }}>Statistics</h3>
-
-                                {/* Following */}
-                                <p style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                            <div
+                                style={{
+                                    backgroundColor: '#fff',
+                                    padding: '20px',
+                                    borderRadius: '10px',
+                                    marginLeft: '10px',
+                                    marginTop: '50px',
+                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                                }}
+                            >
+                                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#333', marginBottom: '20px' }}>Statistics</h3>
+                                <div style={{ marginBottom: '10px' }}>
                                     <span
                                         style={{
-                                            marginRight: "10px",
-                                            fontSize: "18px",
-                                            padding: "8px 16px",
-                                            borderRadius: "20px",
+                                            display: 'inline-block',
+                                            fontSize: '16px',
+                                            padding: '8px 16px',
+                                            borderRadius: '20px',
                                             background: 'linear-gradient(135deg, #007bff, #00d2ff)',
                                             color: '#fff',
-                                            fontWeight: '500',
-                                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                                            transition: 'transform 0.3s ease',
-                                            display: 'inline-block'
-                                        }}
-                                        className="badge badge-pill badge-primary"
-                                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                                    >
-                                        {user.following.length}
-                                    </span>
-                                    <span
-                                        style={{
-                                            fontSize: "18px",
-                                            color: '#333',
-                                            fontWeight: '400'
+                                            fontWeight: 'bold',
                                         }}
                                     >
-                                        Following
+                                        {user.following.length} Following
                                     </span>
-                                </p>
-
-                                {/* Followers */}
-                                <p style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                </div>
+                                <div style={{ marginBottom: '10px' }}>
                                     <span
                                         style={{
-                                            marginRight: "10px",
-                                            fontSize: "18px",
-                                            padding: "8px 16px",
-                                            borderRadius: "20px",
+                                            display: 'inline-block',
+                                            fontSize: '16px',
+                                            padding: '8px 16px',
+                                            borderRadius: '20px',
                                             background: 'linear-gradient(135deg, #28a745, #56ab2f)',
                                             color: '#fff',
-                                            fontWeight: '500',
-                                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                                            transition: 'transform 0.3s ease',
-                                            display: 'inline-block'
-                                        }}
-                                        className="badge badge-pill badge-success"
-                                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                                    >
-                                        {user.followers.length}
-                                    </span>
-                                    <span
-                                        style={{
-                                            fontSize: "18px",
-                                            color: '#333',
-                                            fontWeight: '400'
+                                            fontWeight: 'bold',
                                         }}
                                     >
-                                        Followers
+                                        {user.followers.length} Followers
                                     </span>
-                                </p>
-
-                                {/* Posts */}
-                                <p style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                </div>
+                                <div>
                                     <span
                                         style={{
-                                            marginRight: "10px",
-                                            fontSize: "18px",
-                                            padding: "8px 16px",
-                                            borderRadius: "20px",
+                                            display: 'inline-block',
+                                            fontSize: '16px',
+                                            padding: '8px 16px',
+                                            borderRadius: '20px',
                                             background: 'linear-gradient(135deg, #ffc107, #ff6f00)',
                                             color: '#fff',
-                                            fontWeight: '500',
-                                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                                            transition: 'transform 0.3s ease',
-                                            display: 'inline-block'
-                                        }}
-                                        className="badge badge-pill badge-warning"
-                                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                                    >
-                                        {posts.length}
-                                    </span>
-                                    <span
-                                        style={{
-                                            fontSize: "18px",
-                                            color: '#333',
-                                            fontWeight: '400'
+                                            fontWeight: 'bold',
                                         }}
                                     >
-                                        Posts
+                                        {posts.length} Posts
                                     </span>
-                                </p>
+                                </div>
                             </div>
                         </div>
 
@@ -714,14 +722,26 @@ class Profile extends Component {
                                                             </TableRow>
                                                         )}
 
-                                                        {/* Work Place */}
-                                                        {user.workPlace && (
+                                                        {/* Province/City */}
+                                                        {user.city && (
                                                             <TableRow>
                                                                 <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Work Place</Typography>
+                                                                    <Typography variant="body1" color="textSecondary">Province/City</Typography>
                                                                 </TableCell>
                                                                 <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.workPlace}
+                                                                    {user.city}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )}
+
+                                                        {/* hometown */}
+                                                        {user.hometown && (
+                                                            <TableRow>
+                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                                                    <Typography variant="body1" color="textSecondary">Hometown</Typography>
+                                                                </TableCell>
+                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                                                    {user.hometown}
                                                                 </TableCell>
                                                             </TableRow>
                                                         )}
