@@ -423,12 +423,21 @@ class Profile extends Component {
                                 </div>
 
                                 {/* User Info */}
-                                <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#333', marginBottom: '10px' }}>
-                                    {user.name}
+                                <h2 style={{ margin: 0, textAlign: 'center' }}>
+                                    <span style={{ fontWeight: 'bold', fontSize: '28px', color: '#333' }}>{user.name}</span>
+                                    <i
+                                        style={{
+                                            marginLeft: '8px',
+                                            fontSize: '16px',
+                                            color: '#3897f0',
+                                            verticalAlign: 'top'
+                                        }}
+                                        className="fa fa-check-circle"
+                                        aria-hidden="true"
+                                    />
+                                    <p style={{ fontWeight: 'bold', fontSize: '20px', color: '#333' }}>{user.nickname ? `(${user.nickname})` : ""}</p>
                                 </h2>
-                                {user.nickname && (
-                                    <p style={{ fontSize: '18px', color: '#666', marginBottom: '5px' }}>({user.nickname})</p>
-                                )}
+
                                 <p style={{ fontSize: '14px', color: '#888' }}>{user.email}</p>
                             </div>
 
