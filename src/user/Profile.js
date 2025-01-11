@@ -349,7 +349,7 @@ class Profile extends Component {
                                             left: '50%',
                                             transform: 'translateX(-50%)',
                                             backgroundColor: '#fff',
-                                            padding: '10px 50px',
+                                            padding: '10px 100px',
                                             zIndex: 2,
                                             fontSize: '14px',
                                             fontWeight: '500',

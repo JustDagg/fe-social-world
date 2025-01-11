@@ -130,7 +130,7 @@ const NoteModal = ({ user, isOpen, onClose, existingNote, onDelete, onSave, note
                             placeholder="Share your thoughts..."
                             fullWidth
                             inputProps={{
-                                maxLength: 10,
+                                maxLength: 20,
                                 style: { color: 'white' },
                             }}
                             InputLabelProps={{

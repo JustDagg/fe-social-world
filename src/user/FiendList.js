@@ -337,10 +337,11 @@ const FriendsList = () => {
                     ) : (
                         <p style={{
                             textAlign: 'center',
-                            color: 'white'
+                            color: 'white',
+                            fontWeight: 'bold'
                         }}
                         >
-                            No users found
+                            No suggested users
                         </p>
                     )}
                 </div>
