@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import ReactDOM from 'react-dom';
 import Loading from '../loading/Loading';
-import { Divider } from '@material-ui/core';
+import { Box, Divider, IconButton, Typography } from '@material-ui/core';
 
 import { isAuthenticated } from "../auth";
 import { create } from "./apiPost";
@@ -101,7 +101,7 @@ class CreatePostModal extends Component {
     };
 
     newPostForm = (title, category, location, body) => (
-        <form>
+        <form style={{ paddingLeft: '10px', paddingRight: '10px' }}>
             {/* PHOTO FIELD */}
             <div className="form-group" style={{ marginBottom: '1.5rem' }}>
                 <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
@@ -277,10 +277,35 @@ class CreatePostModal extends Component {
         return ReactDOM.createPortal(
             <div style={styles.overlay}>
                 <div ref={this.modalRef} style={styles.modal}>
-                    {/* CloseButton */}
-                    <button onClick={onClose} style={styles.closeButton}>X</button>
-                    {/* Title */}
-                    <h2 style={{ textAlign: "center", fontWeight: "bold", padding: "10px" }}>Create a New Post</h2>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            backgroundColor: '#D19616',
+                            p: 2,
+                            boxShadow: 3,
+                        }}
+                    >
+                        <Typography
+                            variant="h6"
+                            component="h2"
+                            style={{
+                                fontWeight: 'bold',
+                                color: 'white',
+                                borderRadius: '8px',
+                                textAlign: 'center',
+                            }}
+                        >
+                            Create a new post
+                        </Typography>
+
+                        {/* Close Icon */}
+                        <IconButton onClick={onClose} sx={{ color: 'white' }}>
+                            <i style={{ color: 'white' }} class="fa fa-times" aria-hidden="true"></i>
+                        </IconButton>
+                    </Box>
+
                     <Divider style={{ marginBottom: "20px" }} />
                     <div className="alert alert-danger" style={{ display: error ? "" : "none" }}>
                         {error}
@@ -312,12 +337,13 @@ const styles = {
     },
     modal: {
         backgroundColor: 'white',
-        padding: '20px',
         borderRadius: '8px',
         width: '100%',
         maxWidth: '700px',
         position: 'relative',
-        boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
+        boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+        maxHeight: '80vh',
+        overflowY: 'auto',
     },
     closeButton: {
         position: 'absolute',

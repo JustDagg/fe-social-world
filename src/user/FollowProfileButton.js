@@ -21,7 +21,7 @@ class FollowProfileButton extends Component {
                         <button
                             onClick={this.followClick}
                             className="btn btn-sm btn-info btn-raised"
-                            style={{ borderRadius: "20px", padding: "10px 50px" }}
+                            style={{ borderRadius: "20px", padding: '10px 50px', }}
                         >
                             <i style={{ marginRight: "15px" }} class="fa fa-smile-o" aria-hidden="true"></i>
                             Follow
@@ -31,7 +31,7 @@ class FollowProfileButton extends Component {
                         <button
                             onClick={this.unfollowClick}
                             className="btn btn-sm btn-raised btn-danger"
-                            style={{ borderRadius: "20px", padding: "10px 50px" }}
+                            style={{ borderRadius: "20px", padding: '10px 50px' }}
                         >
                             <i style={{ marginRight: "15px" }} class="fa fa-frown-o" aria-hidden="true"></i>
                             UnFollow

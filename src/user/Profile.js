@@ -13,8 +13,8 @@ import { createNote, deleteNote, getNotesByUser, read } from "./apiUser";
 import '../css/Profile.css';
 import Footer from '../component/Footer';
 import NoteModal from './NoteModal';
-import { DisplayDateTime12Hour } from '../post/timeDifference';
-import { Box, Button, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from '../../node_modules/@material-ui/core/index';
+import { ProfileShowModal } from './ProfileShowModal';
+import { Box } from '@material-ui/core';
 
 class Profile extends Component {
     constructor() {
@@ -30,7 +30,6 @@ class Profile extends Component {
             isNoteModalOpen: false,
             note: "",
             existingNote: null,
-            openInfomatioModal: false,
         }
     }
 
@@ -177,16 +176,9 @@ class Profile extends Component {
         });
     };
 
-    handleOpenInformationModal = () => {
-        this.setState({ openInfomatioModal: true });
-    };
-
-    handleCloseInfomationModal = () => {
-        this.setState({ openInfomatioModal: false });
-    };
-
     renderProfile = () => {
-        const { user, following, posts, isAvatarModalOpen, isNoteModalOpen, existingNote, note, openInfomatioModal } = this.state;
+        const { user, following, posts, isAvatarModalOpen, isNoteModalOpen, existingNote, note } = this.state;
+        console.log("Pas", user)
         const photoUrl = user._id ? `${process.env.REACT_APP_API_URL}/user/photo/${user._id}?${new Date().getTime()}` : DefaultProfile;
 
         // Kiểm tra người dùng hiện tại có phải là người đăng nhập không
@@ -575,277 +567,91 @@ class Profile extends Component {
                                     </span>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="button-container">
-                            {isAuthenticated().user && isAuthenticated().user._id === user._id ? (
-                                <>
-                                    {/* CREATE POST BUTTON */}
-                                    <Link
-                                        className="btn btn-sm btn-raised btn-dark"
-                                        to={`/post/create`}
-                                        style={{
-                                            backgroundColor: "#343a40",
-                                            borderRadius: "25px",
-                                            padding: "8px 16px",
-                                            fontSize: "14px",
-                                            textDecoration: "none",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            transition: "background-color 0.3s ease, transform 0.3s ease",
-                                        }}
-                                    >
-                                        <i style={{ marginRight: "15px" }} class="fa fa-plus-square" aria-hidden="true"></i> Create Post
-                                    </Link>
-
-                                    {/* EDIT PROFILE BUTTON */}
-                                    <Link
-                                        className="btn btn-sm btn-raised btn-dark"
-                                        to={`/user/edit/${user._id}`}
-                                        style={{
-                                            backgroundColor: "#343a40",
-                                            borderRadius: "25px",
-                                            padding: "8px 16px",
-                                            fontSize: "14px",
-                                            textDecoration: "none",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            transition: "background-color 0.3s ease, transform 0.3s ease",
-                                        }}
-                                    >
-                                        <i style={{ marginRight: "15px" }} class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
-                                    </Link>
-
-                                    {/* DELETE USER PROFILE */}
-                                    <DeleteUser userId={user._id} username={user.name} />
-
-                                    {/* PROFILE SHOW */}
-                                    <button
-                                        onClick={this.handleOpenInformationModal}
-                                        className="btn btn-sm btn-raised btn-dark"
-                                        style={{
-                                            backgroundColor: "#343a40",
-                                            borderRadius: "25px",
-                                            padding: "8px 16px",
-                                            fontSize: "14px",
-                                            textDecoration: "none",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            transition: "background-color 0.3s ease, transform 0.3s ease",
-                                        }}
-                                    >
-                                        <i style={{ marginRight: "15px" }} class="fa fa-exclamation-circle" aria-hidden="true"></i> User Details
-                                    </button>
-                                    <Modal
-                                        open={openInfomatioModal}
-                                        onClose={this.handleCloseInfomationModal}
-                                        aria-labelledby="modal-title"
-                                        aria-describedby="modal-description"
-                                    >
+                            <Box
+                                width={'100%'}
+                                p={2}
+                            >
+                                {isAuthenticated().user && isAuthenticated().user._id === user._id ? (
+                                    <>
                                         <Box
-                                            sx={{
-                                                position: "absolute",
-                                                top: "50%",
-                                                left: "50%",
-                                                transform: "translate(-50%, -50%)",
-                                                width: 1000,
-                                                bgcolor: "background.paper",
-                                                border: "2px solid #000",
-                                                boxShadow: 24,
-                                                p: 4,
-                                                borderRadius: "8px",
-                                            }}
+                                            display={'flex'}
+                                            justifyContent={'space-between'}
+                                            sx={{ gap: 10 }}
                                         >
-                                            <TableContainer component={Paper} style={{ borderRadius: '8px' }}>
-                                                <Table>
-                                                    <TableBody>
-                                                        {/* User Birth Year */}
-                                                        {user.birthYear && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Birth Year</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.birthYear}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
+                                            {/* CREATE POST BUTTON */}
+                                            <Link
+                                                className="btn btn-sm btn-raised btn-dark"
+                                                to={`/post/create`}
+                                                style={{
+                                                    padding: '10px 20px',
+                                                    backgroundColor: "#343a40",
+                                                    borderRadius: "25px",
+                                                    width: '100%',
+                                                    fontSize: "14px",
+                                                    textDecoration: "none",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    transition: "background-color 0.3s ease, transform 0.3s ease",
+                                                }}
+                                            >
+                                                <i style={{ marginRight: "15px" }} class="fa fa-plus-square" aria-hidden="true"></i> Create Post
+                                            </Link>
 
-                                                        {/* University */}
-                                                        {user.university && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">University</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.university}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
+                                            {/* EDIT PROFILE BUTTON */}
+                                            <Link
+                                                className="btn btn-sm btn-raised btn-dark"
+                                                to={`/user/edit/${user._id}`}
+                                                style={{
+                                                    padding: '10px 20px',
+                                                    backgroundColor: "#343a40",
+                                                    borderRadius: "25px",
+                                                    width: '100%',
+                                                    fontSize: "14px",
+                                                    textDecoration: "none",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    transition: "background-color 0.3s ease, transform 0.3s ease",
+                                                }}
+                                            >
+                                                <i style={{ marginRight: "15px" }} class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
+                                            </Link>
 
-                                                        {/* Major */}
-                                                        {user.major && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Major</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.major}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
+                                            {/* DELETE USER PROFILE */}
+                                            <DeleteUser userId={user._id} username={user.name} />
 
-                                                        {/* Specialization */}
-                                                        {user.specialization && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Specialization</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.specialization}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
-
-                                                        {/* Sex */}
-                                                        {user.sex && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Sex</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.sex}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
-
-                                                        {/* Nickname */}
-                                                        {user.nickname && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Nickname</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.nickname}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
-
-                                                        {/* Province/City */}
-                                                        {user.city && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Province/City</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.city}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
-
-                                                        {/* hometown */}
-                                                        {user.hometown && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Hometown</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {user.hometown}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
-
-                                                        {/* socialNetworkLink */}
-                                                        {user.socialNetworkLink && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Social Network Link</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    <a href={user.socialNetworkLink} target="_blank" rel="noopener noreferrer">
-                                                                        {user.socialNetworkLink}
-                                                                    </a>
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
-
-                                                        {/* Created Date */}
-                                                        {user.created && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Created Date</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {DisplayDateTime12Hour(new Date(user.created))}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
-
-                                                        {/* Updated Date */}
-                                                        {user.updated && (
-                                                            <TableRow>
-                                                                <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                                                    <Typography variant="body1" color="textSecondary">Updated Date</Typography>
-                                                                </TableCell>
-                                                                <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                                                    {DisplayDateTime12Hour(new Date(user.updated))}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        )}
-                                                    </TableBody>
-                                                </Table>
-                                            </TableContainer>
-                                            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                                <Button
-                                                    onClick={this.handleCloseInfomationModal}
-                                                    variant="contained"
-                                                    color="primary"
-                                                    style={{
-                                                        marginTop: '10px',
-                                                        justifyContent: 'center',
-                                                        borderRadius: '20px',
-                                                        fontWeight: 'bold',
-                                                        padding: '8px 20px',
-                                                        boxShadow: 2,
-                                                        '&:hover': {
-                                                            backgroundColor: '#1976d2',
-                                                            boxShadow: 4,
-                                                        },
-                                                    }}
-                                                >
-                                                    Close
-                                                </Button>
-                                            </Box>
+                                            {/* PROFILE SHOW */}
+                                            <ProfileShowModal user={user} />
                                         </Box>
-                                    </Modal>
-                                </>
-                            ) : (
-                                <div className="row">
-                                    {/* MESSAGE BUTTON */}
-                                    <div>
-                                        <Link
-                                            className="btn btn-sm btn-raised btn-dark"
-                                            style={{ borderRadius: "20px", padding: "10px 50px" }}
-                                            to={`/chat/${isAuthenticated().user._id}/${user._id}`}
-                                        >
-                                            <i style={{ marginRight: "15px" }} class="fa fa-commenting" aria-hidden="true"></i> Message
-                                        </Link>
-                                    </div>
+                                    </>
+                                ) : (
+                                    <Box display={'flex'} width={'100%'} justifyContent={'center'} sx={{ gap: 10 }}>
+                                        {/* MESSAGE BUTTON */}
+                                        <div>
+                                            <Link
+                                                className="btn btn-sm btn-raised btn-dark"
+                                                style={{ borderRadius: "20px", padding: '10px 50px' }}
+                                                to={`/chat/${isAuthenticated().user._id}/${user._id}`}
+                                            >
+                                                <i style={{ marginRight: "15px" }} class="fa fa-commenting" aria-hidden="true"></i> Message
+                                            </Link>
+                                        </div>
 
-                                    {/* FOLLOW USER BUTTON */}
-                                    <div className="col-md-5 col-xs-6">
-                                        <FollowProfileButton following={following} onButtonClick={this.clickFollowButton} />
-                                    </div>
-                                </div>
-                            )}
+                                        {/* FOLLOW USER BUTTON */}
+                                        <div>
+                                            <FollowProfileButton following={following} onButtonClick={this.clickFollowButton} />
+                                        </div>
+                                    </Box>
+                                )}
 
+                            </Box>
                         </div>
 
                         {/* Bio */}
-                        <div className="section">
+                        <Box mt={2} mx={2} className="section">
                             <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#333' }}>BIO</h3>
                             <p style={{ fontSize: "18px", }}>{user.about}</p>
-                        </div>
+                        </Box>
 
                     </div>
                 </div>
@@ -855,7 +661,7 @@ class Profile extends Component {
 
                             {/* POSTS TAB */}
                             <Tab label={postsBadge} className="tab-title-name">
-                                <div className="row">
+                                <div style={{ width: '100%', gap: '80px' }} className="row">
                                     {posts.map((post, i) => (
                                         <div key={i} style={{ paddingBottom: "15px" }} className="col-md-2">
                                             {post.photo && post.photo.data ? (

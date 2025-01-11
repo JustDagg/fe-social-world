@@ -43,28 +43,6 @@ const Sidebar = () => {
         <div className="sidebar">
             <div style={{ marginTop: "0px" }}>
 
-                {/* PROFILE */}
-                {currentUser && (
-                    <>
-                        <Link to={`/user/${currentUser._id}`} className="sidebar-link">
-                            <img
-                                src={`${process.env.REACT_APP_API_URL}/user/photo/${currentUser._id}`}
-                                alt={currentUser.name}
-                                onError={i => (i.target.src = DefaultProfile)}
-                                style={{
-                                    width: '30px',
-                                    height: '30px',
-                                    borderRadius: '50%',
-                                    marginRight: '15px',
-                                    cursor: 'pointer',
-                                    objectFit: 'contain'
-                                }}
-                            />
-                            <span style={{ color: 'white' }}>{currentUser.name}</span>
-                        </Link>
-                    </>
-                )}
-
                 {/* HOME LINK */}
                 <Link to="/" className="sidebar-link">
                     <i className="fas fa-home"></i>
@@ -93,10 +71,25 @@ const Sidebar = () => {
                         </Link>
 
                         {/* PROFILE */}
-                        <Link to={`/user/${user._id}`} className="sidebar-link">
-                            <i className="far fa-user"></i>
-                            <span>Profile</span>
-                        </Link>
+                        {currentUser && (
+                            <Link to={`/user/${user._id}`} className="sidebar-link">
+                                <img
+                                    src={`${process.env.REACT_APP_API_URL}/user/photo/${currentUser._id}`}
+                                    alt={currentUser.name}
+                                    onError={i => (i.target.src = DefaultProfile)}
+                                    style={{
+                                        width: '30px',
+                                        height: '30px',
+                                        borderRadius: '50%',
+                                        marginRight: '15px',
+                                        cursor: 'pointer',
+                                        objectFit: 'contain',
+                                        border: '3px solid white'
+                                    }}
+                                />
+                                <span>Profile</span>
+                            </Link>
+                        )}
                     </>
                 )}
             </div>

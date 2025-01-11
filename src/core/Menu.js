@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
-
+import DefaultProfile from '../images/avatar.jpg';
 import { signout, isAuthenticated } from "../auth";
 import '../css/Menu.css';
 import { Box } from '../../node_modules/@material-ui/core/index';
@@ -188,7 +188,21 @@ const Menu = (props) => (
                                             fontWeight: 'bold'
                                         }}
                                     >
-                                        <i className="fas fa-user mr-2"></i>{`${isAuthenticated().user.name}`}
+                                        <img
+                                            src={`${process.env.REACT_APP_API_URL}/user/photo/${isAuthenticated().user._id}`}
+                                            alt={isAuthenticated().user.name}
+                                            onError={i => (i.target.src = DefaultProfile)}
+                                            style={{
+                                                width: '20px',
+                                                height: '20px',
+                                                borderRadius: '50%',
+                                                marginRight: '15px',
+                                                cursor: 'pointer',
+                                                objectFit: 'contain',
+                                                border: '2px solid white'
+                                            }}
+                                        />
+                                        {`${isAuthenticated().user.name}`}
                                     </button>
                                     <div
                                         className="dropdown-menu"

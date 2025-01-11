@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Posts from '../post/Posts';
 import Sidebar from '../component/Sidebar';
-
 import DefaultProfile from '../images/avatar.jpg';
 import FriendsList from '../user/FiendList';
 import { isAuthenticated } from '../auth';
@@ -24,7 +23,14 @@ const Home = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
             <div style={{ display: 'flex', flex: 1 }}>
-                <div style={{ width: '300px', backgroundColor: '#fafafa', boxShadow: '2px 0 5px rgba(0,0,0,0.1)' }}>
+                <div style={{
+                    width: '300px',
+                    backgroundColor: '#fafafa',
+                    boxShadow: '2px 0 5px rgba(0,0,0,0.1)',
+                    position: 'sticky',
+                    top: '0',
+                    height: '100vh'
+                }}>
                     <Sidebar />
                 </div>
 
@@ -33,7 +39,7 @@ const Home = () => {
                     {/* NotesList */}
                     {isUserAuthenticated && (
                         <div style={{ width: '100%', maxWidth: '600px', marginTop: '20px' }}>
-                            <NotesList /> 
+                            <NotesList />
                         </div>
                     )}
 

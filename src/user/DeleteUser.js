@@ -73,9 +73,10 @@ class DeleteUser extends Component {
                 onClick={this.deleteConfirmed}
                 className="btn btn-sm btn-raised btn-dark"
                 style={{
+                    padding: '10px 20px',
                     backgroundColor: "#343a40",
                     borderRadius: "25px",
-                    padding: "8px 16px",
+                    width: '100%',
                     fontSize: "14px",
                     textDecoration: "none",
                     display: "flex",

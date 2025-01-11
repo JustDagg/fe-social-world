@@ -212,7 +212,7 @@ class Posts extends Component {
                             transition: 'background-color 0.3s, color 0.3s',
                         }}
                     >
-                        Posts
+                        Post
                     </button>
 
                     {/* Conditionally discussion tab if user is authenticated */}
