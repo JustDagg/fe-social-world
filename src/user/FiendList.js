@@ -9,6 +9,7 @@ import { Divider } from '@material-ui/core';
 const FriendsList = () => {
     const [followingUsers, setFollowingUsers] = useState([]);
     const [users, setUsers] = useState([]); // For suggested users
+    console.log("Us:", users)
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const history = useHistory();
@@ -36,9 +37,8 @@ const FriendsList = () => {
         setLoading(true);
         const userId = isAuthenticated().user._id;
         const token = isAuthenticated().token;
-        const { university, birthYear } = authenticatedUser.user; // Assuming these are available
 
-        findPeople(userId, token, university || "", birthYear || "")
+        findPeople(userId, token)
             .then(data => {
                 if (data.error) {
                     setError(data.error);

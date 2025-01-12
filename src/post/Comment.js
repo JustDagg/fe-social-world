@@ -155,80 +155,10 @@ class Comment extends Component {
                 ) : (
                     <div>
                         {/* COMMENTS, LENGTH COMMENT */}
-                        <h6 className="mt-3 mb-1 ml-3 mr-3">
+                        <h6 className="mt-3 mb-4 ml-3 mr-3">
                             Comments <span className="pull-right">{comments.length} comments</span>
                         </h6>
                         <div className="panel-body">
-                            <form onSubmit={this.addComment}>
-                                <div style={{ position: 'relative', margin: '10px 0' }}>
-                                    {/* WRITE COMMENT INPUT */}
-                                    <input
-                                        type="text"
-                                        onChange={this.handleChange}
-                                        value={text}
-                                        placeholder="Write your thoughts..."
-                                        style={{
-                                            padding: '10px 50px 10px 15px',
-                                            borderRadius: '25px',
-                                            border: '1px solid #ddd',
-                                            fontSize: '16px',
-                                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                            transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-                                            outline: 'none',
-                                            width: '100%',
-                                        }}
-                                        onFocus={(e) => {
-                                            e.target.style.borderColor = '#D19616'; /* Highlight color on focus */
-                                            e.target.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
-                                        }}
-                                        onBlur={(e) => {
-                                            e.target.style.borderColor = '#ddd'; /* Reset border color */
-                                            e.target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-                                        }}
-                                    />
-
-                                    {/* ADD EMOJI BUTTON */}
-                                    <button
-                                        type="button"
-                                        onClick={() => this.setState({ showPicker: !showPicker })}
-                                        style={{
-                                            position: 'absolute',
-                                            right: '20px',
-                                            top: '50%',
-                                            transform: 'translateY(-50%)',
-                                            padding: '8px',
-                                            border: 'none',
-                                            borderRadius: '50%',
-                                            cursor: 'pointer',
-                                        }}
-                                    >
-                                        <i
-                                            style={{
-                                                color: '#D19616',
-                                            }}
-                                            className="far fa-smile"
-                                        ></i>
-                                    </button>
-                                </div>
-
-                                {/* ADD COMMENT BUTTON */}
-                                <button
-                                    style={{ borderRadius: "20px", fontWeight: "bold", width: "100%" }}
-                                    type="submit"
-                                    className="btn btn-raised btn-sm btn-info pull-right mt-3 mb-4">
-                                    Add comment
-                                </button>
-                            </form>
-
-                            {/* EMOJI PICKER */}
-                            {showPicker ? <Picker onEmojiClick={this.onEmojiClick} /> : ""}
-                            <div className="alert alert-danger" style={{ display: error ? "" : "none", marginTop: "70px", marginBottom: 0 }}>
-                                {error}
-                            </div>
-
-                            <br />
-                            <div className="clearfix"></div>
-                            <hr />
                             <ul className="media-list">
                                 {comments.reverse().map((comment, i) => (
                                     <li key={i} className="media">
@@ -297,6 +227,73 @@ class Comment extends Component {
                                     </li>
                                 ))}
                             </ul>
+
+                            <form onSubmit={this.addComment}>
+                                <div style={{ position: 'relative', margin: '10px 0' }}>
+                                    {/* WRITE COMMENT INPUT */}
+                                    <input
+                                        type="text"
+                                        onChange={this.handleChange}
+                                        value={text}
+                                        placeholder="Write your thoughts..."
+                                        style={{
+                                            padding: '10px 50px 10px 15px',
+                                            borderRadius: '25px',
+                                            border: '1px solid #ddd',
+                                            fontSize: '16px',
+                                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                                            transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                                            outline: 'none',
+                                            width: '100%',
+                                        }}
+                                        onFocus={(e) => {
+                                            e.target.style.borderColor = '#D19616'; /* Highlight color on focus */
+                                            e.target.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+                                        }}
+                                        onBlur={(e) => {
+                                            e.target.style.borderColor = '#ddd'; /* Reset border color */
+                                            e.target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+                                        }}
+                                    />
+
+                                    {/* ADD EMOJI BUTTON */}
+                                    <button
+                                        type="button"
+                                        onClick={() => this.setState({ showPicker: !showPicker })}
+                                        style={{
+                                            position: 'absolute',
+                                            right: '20px',
+                                            top: '50%',
+                                            transform: 'translateY(-50%)',
+                                            padding: '8px',
+                                            border: 'none',
+                                            borderRadius: '50%',
+                                            cursor: 'pointer',
+                                        }}
+                                    >
+                                        <i
+                                            style={{
+                                                color: '#D19616',
+                                            }}
+                                            className="far fa-smile"
+                                        ></i>
+                                    </button>
+                                </div>
+
+                                {/* ADD COMMENT BUTTON */}
+                                <button
+                                    style={{ borderRadius: "20px", fontWeight: "bold", width: "100%" }}
+                                    type="submit"
+                                    className="btn btn-raised btn-sm btn-info pull-right mt-3 mb-4">
+                                    Add comment
+                                </button>
+                            </form>
+
+                            {/* EMOJI PICKER */}
+                            {showPicker ? <Picker onEmojiClick={this.onEmojiClick} /> : ""}
+                            <div className="alert alert-danger" style={{ display: error ? "" : "none", marginTop: "70px", marginBottom: 0 }}>
+                                {error}
+                            </div>
                         </div>
                     </div>
                 )}

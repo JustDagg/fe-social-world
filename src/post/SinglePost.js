@@ -6,7 +6,7 @@ import DefaultProfile from '../images/avatar.jpg';
 import { timeDifference } from './timeDifference';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { Divider } from '@material-ui/core';
+import { Box, Divider } from '@material-ui/core';
 import Footer from '../component/Footer';
 
 import { isAuthenticated } from "../auth";
@@ -232,11 +232,38 @@ class SinglePost extends Component {
                         </Link>
 
                         {/* Created datetime */}
-                        <p style={{ marginLeft: 'auto', color: '#8e8e8e', fontSize: '15px' }}>
+                        <p style={{ marginLeft: 'auto', color: '#8e8e8e', fontSize: '12px' }}>
                             <i style={{ marginRight: "5px" }} className="far fa-clock"></i>
                             {timeDifference(new Date(), new Date(post.created))}
                         </p>
                     </div>
+
+                    {/* TITLE */}
+                    <Box>
+                        {(post.location || post.category) && (
+                            <div>
+                                {/* Location */}
+                                {post.location && (
+                                    <h7 style={{ fontWeight: 'bold', marginTop: "5px" }} className="card-title ml-3">
+                                        <i style={{ color: "blue" }} className="fa fa-map-marker" aria-hidden="true"></i> {post.location}
+                                    </h7>
+                                )}
+
+                                {post.location && <br />}
+
+                                {/* Category */}
+                                {post.category && (
+                                    <h7 style={{ fontWeight: 'bold', marginTop: "20px" }} className="card-title ml-3">
+                                        <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Category: {post.category}
+                                    </h7>
+                                )}
+                            </div>
+                        )}
+
+                        <h6 style={{ fontWeight: 'bold', padding: '10px' }} className="card-title">{post.title}</h6>
+                    </Box>
+
+                    <Divider style={{ margin: '2px 0' }} />
 
                     {/* Post Image */}
                     {post.photo && post.photo.data ? (
@@ -287,31 +314,55 @@ class SinglePost extends Component {
                         </div>
                     )}
 
+                    <Divider style={{ margin: '2px 0' }} />
+
+                    {/* COUNT LIKE */}
+                    <h6 style={{ marginLeft: '15px', marginTop: '10px' }}>{likes} likes</h6>
+
                     {/* Action */}
-                    <div style={{ padding: '10px 10px' }}>
+                    <div style={{ padding: '0px 10px' }}>
+                        <Divider style={{ margin: '2px 0' }} />
                         <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
                             {like ? (
                                 // LIKE
                                 <h3>
-                                    <i onClick={this.likeToggle} className="fa fa-heart" style={{ color: "red", padding: "10px", cursor: "pointer" }} aria-hidden="true"></i>
+                                    <i
+                                        onClick={this.likeToggle}
+                                        title='Like'
+                                        className="fa fa-heart"
+                                        style={{ color: "red", padding: "10px", cursor: "pointer" }}
+                                        aria-hidden="true">
+                                    </i>
                                 </h3>
                             ) : (
                                 // UNLIKE
                                 <h3>
-                                    <i onClick={this.likeToggle} className="fa fa-heart-o" style={{ padding: "10px", cursor: "pointer" }} aria-hidden="true"></i>
+                                    <i
+                                        onClick={this.likeToggle}
+                                        title='Like'
+                                        className="fa fa-heart-o"
+                                        style={{ padding: "10px", cursor: "pointer" }}
+                                        aria-hidden="true">
+                                    </i>
                                 </h3>
                             )}
 
                             {/* SHARE POST */}
                             <h3>
-                                <i onClick={this.sharePost} className="fa fa-share-alt" style={{ color: "#1DA1F2", padding: "10px", cursor: "pointer" }} aria-hidden="true"></i>
+                                <i
+                                    onClick={this.sharePost}
+                                    title='Share'
+                                    className="fa fa-share-alt"
+                                    style={{ color: "#1DA1F2", padding: "10px", cursor: "pointer" }}
+                                    aria-hidden="true">
+                                </i>
                             </h3>
 
                             {/* EDIT POST (only visible if the user is the author) */}
                             {isAuthenticated().user && isAuthenticated().user._id === this.state.post.postedBy._id && (
                                 <h3>
                                     <Link to={`/post/edit/${this.state.post._id}`} style={{ textDecoration: 'none' }}>
-                                        <i className="fa fa-pencil" style={{ color: "#44E076", padding: "10px", cursor: "pointer" }} aria-hidden="true"></i>
+                                        <i title='Edit' className="fa fa-pencil" style={{ color: "#44E076", padding: "10px", cursor: "pointer" }} aria-hidden="true"></i>
                                     </Link>
                                 </h3>
                             )}
@@ -319,37 +370,23 @@ class SinglePost extends Component {
                             {/* DELETE POST (only visible if the user is the author) */}
                             {isAuthenticated().user && isAuthenticated().user._id === this.state.post.postedBy._id && (
                                 <h3>
-                                    <i onClick={() => this.deleteConfirmed(post)} className="fa fa-trash" style={{ color: "red", padding: "10px", cursor: "pointer" }} aria-hidden="true"></i>
+                                    <i
+                                        onClick={() => this.deleteConfirmed(post)}
+                                        title='Delete'
+                                        className="fa fa-trash"
+                                        style={{ color: "red", padding: "10px", cursor: "pointer" }}
+                                        aria-hidden="true">
+                                    </i>
                                 </h3>
                             )}
 
                         </div>
-
-                        {/* COUNT LIKE */}
-                        <span style={{ fontSize: "18px" }} className="ml-1">{likes} likes</span>
+                        <Divider style={{ margin: '0px 0' }} />
                     </div>
-
-                    {/* TITLE */}
-                    <h5 style={{ fontWeight: 'bold' }} className="card-title ml-3">{post.title}</h5>
-
-                    <h6 style={{ fontWeight: 'bold', marginTop: "20px" }} className="card-title ml-3">
-                        {post.category ? (
-                            <>
-                                <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Category: {post.category}
-                            </>
-                        ) : ""}
-                    </h6>
-
-                    <h6 style={{ fontWeight: 'bold', marginTop: "5px" }} className="card-title ml-3">
-                        {post.location ? (
-                            <>
-                                <i style={{ color: "blue" }} className="fa fa-font-awesome" aria-hidden="true"></i> Location: {post.location}
-                            </>
-                        ) : ""}
-                    </h6>
 
                     {/* DESCRIPTION */}
                     <div style={{
+                        marginTop: '10px',
                         position: 'relative',
                         border: '1px solid #ddd',
                         borderRadius: '8px',

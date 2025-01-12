@@ -477,6 +477,12 @@ class Profile extends Component {
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.major}</td>
                                             </tr>
                                         )}
+                                        {user.hobby && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Hobby</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.hobby}</td>
+                                            </tr>
+                                        )}
                                         {user.socialNetworkLink && (
                                             <tr style={{ borderBottom: '1px solid #eee' }}>
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Social Network Link</td>
