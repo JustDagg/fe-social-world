@@ -14,7 +14,7 @@ import '../css/Profile.css';
 import Footer from '../component/Footer';
 import NoteModal from './NoteModal';
 import { ProfileShowModal } from './ProfileShowModal';
-import { Box } from '@material-ui/core';
+import { Box, Paper } from '@material-ui/core';
 
 class Profile extends Component {
     constructor() {
@@ -327,7 +327,7 @@ class Profile extends Component {
                                 width: '100%',
                             }}
                         >
-                            {/* Left Side: Avatar and User Info */}
+                            {/* Left: Avatar and User Info */}
                             <div
                                 style={{
                                     flex: '1',
@@ -430,10 +430,106 @@ class Profile extends Component {
                                     <p style={{ fontWeight: 'bold', fontSize: '20px', color: '#333' }}>{user.nickname ? `(${user.nickname})` : ""}</p>
                                 </h2>
 
+                                {/* Email */}
                                 <p style={{ fontSize: '14px', color: '#888' }}>{user.email}</p>
+
+                                {/* Statistics */}
+                                <div
+                                    style={{
+                                        backgroundColor: '#fff',
+                                        padding: '20px',
+                                        borderRadius: '10px',
+                                        marginLeft: '10px',
+                                        marginTop: '10px',
+                                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                                    }}
+                                >
+                                    <h3
+                                        style={{
+                                            fontSize: '20px',
+                                            fontWeight: 'bold',
+                                            color: '#333',
+                                            marginBottom: '20px',
+                                            position: 'relative',
+                                            display: 'inline-block',
+                                        }}
+                                    >
+                                        Statistics
+                                        <span
+                                            style={{
+                                                position: 'absolute',
+                                                bottom: '-5px',
+                                                left: '0',
+                                                width: '100%',
+                                                height: '4px',
+                                                background: '#D19616',
+                                                borderRadius: '2px',
+                                            }}
+                                        ></span>
+                                    </h3>
+
+                                    {/* posts */}
+                                    <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', gap: '20px', marginBottom: '20px' }}>
+                                        <div style={{ textAlign: 'center' }}>
+                                            <span
+                                                style={{
+                                                    display: 'inline-block',
+                                                    fontSize: '16px',
+                                                    padding: '10px 20px',
+                                                    borderRadius: '25px',
+                                                    background: 'linear-gradient(135deg, #ffc107, #ff6f00)',
+                                                    color: '#fff',
+                                                    fontWeight: 'bold',
+                                                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                                }}
+                                            >
+                                                {posts.length}
+                                            </span>
+                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#6c757d' }}>Posts</div>
+                                        </div>
+
+                                        {/* followers */}
+                                        <div style={{ textAlign: 'center' }}>
+                                            <span
+                                                style={{
+                                                    display: 'inline-block',
+                                                    fontSize: '16px',
+                                                    padding: '10px 20px',
+                                                    borderRadius: '25px',
+                                                    background: 'linear-gradient(135deg, #28a745, #56ab2f)',
+                                                    color: '#fff',
+                                                    fontWeight: 'bold',
+                                                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                                }}
+                                            >
+                                                {user.followers.length}
+                                            </span>
+                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#6c757d' }}>Followers</div>
+                                        </div>
+
+                                        {/* following */}
+                                        <div style={{ textAlign: 'center' }}>
+                                            <span
+                                                style={{
+                                                    display: 'inline-block',
+                                                    fontSize: '16px',
+                                                    padding: '10px 20px',
+                                                    borderRadius: '25px',
+                                                    background: 'linear-gradient(135deg, #007bff, #00d2ff)',
+                                                    color: '#fff',
+                                                    fontWeight: 'bold',
+                                                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                                }}
+                                            >
+                                                {user.following.length}
+                                            </span>
+                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#6c757d' }}>Following</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            {/* Center: User Details */}
+                            {/* Right: User Details */}
                             <div
                                 style={{
                                     flex: '2',
@@ -444,7 +540,7 @@ class Profile extends Component {
                                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                                 }}
                             >
-                                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#333', marginBottom: '20px' }}>User Information</h3>
+                                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#333', marginBottom: '20px' }}>Information</h3>
                                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                     <tbody>
                                         {user.city && (
@@ -513,65 +609,6 @@ class Profile extends Component {
                                         )}
                                     </tbody>
                                 </table>
-                            </div>
-
-                            {/* Right Side: Statistics */}
-                            <div
-                                style={{
-                                    backgroundColor: '#fff',
-                                    padding: '20px',
-                                    borderRadius: '10px',
-                                    marginLeft: '10px',
-                                    marginTop: '50px',
-                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                }}
-                            >
-                                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#333', marginBottom: '20px' }}>Statistics</h3>
-                                <div style={{ marginBottom: '10px' }}>
-                                    <span
-                                        style={{
-                                            display: 'inline-block',
-                                            fontSize: '16px',
-                                            padding: '8px 16px',
-                                            borderRadius: '20px',
-                                            background: 'linear-gradient(135deg, #007bff, #00d2ff)',
-                                            color: '#fff',
-                                            fontWeight: 'bold',
-                                        }}
-                                    >
-                                        {user.following.length} Following
-                                    </span>
-                                </div>
-                                <div style={{ marginBottom: '10px' }}>
-                                    <span
-                                        style={{
-                                            display: 'inline-block',
-                                            fontSize: '16px',
-                                            padding: '8px 16px',
-                                            borderRadius: '20px',
-                                            background: 'linear-gradient(135deg, #28a745, #56ab2f)',
-                                            color: '#fff',
-                                            fontWeight: 'bold',
-                                        }}
-                                    >
-                                        {user.followers.length} Followers
-                                    </span>
-                                </div>
-                                <div>
-                                    <span
-                                        style={{
-                                            display: 'inline-block',
-                                            fontSize: '16px',
-                                            padding: '8px 16px',
-                                            borderRadius: '20px',
-                                            background: 'linear-gradient(135deg, #ffc107, #ff6f00)',
-                                            color: '#fff',
-                                            fontWeight: 'bold',
-                                        }}
-                                    >
-                                        {posts.length} Posts
-                                    </span>
-                                </div>
                             </div>
 
                             <Box
@@ -653,15 +690,17 @@ class Profile extends Component {
                             </Box>
                         </div>
 
-                        {/* Bio */}
-                        <Box mt={2} mx={2} className="section">
-                            <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#333' }}>BIO</h3>
-                            <p style={{ fontSize: "18px", }}>{user.about}</p>
-                        </Box>
+                        <Paper style={{ padding: '5px', borderRadius: '30px', marginTop: '5px' }}>
+                            {/* Bio */}
+                            <Box mt={2} mx={2} className="section">
+                                <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#333' }}>BIO</h3>
+                                <p style={{ fontSize: "18px", }}>{user.about}</p>
+                            </Box>
+                        </Paper>
 
                     </div>
                 </div>
-                <div className="col-md-11">
+                <div style={{ marginTop: '10px' }} className="col-md-11">
                     <div className="profile-info-right">
                         <Tabs onSelect={(index, label) => console.log(label + ' selected')}>
 
