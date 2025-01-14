@@ -138,9 +138,35 @@ class FindPeople extends Component {
                                 alt={user.name}
                             />
                         </div>
+
                         <div className="card-body text-center">
                             {/* User Name */}
-                            <h5 style={{ fontWeight: "bold" }} className="card-title find-friend-name">{user.name}</h5>
+                            <Link
+                                to={user ? `/user/${user._id}` : '/signin'}
+                                style={{
+                                    color: '#262626',
+                                    textDecoration: 'none',
+                                }}>
+                                <h5 className="card-title find-friend-name" style={{ alignItems: 'center' }}>
+                                    <span
+                                        style={{ fontWeight: 'bold', fontSize: '20px' }}
+                                        onMouseEnter={(e) => e.target.style.color = '#4A90E2'}
+                                        onMouseLeave={(e) => e.target.style.color = ''}
+                                    >
+                                        {user.name}
+                                    </span>
+                                    <i
+                                        style={{
+                                            marginLeft: '5px',
+                                            fontSize: '10px',
+                                            color: '#3897f0',
+                                            verticalAlign: 'top',
+                                        }}
+                                        className="fa fa-check-circle"
+                                        aria-hidden="true">
+                                    </i>
+                                </h5>
+                            </Link>
 
                             {/* User Email */}
                             <p style={{ fontSize: "15px" }} className="card-title find-friend-name">{user.email}</p>

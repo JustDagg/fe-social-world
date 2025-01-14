@@ -258,7 +258,7 @@ class CreatePostModal extends Component {
             <button
                 style={{
                     width: "100%",
-                    marginTop: "20px",
+                    marginTop: "10px",
                     borderRadius: "20px",
                     height: "3rem",
                     backgroundColor: "#D19616"
@@ -338,7 +338,7 @@ const styles = {
     },
     modal: {
         backgroundColor: 'white',
-        borderRadius: '8px',
+        borderRadius: "15px",
         width: '100%',
         maxWidth: '700px',
         position: 'relative',

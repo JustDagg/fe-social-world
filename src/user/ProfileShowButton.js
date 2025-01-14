@@ -73,9 +73,8 @@ export const ProfileShowButton = (user) => {
                         transform: "translate(-50%, -50%)",
                         width: 1000,
                         bgcolor: "background.paper",
-                        border: "2px solid #000",
                         boxShadow: 24,
-                        borderRadius: "8px",
+                        borderRadius: "15px",
                         maxHeight: '80vh',
                         overflowY: 'auto',
                     }}

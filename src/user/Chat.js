@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {
     Box,
+    Button,
     Divider,
-    Tooltip
+    Modal,
+    Tooltip,
+    Typography
 } from '../../node_modules/@material-ui/core/index';
 import io from 'socket.io-client';
 import Picker from 'emoji-picker-react';
@@ -146,6 +149,18 @@ class Chat extends Component {
         );
     };
 
+    toggleEmojiSettings = () => {
+        this.setState({ showEmojiSettings: !this.state.showEmojiSettings });
+    };
+
+    changeIcon = (emoji) => {
+        this.setState({ selectedIcon: emoji, showEmojiSettings: false });
+    };
+
+    toggleDarkMode = () => {
+        this.setState({ isDarkMode: !this.state.isDarkMode });
+    };
+
     toggleTheme = () => {
         this.setState((prevState) => ({
             isDarkMode: !prevState.isDarkMode,
@@ -182,11 +197,11 @@ class Chat extends Component {
                         <div style={{
                             width: '250px',
                             borderRight: '1px solid #ddd',
-                            padding: '30px',
+                            padding: '10px',
                             overflowY: 'auto',
                             backgroundColor: isDarkMode ? '#333' : 'white',
                         }}>
-                            <div style={{ marginBottom: '10px' }}>
+                            <div style={{ padding: '20px', marginBottom: '10px' }}>
                                 {currentUser && (
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
                                         <img
@@ -202,25 +217,50 @@ class Chat extends Component {
                                 )}
                             </div>
 
-                            <h6 style={{ margin: '10px 0 5px', fontSize: '16px', color: '#007bff', fontWeight: 'bold' }}>Chat</h6>
+                            <h6 style={{ margin: '5px 10px 10px', fontSize: '16px', color: '#007bff', fontWeight: 'bold' }}>Chat</h6>
 
                             <div>
                                 {chatList.map((user, i) => (
-                                    <a key={i} href={`/chat/${sender._id}/${user._id}`} style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        textDecoration: 'none',
-                                        color: '#000',
-                                        padding: '10px 0'
-                                    }}>
+                                    <a
+                                        key={i}
+                                        href={`/chat/${sender._id}/${user._id}`}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            textDecoration: 'none',
+                                            color: '#000',
+                                            padding: '10px 10px',
+                                            borderRadius: '8px',
+                                            transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.target.style.backgroundColor = '#f0f0f0';
+                                            e.target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.target.style.backgroundColor = '';
+                                            e.target.style.boxShadow = '';
+                                        }}
+                                    >
                                         <img
                                             src={`${process.env.REACT_APP_API_URL}/user/photo/${user._id}`}
                                             alt={user.name}
                                             onError={i => (i.target.src = DefaultProfile)}
-                                            style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '10px', objectFit: 'contain' }}
+                                            style={{
+                                                width: '40px',
+                                                height: '40px',
+                                                borderRadius: '50%',
+                                                marginRight: '10px',
+                                                objectFit: 'contain'
+                                            }}
                                         />
                                         <div>
-                                            <span style={{ fontWeight: 'bold', color: isDarkMode ? 'white' : 'black' }}>{user.name}</span>
+                                            <span style={{
+                                                fontWeight: 'bold',
+                                                color: isDarkMode ? 'white' : 'black'
+                                            }}>
+                                                {user.name}
+                                            </span>
                                         </div>
                                     </a>
                                 ))}
@@ -300,49 +340,125 @@ class Chat extends Component {
                                 </Box>
 
                                 {/* Emoji Settings Dropdown */}
-                                {showEmojiSettings && (
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: '50px',
-                                        right: '0px',
-                                        backgroundColor: '#fff',
-                                        border: '1px solid #ddd',
-                                        borderRadius: '5px',
-                                        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                                        padding: '10px',
-                                        zIndex: 1000,
-                                    }}>
-                                        <h6
-                                            style={{
-                                                marginBottom: '15px',
-                                                fontSize: '14px',
-                                                fontWeight: 'bold',
-                                                borderBottom: '2px solid black',
-                                                textAlign: 'center',
-                                                padding: '5px'
+                                <Modal
+                                    open={this.state.showEmojiSettings}
+                                    onClose={this.toggleEmojiSettings}
+                                    aria-labelledby="emoji-settings-modal"
+                                    aria-describedby="modal-to-change-emoji"
+                                >
+                                    <Box
+                                        sx={{
+                                            position: "absolute",
+                                            top: "50%",
+                                            left: "50%",
+                                            transform: "translate(-50%, -50%)",
+                                            width: 500,
+                                            bgcolor: "background.paper",
+                                            boxShadow: 24,
+                                            borderRadius: "15px",
+                                            maxHeight: '80vh',
+                                            overflowY: 'auto',
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                                alignItems: 'center',
+                                                backgroundColor: '#D19616',
+                                                p: 2,
+                                                boxShadow: 3,
                                             }}
                                         >
-                                            Change Emoji
-                                        </h6>
-                                        <div style={{ display: 'flex' }}>
-                                            {['😊', '😂', '❤️', '👍', '😢'].map((emoji, index) => (
-                                                <button
-                                                    key={index}
-                                                    onClick={() => this.changeIcon(emoji)}
-                                                    style={{
-                                                        fontSize: '24px',
-                                                        cursor: 'pointer',
-                                                        background: 'transparent',
-                                                        border: 'none',
-                                                        marginRight: '10px',
-                                                    }}
-                                                >
-                                                    {emoji}
-                                                </button>
+                                            <Typography
+                                                variant="h6"
+                                                component="h2"
+                                                style={{
+                                                    fontWeight: 'bold',
+                                                    color: 'white',
+                                                    borderRadius: '8px',
+                                                    textAlign: 'center',
+                                                }}
+                                            >
+                                                Change Emoji
+                                            </Typography>
+                                        </Box>
+
+                                        <div
+                                            style={{
+                                                padding: '20px',
+                                                display: 'grid',
+                                                gridTemplateColumns: 'repeat(5, 1fr)',
+                                                gap: '20px',
+                                                background: 'linear-gradient(145deg, #f4f7fc, #e2e8f0)',
+                                                borderRadius: '16px',
+                                                boxShadow: '0 10px 20px rgba(0,0,0,0.1)',
+                                                maxWidth: '600px',
+                                                margin: 'auto',
+                                            }}
+                                        >
+                                            {[
+                                                { emoji: '😊', label: 'Happy' },
+                                                { emoji: '😂', label: 'Laughing' },
+                                                { emoji: '❤️', label: 'Love' },
+                                                { emoji: '👍', label: 'Like' },
+                                                { emoji: '😢', label: 'Sad' },
+                                                { emoji: '😎', label: 'Cool' },
+                                                { emoji: '😍', label: 'In Love' },
+                                                { emoji: '😜', label: 'Playful' },
+                                                { emoji: '😇', label: 'Innocent' },
+                                                { emoji: '🤩', label: 'Starstruck' },
+                                                { emoji: '😏', label: 'Smirk' },
+                                                { emoji: '🤔', label: 'Thinking' },
+                                                { emoji: '🙃', label: 'Upside' },
+                                                { emoji: '🤗', label: 'Hugging' },
+                                                { emoji: '😋', label: 'Yummy' },
+                                                { emoji: '🥺', label: 'Pleading' },
+                                                { emoji: '🥳', label: 'Partying' },
+                                                { emoji: '💪', label: 'Strong' },
+                                                { emoji: '😱', label: 'Shocked' },
+                                                { emoji: '🤤', label: 'Drooling' },
+                                            ].map((item, index) => (
+                                                <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Button
+                                                        onClick={() => this.changeIcon(item.emoji)}
+                                                        style={{
+                                                            fontSize: '20px',
+                                                            cursor: 'pointer',
+                                                            background: '#fff',
+                                                            border: '2px solid #ddd',
+                                                            borderRadius: '50%',
+                                                            padding: '10px',
+                                                            transition: 'all 0.3s ease-in-out',
+                                                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                                                            '&:hover': {
+                                                                backgroundColor: '#007bff',
+                                                                color: '#fff',
+                                                                borderColor: '#0056b3',
+                                                                transform: 'scale(1.1)',
+                                                                boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)',
+                                                            },
+                                                        }}
+                                                    >
+                                                        {item.emoji}
+                                                    </Button>
+                                                    <div
+                                                        style={{
+                                                            fontSize: '16px',
+                                                            fontWeight: '600',
+                                                            color: '#333',
+                                                            transition: 'color 0.3s ease',
+                                                            textTransform: 'capitalize',
+                                                            marginTop: '8px',
+                                                        }}
+                                                    >
+                                                        {item.label}
+                                                    </div>
+                                                </div>
                                             ))}
                                         </div>
-                                    </div>
-                                )}
+                                    </Box>
+                                </Modal>
 
                             </Box>
 
@@ -431,6 +547,8 @@ class Chat extends Component {
                                                 transition: "background-color 0.3s",
                                                 flexShrink: 0,
                                             }}
+                                            onMouseEnter={(e) => e.target.style.backgroundColor = '#D19616'}
+                                            onMouseLeave={(e) => e.target.style.backgroundColor = '#007bff'}
                                         >
                                             Send
                                         </button>

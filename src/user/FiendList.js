@@ -195,11 +195,18 @@ const FriendsList = () => {
                                     flexDirection: 'column',
                                     justifyContent: 'center'
                                 }}>
-                                    <span style={{
-                                        fontSize: '16px',
-                                        fontWeight: '600',
-                                        color: '#333'
-                                    }}>{user.name}</span>
+                                    <span
+                                        title={user.name}
+                                        style={{
+                                            fontSize: '16px',
+                                            fontWeight: '600',
+                                            color: '#333'
+                                        }}
+                                        onMouseEnter={(e) => e.target.style.color = '#4A90E2'}
+                                        onMouseLeave={(e) => e.target.style.color = ''}
+                                    >
+                                        {user.name}
+                                    </span>
                                     {user.university && (
                                         <span style={{
                                             fontSize: '14px',
@@ -289,6 +296,7 @@ const FriendsList = () => {
                                                 cursor: 'pointer',
                                                 margin: '0',
                                                 fontSize: '14px',
+                                                fontWeight: '600',
                                                 whiteSpace: 'nowrap',
                                                 overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
@@ -302,7 +310,7 @@ const FriendsList = () => {
                                             {user.name}
                                         </h6>
                                         <p
-                                            title={`${user.email}`}
+                                            title={`${user.university}`}
                                             style={{
                                                 margin: '0',
                                                 fontSize: '12px',
@@ -312,10 +320,11 @@ const FriendsList = () => {
                                                 width: '100px',
                                             }}
                                         >
-                                            {user.email}
+                                            {user.university}
                                         </p>
                                     </div>
                                     <button
+                                        title='Follow'
                                         onClick={() => onFollow(user, i)}
                                         style={{
                                             marginLeft: 'auto',

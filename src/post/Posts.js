@@ -99,7 +99,13 @@ class Posts extends Component {
                                             textDecoration: 'none',
                                         }}>
                                         <h5 style={{ alignItems: 'center' }}>
-                                            <span style={{ fontWeight: 'bold', fontSize: '16px' }}>{posterName}</span>
+                                            <span
+                                                style={{ fontWeight: 'bold', fontSize: '16px' }}
+                                                onMouseEnter={(e) => e.target.style.color = '#4A90E2'}
+                                                onMouseLeave={(e) => e.target.style.color = ''}
+                                            >
+                                                {posterName}
+                                            </span>
                                             <i
                                                 style={{
                                                     marginLeft: '5px',
@@ -143,7 +149,13 @@ class Posts extends Component {
                                         textDecoration: 'none',
                                     }}>
                                         <h5 style={{ alignItems: 'center' }}>
-                                            <span style={{ fontWeight: 'bold', fontSize: '23px' }}>{posterName}</span>
+                                            <span
+                                                style={{ fontWeight: 'bold', fontSize: '23px' }}
+                                                onMouseEnter={(e) => e.target.style.color = '#4A90E2'}
+                                                onMouseLeave={(e) => e.target.style.color = ''}
+                                            >
+                                                {posterName}
+                                            </span>
                                             <i
                                                 style={{
                                                     marginLeft: '5px',

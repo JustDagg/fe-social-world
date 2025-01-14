@@ -12,7 +12,7 @@ import { comment, uncomment } from './apiPost';
 import '../css/Comment.css';
 
 class Comment extends Component {
-    
+
     constructor() {
         super();
         this.state = {
@@ -217,7 +217,13 @@ class Comment extends Component {
                                                     textDecoration: 'none',
                                                 }}>
                                                 <h5 style={{ alignItems: "center" }}>
-                                                    <span style={{ fontWeight: "bold", fontSize: "16px" }}>{comment.postedBy.name}</span>
+                                                    <span
+                                                        style={{ fontWeight: "bold", fontSize: "16px" }}
+                                                        onMouseEnter={(e) => e.target.style.color = '#4A90E2'}
+                                                        onMouseLeave={(e) => e.target.style.color = ''}
+                                                    >
+                                                        {comment.postedBy.name}
+                                                    </span>
                                                     <i
                                                         style={{
                                                             marginLeft: "5px",

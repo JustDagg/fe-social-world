@@ -459,7 +459,13 @@ const DiscussionPost = ({ discussion, onDelete, refreshData }) => {
                                 color: 'black'
                             }}
                         >
-                            <span style={{ fontWeight: 'bold' }}>{posterName}</span>
+                            <span
+                                style={{ fontWeight: 'bold', fontSize: '16px' }}
+                                onMouseEnter={(e) => e.target.style.color = '#4A90E2'}
+                                onMouseLeave={(e) => e.target.style.color = ''}
+                            >
+                                {posterName}
+                            </span>
                             <i
                                 style={{
                                     marginLeft: '5px',

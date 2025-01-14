@@ -189,9 +189,8 @@ export const SettingButton = ({ buttonVisibility, updateButtonVisibility }) => {
                         transform: "translate(-50%, -50%)",
                         width: 1000,
                         bgcolor: "background.paper",
-                        border: "2px solid #000",
                         boxShadow: 24,
-                        borderRadius: "8px",
+                        borderRadius: "15px",
                         maxHeight: '80vh',
                         overflowY: 'auto',
                     }}
@@ -226,7 +225,7 @@ export const SettingButton = ({ buttonVisibility, updateButtonVisibility }) => {
 
                     <div style={{ padding: '30px' }}>
                         <Typography variant="body2" color="textSecondary" gutterBottom>
-                            Restricted words:
+                            Enter words, separated by commas
                         </Typography>
                         <TextField
                             fullWidth
@@ -267,9 +266,8 @@ export const SettingButton = ({ buttonVisibility, updateButtonVisibility }) => {
                         transform: "translate(-50%, -50%)",
                         width: 500,
                         bgcolor: "background.paper",
-                        border: "2px solid #000",
                         boxShadow: 24,
-                        borderRadius: "8px",
+                        borderRadius: "15px",
                         maxHeight: '80vh',
                         overflowY: 'auto',
                     }}
