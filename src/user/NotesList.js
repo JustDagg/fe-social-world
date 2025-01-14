@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { isAuthenticated } from '../auth';
 import { getNotes } from './apiUser';
 import DefaultProfile from '../images/avatar.jpg';
-import { Link } from 'react-router-dom';
 import Loading from '../loading/Loading';
 
 const Note = ({ note }) => {
+
     // posterId
     const posterId = note.postedBy ? note.postedBy._id : '';
     // posterName
@@ -64,9 +66,8 @@ const Note = ({ note }) => {
 };
 
 const NotesList = () => {
-    // state for notes
+    
     const [notes, setNotes] = useState([]);
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 

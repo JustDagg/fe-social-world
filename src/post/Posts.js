@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import Loading from '../loading/Loading';
 import DefaultProfile from '../images/avatar.jpg';
 import { timeDifference } from './timeDifference';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import { list, countTotalPosts, fetchDiscussionPosts } from './apiPost';
 import { isAuthenticated } from '../auth';
 import DiscussionPostsList from './discussion/DiscussionPostsList';
 
 class Posts extends Component {
+
     constructor() {
         super();
         this.state = {
@@ -17,7 +19,7 @@ class Posts extends Component {
             hasMore: true,
             count: 0,
             discussion: [],
-            activeTab: 'posts', // Track the active tab
+            activeTab: 'posts',
         };
     }
 
@@ -41,7 +43,6 @@ class Posts extends Component {
         this.setState({ count: count.data });
         this.fetchData();
 
-        // Fetch discussion posts here
         const discussionData = await fetchDiscussionPosts();
         this.setState({ discussion: discussionData });
     }

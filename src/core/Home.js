@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import Posts from '../post/Posts';
 import Sidebar from '../component/Sidebar';
 import DefaultProfile from '../images/avatar.jpg';
@@ -10,6 +11,7 @@ import Footer from '../component/Footer';
 import NotesList from '../user/NotesList';
 
 const Home = () => {
+
     // state for isModalOpen
     const [isModalOpen, setModalOpen] = useState(false);
 

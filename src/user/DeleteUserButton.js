@@ -8,7 +8,7 @@ import { signout } from '../auth/index';
 import { remove } from './apiUser';
 import '../css/DeleteUser.css';
 
-class DeleteUser extends Component {
+class DeleteUserButton extends Component {
     state = {
         redirect: false
     }
@@ -90,4 +90,4 @@ class DeleteUser extends Component {
     }
 }
 
-export default DeleteUser;
+export default DeleteUserButton;

@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
+import {
+    Modal,
+    Box,
+    TextField,
+    Typography,
+    IconButton
+} from '@material-ui/core';
+
 import { updateRestrictedPhrases, getRestrictedPhrases } from "../post/apiPost";
 import { isAuthenticated } from "../auth";
-import { Modal, Box, Button, TextField, Typography, IconButton } from '@material-ui/core';
 
 export const SettingButton = () => {
+
     const [showMenu, setShowMenu] = useState(false);
     const [restrictedPhrases, setRestrictedPhrases] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -169,6 +177,7 @@ export const SettingButton = () => {
                             <i style={{ color: 'white' }} class="fa fa-times" aria-hidden="true"></i>
                         </IconButton>
                     </Box>
+                    
                     <div style={{ padding: '30px' }}>
                         <Typography variant="body2" color="textSecondary" gutterBottom>
                             Restricted words:

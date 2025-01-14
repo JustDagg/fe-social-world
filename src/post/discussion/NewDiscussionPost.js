@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { createDiscussionPost } from '../apiPost';
-import { isAuthenticated } from '../../auth/index';
 import { withRouter } from 'react-router-dom';
 
+import { createDiscussionPost } from '../apiPost';
+import { isAuthenticated } from '../../auth/index';
+
 const NewDiscussionPost = ({ history }) => {
+
     // AUTH
     const auth = isAuthenticated();
     const userId = auth ? auth.user._id : null;
@@ -51,7 +53,6 @@ const NewDiscussionPost = ({ history }) => {
                 setError(data.error);
             } else {
                 setSuccess(true);
-                // Reset form fields after success
                 setQuestion("");
                 setCorrectAnswer("");
                 setAnswer1("");
@@ -60,9 +61,8 @@ const NewDiscussionPost = ({ history }) => {
                 setAnswer4("");
                 setSubject("");
 
-                // Redirect to home after a short delay
                 setTimeout(() => {
-                    history.push('/'); // Redirect to home using history
+                    history.push('/');
                 }, 1000);
             }
         } catch (err) {
@@ -90,7 +90,7 @@ const NewDiscussionPost = ({ history }) => {
                     />
                 </div>
 
-                {/* Question */}
+                {/* Subject */}
                 <div style={styles.inputContainer}>
                     <i className="fa fa-book" aria-hidden="true" style={styles.icon}></i>
                     <textarea
@@ -229,5 +229,4 @@ const styles = {
     },
 };
 
-// Wrap the component with withRouter
 export default withRouter(NewDiscussionPost);

@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import {
+    Typography,
+    TextField,
+    Button,
+    Container,
+    Paper,
+    Divider,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem
+} from '@material-ui/core';
+
 import { Link } from 'react-router-dom';
 import SocialLogin from "./SocialLogin";
 import Loading from '../loading/Loading';
-import { Typography, TextField, Button, Container, Paper, Divider, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
-
 import { signup } from "../auth";
 
 class Signup extends Component {
@@ -24,12 +35,10 @@ class Signup extends Component {
         };
     }
 
-    // handleDayChange
     handleDayChange = event => {
         this.setState({ selectedDay: event.target.value });
     };
 
-    // handleChange
     handleChange = e => {
         this.setState({
             error: "",
@@ -38,7 +47,6 @@ class Signup extends Component {
         });
     };
 
-    // recaptchaHandler
     recaptchaHandler = e => {
         this.setState({ error: "" });
         let userDay = e.target.value.toLowerCase();
@@ -71,7 +79,6 @@ class Signup extends Component {
         }
     };
 
-    // clickSubmit
     clickSubmit = e => {
         e.preventDefault();
         this.setState({ loading: true });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Loading from '../loading/Loading';
 import { Redirect } from 'react-router-dom';
 
+import Loading from '../loading/Loading';
 import { isAuthenticated } from "../auth";
 import { singlePost, update } from './apiPost';
 import Footer from '../component/Footer';

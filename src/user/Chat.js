@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import {
+    Box,
+    Divider,
+    Tooltip
+} from '../../node_modules/@material-ui/core/index';
 import io from 'socket.io-client';
 import Picker from 'emoji-picker-react';
+
 import Loading from '../loading/Loading';
 import DefaultProfile from '../images/avatar.jpg';
 import { DisplayDateTime12Hour } from '../post/timeDifference';
 import { Link } from 'react-router-dom';
-
 import { isAuthenticated } from '../auth/index';
 import { read, getChats, getChatList } from './apiUser';
 import '../css/Chat.css';
-import { Box, Divider, Tooltip } from '../../node_modules/@material-ui/core/index';
 
 const socketUrl = `${process.env.REACT_APP_API_URL}`;
 let socket;
@@ -25,8 +29,8 @@ class Chat extends Component {
             receiver: {},
             loading: false,
             showPicker: false,
-            currentUser: {}, // Added state for the current user
-            chatList: [], // Initialize as an empty array
+            currentUser: {},
+            chatList: [],
             selectedIcon: '❤️',
             showEmojiSettings: false,
             isDarkMode: false,
@@ -56,14 +60,14 @@ class Chat extends Component {
         } else {
             const sender = await this.init(senderId);
             const receiver = await this.init(receiverId);
-            const currentUser = isAuthenticated().user; // Get the logged-in user
+            const currentUser = isAuthenticated().user;
 
             this.setState({
                 messages: data,
                 sender,
                 receiver,
-                currentUser, // Set the current user in state
-                chatList: chatList, // Set chatList in state
+                currentUser,
+                chatList: chatList,
                 loading: false
             });
             this.initSocket();
@@ -344,34 +348,15 @@ class Chat extends Component {
 
                             <Divider />
 
-                            {/* <ScrollToBottom style={{
-                                flex: 1,
-                                overflowY: 'auto',
-                                backgroundColor: '#fff',
-                                borderRadius: '8px',
-                                padding: '10px',
-                                marginBottom: '10px'
-                            }}>
-                                <ul style={{
-                                    listStyleType: 'none',
-                                    padding: 0,
-                                    margin: 0,
-                                    overflow: 'hidden'
-                                }}>
-                                    {messages.map(this.renderChat)}
-                                    <div ref={this.messagesEndRef} />
-                                </ul>
-                            </ScrollToBottom> */}
-
                             {/* Chat Window */}
                             <div
                                 style={{
                                     flex: 1,
-                                    overflowY: 'auto',  // Allows scrolling manually
+                                    overflowY: 'auto',
                                     backgroundColor: '#fff',
                                     padding: '10px',
                                     marginBottom: '10px',
-                                    maxHeight: '450px', // Limit the height to create a scrollable window effect
+                                    maxHeight: '450px',
                                 }}
                             >
                                 <ul

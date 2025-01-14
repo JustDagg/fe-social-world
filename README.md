@@ -9,7 +9,7 @@
     - #### *Edit (upload avatar) / Delete your profile.*
     - #### *Follow / Unfollow users.*
     - #### *Create (upload image) / Edit / Delete posts.*
-    - #### *Create / Delete post comments.*
+    - #### *Create / Delete post comments. (Customize the offensive restrictive phrase feature)*
     - #### *Like / Unlike posts.*
     - #### *Create / Edit / Delete discussions, filter (subject, date).*
     - #### *Like / Unlike discussions.*

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-
-import { forgotPassword } from "../auth";
 import { Box } from "../../node_modules/@material-ui/core/index";
 
+import { forgotPassword } from "../auth";
+
 class ForgotPassword extends Component {
+    
     state = {
         email: "",
         message: "",

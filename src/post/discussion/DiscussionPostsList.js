@@ -1,36 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import { Divider } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+
 import { deleteDiscussionPost, fetchDiscussionPosts, fetchSubjects, likeDiscussionPost, unlikeDiscussionPost, updateDiscussionPost } from '../apiPost';
 import { isAuthenticated } from '../../auth/index';
 import DefaultProfile from '../../images/avatar.jpg';
-import { Link } from 'react-router-dom';
-import { Divider } from '@material-ui/core';
-import { confirmAlert } from 'react-confirm-alert';
 import '../../css/DiscussionPostsList.css';
 import Loading from '../../loading/Loading';
 import EditDiscussionModal from './EditDiscussionModal';
 
 const DiscussionPostsList = () => {
-    // state for discussions
-    const [discussions, setDiscussions] = useState([]);
 
+    const [discussions, setDiscussions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-
-    // state for subjects
     const [subjects, setSubjects] = useState([]);
-    // state for subject
     const [subject, setSubject] = useState("");
-
-    // State for date filters
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
     // fetchDiscussionPosts
     useEffect(() => {
         const loadPosts = async () => {
-            setLoading(true); // Set loading before fetching
+            setLoading(true);
             try {
-                const data = await fetchDiscussionPosts(subject, startDate, endDate); // Pass dates as arguments
+                const data = await fetchDiscussionPosts(subject, startDate, endDate);
                 setDiscussions(data);
             } catch (error) {
                 setError(error.message);
@@ -42,7 +37,6 @@ const DiscussionPostsList = () => {
         loadPosts();
     }, [subject, startDate, endDate]);
 
-    // Fetch subjects
     useEffect(() => {
         const loadSubjects = async () => {
             try {
@@ -56,7 +50,6 @@ const DiscussionPostsList = () => {
         loadSubjects();
     }, []);
 
-    // refreshData
     const refreshData = async () => {
         setLoading(true);
         try {
@@ -69,7 +62,6 @@ const DiscussionPostsList = () => {
         }
     };
 
-    // handleDeleteDiscussion
     const handleDeleteDiscussion = async (discussionId) => {
         const token = isAuthenticated().token;
         try {
@@ -82,7 +74,6 @@ const DiscussionPostsList = () => {
         }
     };
 
-    // confirmDelete
     const confirmDelete = (discussion) => {
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -119,12 +110,10 @@ const DiscussionPostsList = () => {
         });
     };
 
-    // handleSubjectChange
     const handleSubjectChange = (e) => {
-        setSubject(e.target.value); // set the selected subject
+        setSubject(e.target.value);
     };
 
-    // Function to handle date changes
     const handleStartDateChange = (e) => {
         setStartDate(e.target.value);
     };
@@ -148,7 +137,7 @@ const DiscussionPostsList = () => {
             <div style={{ marginTop: '40px', marginBottom: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <label
                     htmlFor="subjectFilter"
-                    title="Filters" // Tooltip for the icon
+                    title="Filters"
                     style={{
                         fontWeight: 'bold',
                         fontSize: '20px',
@@ -156,7 +145,7 @@ const DiscussionPostsList = () => {
                         display: 'flex',
                         alignItems: 'center',
                         cursor: 'pointer',
-                        marginRight: '20px' // Space between icon and dropdown
+                        marginRight: '20px'
                     }}>
                     <i
                         className="fa fa-filter"
@@ -187,7 +176,7 @@ const DiscussionPostsList = () => {
                             transition: 'border-color 0.3s ease',
                             boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
                             cursor: 'pointer',
-                            minWidth: '150px' // Ensures a minimum width
+                            minWidth: '150px'
                         }}
                         onMouseOver={(e) => {
                             e.target.style.borderColor = '#0056b3';
@@ -221,7 +210,7 @@ const DiscussionPostsList = () => {
                             transition: 'border-color 0.3s ease',
                             boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
                             cursor: 'pointer',
-                            minWidth: '150px' // Ensures a minimum width
+                            minWidth: '150px'
                         }}
                         onMouseOver={(e) => {
                             e.target.style.borderColor = '#0056b3';
@@ -248,7 +237,7 @@ const DiscussionPostsList = () => {
                             transition: 'border-color 0.3s ease',
                             boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
                             cursor: 'pointer',
-                            minWidth: '150px' // Ensures a minimum width
+                            minWidth: '150px'
                         }}
                         onMouseOver={(e) => {
                             e.target.style.borderColor = '#0056b3';
@@ -264,7 +253,7 @@ const DiscussionPostsList = () => {
                     <i
                         className="fa fa-refresh"
                         aria-hidden="true"
-                        title="Reset Filters" // Tooltip for the icon
+                        title="Reset Filters"
                         style={{
                             fontSize: '20px',
                             color: '#007bff',
@@ -273,7 +262,6 @@ const DiscussionPostsList = () => {
                             transition: 'transform 0.3s ease'
                         }}
                         onClick={() => {
-                            // Reset the filters
                             setSubject("");
                             setStartDate("");
                             setEndDate("");
@@ -417,7 +405,6 @@ const DiscussionPost = ({ discussion, onDelete, refreshData }) => {
                     <i
                         className="fa fa-copy"
                         aria-hidden="true"
-                        // copy function
                         onClick={() => {
                             navigator.clipboard.writeText(discussion.question)
                                 .then(() => {

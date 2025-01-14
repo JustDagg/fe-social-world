@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { read } from '../user/apiUser';
-import { Typography } from '@material-ui/core';
 import DefaultProfile from '../images/avatar.jpg';
 import { isAuthenticated } from '../auth';
 import './Sidebar.css';
 
 const Sidebar = () => {
+
     // state for user
     const [user, setUser] = useState(null);
     // state for authenticated

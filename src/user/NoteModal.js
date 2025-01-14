@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
+import {
+    Button,
+    TextField
+} from '@material-ui/core';
+
 import DefaultProfile from '../images/avatar.jpg';
-import { Button, TextField } from '@material-ui/core'; // Adjusted import
 
 const NoteModal = ({ user, isOpen, onClose, existingNote, onDelete, onSave, note, handleNoteChange }) => {
-    // photoUrl
+
     const photoUrl = user._id ? `${process.env.REACT_APP_API_URL}/user/photo/${user._id}?${new Date().getTime()}` : DefaultProfile;
 
-    // State for error
     const [error, setError] = useState('');
 
-    // Return null if the modal is not open
     if (!isOpen) return null;
 
     const handleChange = (e) => {
-        const value = e.target.value; // Get the value from the TextField
+        const value = e.target.value;
         if (value.length <= 20) {
-            handleNoteChange(e); // Update the note if not exceeding 10 characters
-            setError(''); // Clear any error message
+            handleNoteChange(e);
+            setError('');
         } else {
-            setError("Note cannot exceed 20 characters"); // Show error if exceeds 10 characters
+            setError("Note cannot exceed 20 characters");
         }
     };
 
@@ -38,7 +40,7 @@ const NoteModal = ({ user, isOpen, onClose, existingNote, onDelete, onSave, note
 
     const handleSave = () => {
         if (isValid()) {
-            onSave(); // Call onSave if note is valid
+            onSave();
         }
     };
 
@@ -50,7 +52,7 @@ const NoteModal = ({ user, isOpen, onClose, existingNote, onDelete, onSave, note
                 left: '0',
                 width: '100%',
                 height: '100%',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)', // Dark background
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -62,12 +64,12 @@ const NoteModal = ({ user, isOpen, onClose, existingNote, onDelete, onSave, note
                 style={{
                     backgroundColor: '#363636',
                     padding: '30px',
-                    borderRadius: '15px', // Rounded corners
+                    borderRadius: '15px',
                     width: '400px',
                     textAlign: 'center',
-                    animation: 'fadeIn 0.3s ease', // Fade-in effect
+                    animation: 'fadeIn 0.3s ease',
                 }}
-                onClick={(e) => e.stopPropagation()} // Prevent modal from closing on content click
+                onClick={(e) => e.stopPropagation()}
             >
                 <h3 style={{ marginBottom: '20px', color: '#ffff', fontFamily: 'Arial, sans-serif' }}>
                     {existingNote ? 'Existing Note' : 'Create Note'}
@@ -76,12 +78,12 @@ const NoteModal = ({ user, isOpen, onClose, existingNote, onDelete, onSave, note
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
                         <p style={{
                             fontSize: '16px',
-                            color: '#fff', // White text color
+                            color: '#fff',
                             marginBottom: '20px',
-                            padding: '10px', // Add padding for better spacing
-                            backgroundColor: '#444', // Background color for the note
-                            borderRadius: '8px', // Rounded corners for the note display
-                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Subtle shadow effect
+                            padding: '10px',
+                            backgroundColor: '#444',
+                            borderRadius: '8px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                         }}>
                             {existingNote.content}
                         </p>

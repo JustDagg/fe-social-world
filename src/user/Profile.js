@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
+import {
+    Box,
+    Paper
+} from '@material-ui/core';
 import { Redirect, Link } from 'react-router-dom';
-import DefaultProfile from '../images/avatar.jpg';
-import DeleteUser from './DeleteUser';
-import FollowProfileButton from './FollowProfileButton';
 import { Tabs, Tab } from 'react-bootstrap-tabs';
+
+import DefaultProfile from '../images/avatar.jpg';
+import DeleteUserButton from './DeleteUserButton';
+import { SettingButton } from './SettingButton';
+import { ProfileShowButton } from './ProfileShowButton';
+import FollowProfileButton from './FollowProfileButton';
 import Loading from '../loading/Loading';
 import Sidebar from '../component/Sidebar';
-
 import { isAuthenticated } from "../auth";
 import { listByUser } from '../post/apiPost';
 import { createNote, deleteNote, getNotesByUser, read } from "./apiUser";
 import '../css/Profile.css';
 import Footer from '../component/Footer';
 import NoteModal from './NoteModal';
-import { ProfileShowModal } from './ProfileShowModal';
-import { Box, Paper } from '@material-ui/core';
-import { SettingButton } from './SettingButton';
 
 class Profile extends Component {
     constructor() {
@@ -98,9 +101,9 @@ class Profile extends Component {
                     console.log(data.error);
                 } else {
                     if (data.length > 0) {
-                        this.setState({ existingNote: data[0] }); // Lưu note đầu tiên vào state
+                        this.setState({ existingNote: data[0] });
                     } else {
-                        this.setState({ existingNote: null }); // Không có ghi chú thì đặt thành null
+                        this.setState({ existingNote: null });
                     }
                 }
             });
@@ -109,42 +112,37 @@ class Profile extends Component {
     componentDidMount() {
         const userId = this.props.match.params.userId;
         this.init(userId);
-        this.fetchNotesForUser(userId); // Fetch the user's note on load
+        this.fetchNotesForUser(userId);
     }
 
     componentWillReceiveProps(props) {
         const userId = props.match.params.userId;
         this.init(userId);
-        this.fetchNotesForUser(userId); // Cập nhật khi nhận props mới
+        this.fetchNotesForUser(userId);
     }
 
-    // Method to toggle the avatar image modal
     toggleAvatarModal = () => {
         this.setState((prevState) => ({
             isAvatarModalOpen: !prevState.isAvatarModalOpen,
         }));
     };
 
-    // Method to close modal when clicking outside the avatar image
     handleAvatarClickOutside = (e) => {
         if (e.target.id === 'avatar-modal-background') {
             this.toggleAvatarModal();
         }
     };
 
-    // Toggle note modal
     toggleNoteModal = () => {
         this.setState((prevState) => ({
             isNoteModalOpen: !prevState.isNoteModalOpen,
         }));
     };
 
-    // Handle note change
     handleNoteChange = (event) => {
         this.setState({ note: event.target.value });
     };
 
-    // saveNote
     saveNote = () => {
         const userId = isAuthenticated().user._id;
         const token = isAuthenticated().token;
@@ -160,12 +158,10 @@ class Profile extends Component {
         });
     };
 
-    // deleteNote
     deleteNote = () => {
         const userId = isAuthenticated().user._id;
         const token = isAuthenticated().token;
 
-        // Sửa lại cách gọi hàm deleteNote, truyền vào cả noteId và userId
         deleteNote(this.state.existingNote._id, userId, token).then(data => {
             if (data.error) {
                 this.setState({ error: data.error });
@@ -179,7 +175,6 @@ class Profile extends Component {
 
     renderProfile = () => {
         const { token, user, following, posts, isAvatarModalOpen, isNoteModalOpen, existingNote, note } = this.state;
-        console.log("Pas", user)
         const photoUrl = user._id ? `${process.env.REACT_APP_API_URL}/user/photo/${user._id}?${new Date().getTime()}` : DefaultProfile;
 
         // Kiểm tra người dùng hiện tại có phải là người đăng nhập không
@@ -209,7 +204,6 @@ class Profile extends Component {
                 {existingNote.content}
             </span>
         ) : (
-            // Chỉ hiển thị khi người dùng đã đăng nhập
             isLoggedInUser && (
                 <span style={{
                     display: 'inline-block',
@@ -248,10 +242,10 @@ class Profile extends Component {
                         fontSize: '16px',
                         fontWeight: 'bold',
                         display: 'inline-block',
-                        boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Shadow for depth
-                        transition: 'transform 0.3s ease', // Smooth transition for hover effect
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.3s ease',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} // Hover effect
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                 >
                     {user.following.length}
@@ -273,10 +267,10 @@ class Profile extends Component {
                         fontSize: '16px',
                         fontWeight: 'bold',
                         display: 'inline-block',
-                        boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Shadow for depth
-                        transition: 'transform 0.3s ease', // Smooth transition for hover effect
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.3s ease',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} // Hover effect
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                 >
                     {user.followers.length}
@@ -298,10 +292,10 @@ class Profile extends Component {
                         fontSize: '16px',
                         fontWeight: 'bold',
                         display: 'inline-block',
-                        boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Shadow for depth
-                        transition: 'transform 0.3s ease', // Smooth transition for hover effect
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.3s ease',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} // Hover effect
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                 >
                     {posts.length}
@@ -612,6 +606,7 @@ class Profile extends Component {
                                 </table>
                             </div>
 
+                            {/* Action */}
                             <Box
                                 width={'100%'}
                                 p={2}
@@ -623,6 +618,7 @@ class Profile extends Component {
                                             justifyContent={'space-between'}
                                             sx={{ gap: 10 }}
                                         >
+                                            {/* SETTING BUTTON */}
                                             <SettingButton token={token} userId={user._id} />
 
                                             {/* CREATE POST BUTTON */}
@@ -663,11 +659,11 @@ class Profile extends Component {
                                                 <i style={{ marginRight: "15px" }} class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
                                             </Link>
 
-                                            {/* DELETE USER PROFILE */}
-                                            <DeleteUser userId={user._id} username={user.name} />
+                                            {/* DELETE USER BUTTON */}
+                                            <DeleteUserButton userId={user._id} username={user.name} />
 
-                                            {/* PROFILE SHOW */}
-                                            <ProfileShowModal user={user} />
+                                            {/* PROFILE SHOW BUTTON */}
+                                            <ProfileShowButton user={user} />
                                         </Box>
                                     </>
                                 ) : (
@@ -713,7 +709,6 @@ class Profile extends Component {
                                     {posts.map((post, i) => (
                                         <div key={i} style={{ paddingBottom: "15px" }} className="col-md-2">
                                             {post.photo && post.photo.data ? (
-                                                // Nếu post có ảnh, hiển thị ảnh và biểu tượng trái tim với số lượt thích
                                                 <Link to={`/post/${post._id}`} >
                                                     <figure className="snip1205 red">
                                                         <img
@@ -730,7 +725,6 @@ class Profile extends Component {
                                                     </figure>
                                                 </Link>
                                             ) : (
-                                                // Nếu không có ảnh, hiển thị tiêu đề bài viết và biểu tượng trái tim với số lượt thích
                                                 <Link style={{ textDecoration: "none" }} to={`/post/${post._id}`} >
                                                     <div>
                                                         <figure className="snip1205 red" style={{
@@ -814,7 +808,6 @@ class Profile extends Component {
                                             >
                                                 @{person.name}
                                             </Link>
-                                            {/* <button type="button" className="btn btn-sm btn-toggle-following pull-right"><i className="fa fa-checkmark-round"></i> <span>Following</span></button> */}
                                         </div>
                                     </div>
                                 ))}
@@ -832,9 +825,9 @@ class Profile extends Component {
                                             marginBottom: '15px',
                                             padding: '10px',
                                             borderRadius: '8px',
-                                            backgroundColor: '#f8f9fa', // Light background color
-                                            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Subtle shadow
-                                            position: 'relative', // For button positioning
+                                            backgroundColor: '#f8f9fa',
+                                            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                            position: 'relative',
                                         }}
                                     >
                                         {/* IMAGE */}
@@ -872,7 +865,6 @@ class Profile extends Component {
                                             >
                                                 @{person.name}
                                             </Link>
-                                            {/* <button data-index = {person._id} onClick={this.unfollowClick} type="button" className="btn btn-sm btn-toggle-following pull-right"><i className="fa fa-checkmark-round"></i> <span>Unfollow</span></button> */}
                                         </div>
                                     </div>
                                 ))}
@@ -888,7 +880,6 @@ class Profile extends Component {
 
     render() {
         const { redirectToSignin, user, loading } = this.state;
-        console.log("state user", user);
         if (redirectToSignin) {
             return <Redirect to='/signin' />
         }

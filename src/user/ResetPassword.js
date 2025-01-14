@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Box } from "../../node_modules/@material-ui/core/index";
 
 import { resetPassword } from "../auth";
-import { Box } from "../../node_modules/@material-ui/core/index";
 
 class ResetPassword extends Component {
     constructor(props) {

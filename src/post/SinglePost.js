@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
+import {
+    Box,
+    Divider
+} from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import Loading from '../loading/Loading';
 import Comment from './Comment';
 import DefaultProfile from '../images/avatar.jpg';
 import { timeDifference } from './timeDifference';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import { Box, Divider } from '@material-ui/core';
 import Footer from '../component/Footer';
-
 import { isAuthenticated } from "../auth";
 import { singlePost, remove, like, unlike } from './apiPost';
 import '../css/SinglePost.css';
 
 class SinglePost extends Component {
+
     constructor() {
         super();
         this.state = {
@@ -31,7 +35,7 @@ class SinglePost extends Component {
     // checkLike
     checkLike = (likes) => {
         const userId = isAuthenticated() && isAuthenticated().user._id;
-        let match = likes.indexOf(userId) !== -1; // true if user found
+        let match = likes.indexOf(userId) !== -1;
         return match;
     };
 
@@ -62,7 +66,7 @@ class SinglePost extends Component {
         this.setState({ loading: true });
         if (!isAuthenticated()) {
             this.setState({ redirectToSignin: true, loading: false });
-            return false; // so that the rest of code isn't executed
+            return false;
         }
         let callApi = this.state.like ? unlike : like;
         const userId = isAuthenticated().user._id;
@@ -141,19 +145,16 @@ class SinglePost extends Component {
                 url: `${window.location.origin}/post/${post._id}`
             }).catch(error => console.log('Error sharing:', error));
         } else {
-            // Fallback for browsers that do not support the Web Share API
             alert('Sharing is not supported by this browser.');
         }
     };
 
-    // Method to toggle the modal post image 
     toggleModal = () => {
         this.setState((prevState) => ({
             isPostImageModalOpen: !prevState.isPostImageModalOpen,
         }));
     };
 
-    // Method to close modal when clicking outside of the post image
     handleClickOutside = (e) => {
         if (e.target.id === 'modal-background') {
             this.toggleModal();
@@ -162,10 +163,10 @@ class SinglePost extends Component {
 
     // handleCopy
     handleCopy = () => {
-        navigator.clipboard.writeText(this.state.post.body) // Sao chép nội dung vào clipboard
+        navigator.clipboard.writeText(this.state.post.body)
             .then(() => {
                 this.setState({ tooltipVisible: true });
-                setTimeout(() => this.setState({ tooltipVisible: false }), 2000); // Ẩn tooltip sau 2 giây
+                setTimeout(() => this.setState({ tooltipVisible: false }), 2000);
             })
             .catch(err => console.error('Failed to copy: ', err));
     };

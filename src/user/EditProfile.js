@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Loading from '../loading/Loading';
 import { Redirect } from 'react-router-dom';
-import DefaultProfile from '../images/avatar.jpg';
 
+import Loading from '../loading/Loading';
+import DefaultProfile from '../images/avatar.jpg';
 import { isAuthenticated } from "../auth";
 import { read, update, updateUser } from "./apiUser";
 import Footer from '../component/Footer';
@@ -119,9 +119,6 @@ class EditProfle extends Component {
         e.preventDefault();
         this.setState({ loading: true })
         if (this.isValid()) {
-            //const { name, email, hashed_password } = this.state;
-            //const user = { name, email, hashed_password: hashed_password || undefined };
-            // console.log(user);
             const userId = this.props.match.params.userId;
             const token = isAuthenticated().token;
             update(userId, token, this.userData)

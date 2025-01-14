@@ -1,7 +1,12 @@
 import React from 'react';
-import { Button, Modal, TextField } from '@material-ui/core';
+import {
+    Button,
+    Modal,
+    TextField
+} from '@material-ui/core';
 
 const EditDiscussionModal = ({ open, onClose, updatedPost, setUpdatedPost, handleEditSubmit }) => {
+    
     return (
         <Modal open={open} onClose={onClose}>
             <div

@@ -1,12 +1,18 @@
 import React, { Component, createRef } from 'react';
+import {
+    Box,
+    Divider,
+    IconButton,
+    Typography
+} from '@material-ui/core';
 import ReactDOM from 'react-dom';
-import Loading from '../loading/Loading';
-import { Box, Divider, IconButton, Typography } from '@material-ui/core';
 
+import Loading from '../loading/Loading';
 import { isAuthenticated } from "../auth";
 import { create } from "./apiPost";
 
 class CreatePostModal extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -47,10 +53,6 @@ class CreatePostModal extends Component {
             this.setState({ error: "File size should be less than 1 MB", loading: false });
             return false;
         }
-        // if (photo.length === 0) {
-        //     this.setState({ error: "Photo is required", loading: false });
-        //     return false;
-        // }
         if (title.length === 0) {
             this.setState({ error: "Title is required", loading: false });
             return false;
@@ -313,7 +315,6 @@ class CreatePostModal extends Component {
                     {loading ? (
                         <Loading />
                     ) : (
-                        // Render Form
                         this.newPostForm(title, category, location, body)
                     )}
                 </div>

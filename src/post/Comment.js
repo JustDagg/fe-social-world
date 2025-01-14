@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import DefaultProfile from '../images/avatar.jpg';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import Picker from 'emoji-picker-react';
 import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
+
+import DefaultProfile from '../images/avatar.jpg';
 import { timeDifference } from './timeDifference';
 import Loading from '../loading/Loading';
-
 import { isAuthenticated } from '../auth';
 import { comment, uncomment } from './apiPost';
 import '../css/Comment.css';
 
 class Comment extends Component {
+    
     constructor() {
         super();
         this.state = {
@@ -50,7 +51,6 @@ class Comment extends Component {
     addComment = e => {
         e.preventDefault();
 
-        // Check if the user is authenticated
         if (!isAuthenticated()) {
             this.setState({
                 error: "Please Signin first to leave a comment"
@@ -58,7 +58,6 @@ class Comment extends Component {
             return false;
         }
 
-        // Validate the comment text
         if (this.isValid()) {
             this.setState({ loading: true });
 
@@ -105,9 +104,8 @@ class Comment extends Component {
                 if (data.error) {
                     console.log(data.error);
                 } else {
-                    console.log(data); // Log the data to verify the response
+                    console.log(data);
                     this.setState({ loading: false });
-                    // Send the updated/fresh list of comments to the parent component
                     this.props.updateComments(data.comments);
                 }
             });
@@ -261,11 +259,11 @@ class Comment extends Component {
                                             width: '100%',
                                         }}
                                         onFocus={(e) => {
-                                            e.target.style.borderColor = '#D19616'; /* Highlight color on focus */
+                                            e.target.style.borderColor = '#D19616';
                                             e.target.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
                                         }}
                                         onBlur={(e) => {
-                                            e.target.style.borderColor = '#ddd'; /* Reset border color */
+                                            e.target.style.borderColor = '#ddd';
                                             e.target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
                                         }}
                                     />

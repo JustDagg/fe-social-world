@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import DefaultProfile from '../images/avatar.jpg';
 import { Link } from 'react-router-dom';
+
 import Loading from '../loading/Loading';
 import Footer from '../component/Footer';
-
+import DefaultProfile from '../images/avatar.jpg';
 import { isAuthenticated } from '../auth/index';
 import { fetchUniversities, findPeople, follow, searchUserByName } from './apiUser';
 import '../css/FindPeople.css';
@@ -38,7 +38,7 @@ class FindPeople extends Component {
                 if (data.error) {
                     console.log(data.error);
                 } else {
-                    this.setState({ universities: data }); // Update to reflect the correct data structure
+                    this.setState({ universities: data });
                 }
             })
             .catch(err => {
@@ -55,10 +55,9 @@ class FindPeople extends Component {
 
         findPeople(userId, token, university || "", birthYear || "")
             .then(data => {
-                console.log("Fetched users data:", data); // Log the data
                 if (data && data.error) {
                     console.log(data.error);
-                    this.setState({ users: [], loading: false }); // Set users to empty if there's an error
+                    this.setState({ users: [], loading: false });
                 } else {
                     this.setState({ users: data || [], loading: false });
                 }
@@ -85,7 +84,6 @@ class FindPeople extends Component {
         const token = isAuthenticated().token;
 
         if (searchQuery.trim() === "") {
-            // If the search query is empty, fetch all users
             this.fetchUsers();
         } else {
             searchUserByName(searchQuery, token)
@@ -93,10 +91,8 @@ class FindPeople extends Component {
                     if (data.error) {
                         this.setState({ error: data.error, loading: false });
                     } else if (data.length === 0) {
-                        // No users found
                         this.setState({ users: [], error: "No users found", loading: false });
                     } else {
-                        // Users found
                         this.setState({ users: data, error: "", loading: false });
                     }
                 })

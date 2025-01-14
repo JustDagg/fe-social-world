@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
-import DefaultProfile from '../images/avatar.jpg';
-
-import { isAuthenticated } from '../auth';
-import { list, follow, findPeople } from './apiUser'; // Ensure the follow and findPeople functions are imported
 import { Divider } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+
+import DefaultProfile from '../images/avatar.jpg';
+import { isAuthenticated } from '../auth';
+import { list, follow, findPeople } from './apiUser';
 
 const FriendsList = () => {
     const [followingUsers, setFollowingUsers] = useState([]);
-    const [users, setUsers] = useState([]); // For suggested users
-    console.log("Us:", users)
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const history = useHistory();

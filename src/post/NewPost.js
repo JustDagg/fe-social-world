@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Loading from '../loading/Loading';
 import { Redirect } from 'react-router-dom';
-import Footer from '../component/Footer';
 
+import Footer from '../component/Footer';
+import Loading from '../loading/Loading';
 import { isAuthenticated } from "../auth";
 import { create } from "./apiPost";
 import NewDiscussionPost from './discussion/NewDiscussionPost';
@@ -38,10 +38,6 @@ class NewPost extends Component {
             this.setState({ error: "File size should be less than 1 MB", loading: false });
             return false;
         }
-        // if (photo.length === 0) {
-        //     this.setState({ error: "Photo is required", loading: false });
-        //     return false;
-        // }
         if (title.length === 0) {
             this.setState({ error: "Title is required", loading: false });
             return false;
@@ -57,7 +53,7 @@ class NewPost extends Component {
     handleChange = e => {
         const value = e.target.name === 'photo' ? e.target.files[0] : e.target.value;
         const fileSize = e.target.name === 'photo' ? e.target.files[0].size : 0;
-        //Form Data method set
+
         this.postData.set(e.target.name, value);
         this.setState({
             error: "",
@@ -92,7 +88,6 @@ class NewPost extends Component {
                             loading: false,
                             redirectToProfile: true
                         });
-                        //console.log("NEW POST ",data);
                     }
                 });
         }

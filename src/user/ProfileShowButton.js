@@ -1,8 +1,21 @@
 import React, { useState } from "react";
-import { Box, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
+import {
+    Box,
+    IconButton,
+    Modal,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+    Typography
+} from "@material-ui/core";
+
 import { DisplayDateTime12Hour } from "../post/timeDifference";
 
-export const ProfileShowModal = (user) => {
+export const ProfileShowButton = (user) => {
+
     const userInfo = user.user;
     const [openInformationModal, setOpenInformationModal] = useState(false);
     const [onClose, setOnClose] = useState(false);
@@ -44,6 +57,8 @@ export const ProfileShowModal = (user) => {
             >
                 <i style={{ marginRight: "15px" }} class="fa fa-exclamation-circle" aria-hidden="true"></i> User Details
             </button>
+
+            {/* Modal */}
             <Modal
                 open={openInformationModal}
                 onClose={handleCloseInformationModal}

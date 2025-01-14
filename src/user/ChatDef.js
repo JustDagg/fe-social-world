@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import DefaultProfile from '../images/avatar.jpg';
 import Loading from '../loading/Loading';
-import { Link } from 'react-router-dom';
 import Footer from '../component/Footer';
 import { isAuthenticated } from "../auth";
 import { read, getChatList } from './apiUser';
@@ -43,7 +44,6 @@ class Chat extends Component {
         this.setState({ sender });
     }
 
-    // Function to handle search input change
     handleSearchChange = (event) => {
         this.setState({ searchTerm: event.target.value });
     };
@@ -51,7 +51,6 @@ class Chat extends Component {
     render() {
         const { chatList, sender, loading, searchTerm } = this.state;
 
-        // Filtered chat list based on search term
         const filteredChatList = chatList.filter(user =>
             user.name.toLowerCase().includes(searchTerm.toLowerCase())
         );

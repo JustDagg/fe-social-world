@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import {
+    Typography,
+    TextField,
+    Button,
+    Container,
+    Paper,
+    Divider,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem
+} from '@material-ui/core';
 import { Redirect, Link } from 'react-router-dom';
+
 import SocialLogin from "./SocialLogin";
 import Loading from '../loading/Loading';
-import { Typography, TextField, Button, Container, Paper, Divider, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
-
 import { signin, authenticate } from "../auth";
 
 class Signin extends Component {
@@ -20,12 +31,10 @@ class Signin extends Component {
         };
     }
 
-    // handleDayChange
     handleDayChange = event => {
         this.setState({ selectedDay: event.target.value });
     };
 
-    // handleChange
     handleChange = e => {
         this.setState({
             error: "",
@@ -33,7 +42,6 @@ class Signin extends Component {
         });
     };
 
-    // clickSubmit
     clickSubmit = e => {
         e.preventDefault();
         this.setState({ loading: true });
@@ -46,7 +54,6 @@ class Signin extends Component {
                     if (data.error) {
                         this.setState({ error: data.error, loading: false });
                     } else {
-                        // authenticate
                         authenticate(data, () => {
                             this.setState({ redirectToReferer: true })
                         });
