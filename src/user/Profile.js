@@ -34,6 +34,12 @@ class Profile extends Component {
             isNoteModalOpen: false,
             note: "",
             existingNote: null,
+            buttonVisibility: {
+                showCreatePostButton: true,
+                showEditProfileButton: true,
+                showDeleteProfileButton: true,
+                showUserDetailsButton: true,
+            }
         }
     }
 
@@ -173,9 +179,19 @@ class Profile extends Component {
         });
     };
 
+    updateButtonVisibility = (buttonName, isVisible) => {
+        this.setState((prevState) => ({
+            buttonVisibility: {
+                ...prevState.buttonVisibility,
+                [buttonName]: isVisible,
+            }
+        }));
+    };
+
     renderProfile = () => {
         const { token, user, following, posts, isAvatarModalOpen, isNoteModalOpen, existingNote, note } = this.state;
         const photoUrl = user._id ? `${process.env.REACT_APP_API_URL}/user/photo/${user._id}?${new Date().getTime()}` : DefaultProfile;
+        const { buttonVisibility } = this.state;
 
         // Kiểm tra người dùng hiện tại có phải là người đăng nhập không
         const isLoggedInUser = isAuthenticated() && isAuthenticated().user._id === user._id;
@@ -619,51 +635,62 @@ class Profile extends Component {
                                             sx={{ gap: 10 }}
                                         >
                                             {/* SETTING BUTTON */}
-                                            <SettingButton token={token} userId={user._id} />
+                                            <SettingButton
+                                                buttonVisibility={this.state.buttonVisibility}
+                                                updateButtonVisibility={this.updateButtonVisibility}
+                                            />
 
-                                            {/* CREATE POST BUTTON */}
-                                            <Link
-                                                className="btn btn-sm btn-raised btn-dark"
-                                                to={`/post/create`}
-                                                style={{
-                                                    padding: '10px 20px',
-                                                    backgroundColor: "#343a40",
-                                                    borderRadius: "25px",
-                                                    width: '100%',
-                                                    fontSize: "14px",
-                                                    textDecoration: "none",
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    transition: "background-color 0.3s ease, transform 0.3s ease",
-                                                }}
-                                            >
-                                                <i style={{ marginRight: "15px" }} class="fa fa-plus-square" aria-hidden="true"></i> Create Post
-                                            </Link>
+                                            {/* Create Post Button */}
+                                            {buttonVisibility.showCreatePostButton && (
+                                                <Link
+                                                    className="btn btn-sm btn-raised btn-dark"
+                                                    to={`/post/create`}
+                                                    style={{
+                                                        padding: '10px 20px',
+                                                        backgroundColor: "#343a40",
+                                                        borderRadius: "25px",
+                                                        width: '100%',
+                                                        fontSize: "14px",
+                                                        textDecoration: "none",
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        transition: "background-color 0.3s ease, transform 0.3s ease",
+                                                    }}
+                                                >
+                                                    <i style={{ marginRight: "15px" }} className="fa fa-plus-square" aria-hidden="true"></i> Create Post
+                                                </Link>
+                                            )}
 
-                                            {/* EDIT PROFILE BUTTON */}
-                                            <Link
-                                                className="btn btn-sm btn-raised btn-dark"
-                                                to={`/user/edit/${user._id}`}
-                                                style={{
-                                                    padding: '10px 20px',
-                                                    backgroundColor: "#343a40",
-                                                    borderRadius: "25px",
-                                                    width: '100%',
-                                                    fontSize: "14px",
-                                                    textDecoration: "none",
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    transition: "background-color 0.3s ease, transform 0.3s ease",
-                                                }}
-                                            >
-                                                <i style={{ marginRight: "15px" }} class="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
-                                            </Link>
+                                            {/* Edit Profile Button */}
+                                            {buttonVisibility.showEditProfileButton && (
+                                                <Link
+                                                    className="btn btn-sm btn-raised btn-dark"
+                                                    to={`/user/edit/${user._id}`}
+                                                    style={{
+                                                        padding: '10px 20px',
+                                                        backgroundColor: "#343a40",
+                                                        borderRadius: "25px",
+                                                        width: '100%',
+                                                        fontSize: "14px",
+                                                        textDecoration: "none",
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        transition: "background-color 0.3s ease, transform 0.3s ease",
+                                                    }}
+                                                >
+                                                    <i style={{ marginRight: "15px" }} className="fa fa-pencil-square" aria-hidden="true"></i> Edit Profile
+                                                </Link>
+                                            )}
 
-                                            {/* DELETE USER BUTTON */}
-                                            <DeleteUserButton userId={user._id} username={user.name} />
+                                            {/* Delete User Button */}
+                                            {buttonVisibility.showDeleteProfileButton && (
+                                                <DeleteUserButton userId={user._id} username={user.name} />
+                                            )}
 
-                                            {/* PROFILE SHOW BUTTON */}
-                                            <ProfileShowButton user={user} />
+                                            {/* Profile Show Button */}
+                                            {buttonVisibility.showUserDetailsButton && (
+                                                <ProfileShowButton user={user} />
+                                            )}
                                         </Box>
                                     </>
                                 ) : (
