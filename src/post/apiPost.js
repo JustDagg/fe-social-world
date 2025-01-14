@@ -142,10 +142,49 @@ export const comment = (userId, token, postId, comment) => {
         },
         body: JSON.stringify({ userId, postId, comment })
     })
-        .then(response => {
+        .then(async (response) => {
+            if (!response.ok) {
+                const errorData = await response.json();
+                if (errorData.error) {
+                    throw new Error(errorData.error);
+                } else if (errorData.comment && errorData.comment.error) {
+                    throw new Error(errorData.comment.error);
+                }
+                throw new Error("Có lỗi xảy ra.");
+            }
             return response.json();
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.error(err.message);
+            throw err;
+        });
+};
+
+// updateRestrictedPhrases (/post/comment/restricted)
+export const updateRestrictedPhrases = (token, userId, restrictedPhrases) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/post/comment/restricted`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ userId, restrictedPhrases })
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err));
+};
+
+export const getRestrictedPhrases = (token, userId) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/post/comment/restricted`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err));
 };
 
 // uncomment (/post/uncomment)
@@ -200,13 +239,13 @@ export const fetchDiscussionPosts = async (subject, startDate, endDate) => {
 export const fetchSubjects = async () => {
     try {
         const url = `${process.env.REACT_APP_API_URL}/discussion/subjects`;
-        
+
         const response = await fetch(url);
-        
+
         if (!response.ok) {
             throw new Error('Error fetching subjects');
         }
-        
+
         const data = await response.json();
         return data;
     } catch (error) {

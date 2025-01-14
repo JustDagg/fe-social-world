@@ -15,6 +15,7 @@ import Footer from '../component/Footer';
 import NoteModal from './NoteModal';
 import { ProfileShowModal } from './ProfileShowModal';
 import { Box, Paper } from '@material-ui/core';
+import { SettingButton } from './SettingButton';
 
 class Profile extends Component {
     constructor() {
@@ -177,7 +178,7 @@ class Profile extends Component {
     };
 
     renderProfile = () => {
-        const { user, following, posts, isAvatarModalOpen, isNoteModalOpen, existingNote, note } = this.state;
+        const { token, user, following, posts, isAvatarModalOpen, isNoteModalOpen, existingNote, note } = this.state;
         console.log("Pas", user)
         const photoUrl = user._id ? `${process.env.REACT_APP_API_URL}/user/photo/${user._id}?${new Date().getTime()}` : DefaultProfile;
 
@@ -622,6 +623,8 @@ class Profile extends Component {
                                             justifyContent={'space-between'}
                                             sx={{ gap: 10 }}
                                         >
+                                            <SettingButton token={token} userId={user._id} />
+
                                             {/* CREATE POST BUTTON */}
                                             <Link
                                                 className="btn btn-sm btn-raised btn-dark"

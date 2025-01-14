@@ -49,14 +49,19 @@ class Comment extends Component {
     // addComment
     addComment = e => {
         e.preventDefault();
+
+        // Check if the user is authenticated
         if (!isAuthenticated()) {
             this.setState({
                 error: "Please Signin first to leave a comment"
             });
             return false;
         }
+
+        // Validate the comment text
         if (this.isValid()) {
             this.setState({ loading: true });
+
             const userId = isAuthenticated().user._id;
             const token = isAuthenticated().token;
             const postId = this.props.postId;
@@ -64,17 +69,26 @@ class Comment extends Component {
 
             comment(userId, token, postId, commentText)
                 .then(data => {
-                    if (data.error) {
-                        console.log(data.error);
+                    if (data.comment && data.comment.error) {
+                        this.setState({
+                            error: data.comment.error,
+                            loading: false
+                        });
                     } else {
                         this.setState({
                             text: "",
                             showPicker: false,
                             loading: false
                         });
-                        // Send the updated/fresh list of comments to the parent component
                         this.props.updateComments(data.comments);
                     }
+                })
+                .catch(err => {
+                    console.error("Error posting comment:", err);
+                    this.setState({
+                        loading: false,
+                        error: err.message || "An error occurred. Please try again later."
+                    });
                 });
         }
     };
