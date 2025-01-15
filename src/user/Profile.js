@@ -5,7 +5,6 @@ import {
 } from '@material-ui/core';
 import { Redirect, Link } from 'react-router-dom';
 import { Tabs, Tab } from 'react-bootstrap-tabs';
-import * as XLSX from 'xlsx';
 import DefaultProfile from '../images/avatar.jpg';
 import DeleteUserButton from './DeleteUserButton';
 import { SettingButton } from './SettingButton';
@@ -19,6 +18,7 @@ import { createNote, deleteNote, getNotesByUser, read } from "./apiUser";
 import '../css/Profile.css';
 import Footer from '../component/Footer';
 import NoteModal from './NoteModal';
+import { exportToExcel, exportToPDF } from '../utils';
 
 class Profile extends Component {
     constructor() {
@@ -186,28 +186,6 @@ class Profile extends Component {
                 [buttonName]: isVisible,
             }
         }));
-    };
-
-    exportToExcel = (user) => {
-        const data = [
-            { label: 'Birth Year', value: user.birthYear },
-            { label: 'Gender', value: user.sex },
-            { label: 'Religion', value: user.religion },
-            { label: 'Ethnicity', value: user.ethnicity },
-            { label: 'Province/City', value: user.city },
-            { label: 'Hometown', value: user.hometown },
-            { label: 'University', value: user.university },
-            { label: 'Major', value: user.major },
-            { label: 'Specialization', value: user.specialization },
-            { label: 'Study Status', value: user.studyStatus === '0' ? 'Ra trường' : 'Vẫn đang học' },
-            { label: 'Hobby', value: user.hobby },
-            { label: 'Social Network Link', value: user.socialNetworkLink },
-            { label: 'Join Date', value: user.created ? new Date(user.created).toLocaleDateString() : '' }
-        ];
-        const ws = XLSX.utils.json_to_sheet(data);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'User Information');
-        XLSX.writeFile(wb, 'user_information.xlsx');
     };
 
     renderProfile = () => {
@@ -583,27 +561,47 @@ class Profile extends Component {
                                     <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#333', margin: 0 }}>
                                         Information
                                     </h3>
-                                    {/* Export Button */}
-                                    <button
-                                        title='Export to excel (xlsx)'
-                                        onClick={() => this.exportToExcel(user)}
-                                        style={{
-                                            padding: '5px 14px',
-                                            fontSize: '13px',
-                                            backgroundColor: 'black',
-                                            color: '#fff',
-                                            border: 'none',
-                                            borderRadius: '20px',
-                                            cursor: 'pointer',
-                                            transition: 'background-color 0.3s, transform 0.2s',
-                                            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                                        }}
-                                        onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
-                                        onMouseLeave={(e) => (e.target.style.backgroundColor = 'black')}
-                                    >
-                                        <i style={{ marginRight: '10px' }} class="fa fa-download" aria-hidden="true"></i>
-                                        <span style={{ fontWeight: 'bold' }}>Export</span>
-                                    </button>
+
+                                    <Box>
+                                        {/* Export Button */}
+                                        <button
+                                            title='Export to EXCEL (.xlsx)'
+                                            onClick={() => exportToExcel(user)}
+                                            style={{
+                                                marginRight: '10px',
+                                                padding: '5px 14px',
+                                                fontSize: '13px',
+                                                backgroundColor: '#33C481',
+                                                color: 'white',
+                                                border: 'none',
+                                                borderRadius: '20px',
+                                                cursor: 'pointer',
+                                                transition: 'background-color 0.3s, transform 0.2s',
+                                                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                            }}
+                                        >
+                                            <i style={{ marginRight: '10px' }} class="fa fa-download" aria-hidden="true"></i>
+                                            <span style={{ fontWeight: 'bold' }}>Export Excel</span>
+                                        </button>
+                                        <button
+                                            title='Export to PDF (.pdf)'
+                                            onClick={() => exportToPDF(user)}
+                                            style={{
+                                                padding: '5px 14px',
+                                                fontSize: '13px',
+                                                backgroundColor: '#F6891C',
+                                                color: '#fff',
+                                                border: 'none',
+                                                borderRadius: '20px',
+                                                cursor: 'pointer',
+                                                transition: 'background-color 0.3s, transform 0.2s',
+                                                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                            }}
+                                        >
+                                            <i style={{ marginRight: '10px' }} class="fa fa-download" aria-hidden="true"></i>
+                                            <span style={{ fontWeight: 'bold' }}>Export PDF</span>
+                                        </button>
+                                    </Box>
                                 </Box>
                                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                     <tbody>
