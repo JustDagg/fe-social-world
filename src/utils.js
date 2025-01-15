@@ -4,19 +4,19 @@ import { jsPDF } from 'jspdf';
 // --- Profile ---
 export const prepareData = (user) => {
     return [
-        { label: 'Birth Year', value: user.birthYear },
-        { label: 'Gender', value: user.sex },
-        { label: 'Religion', value: user.religion },
-        { label: 'Ethnicity', value: user.ethnicity },
-        { label: 'Province/City', value: user.city },
-        { label: 'Hometown', value: user.hometown },
-        { label: 'University', value: user.university },
-        { label: 'Major', value: user.major },
-        { label: 'Specialization', value: user.specialization },
-        { label: 'Study Status', value: user.studyStatus === '0' ? 'Ra trường' : 'Vẫn đang học' },
-        { label: 'Hobby', value: user.hobby },
-        { label: 'Social Network Link', value: user.socialNetworkLink },
-        { label: 'Join Date', value: user.created ? new Date(user.created).toLocaleDateString() : '' }
+        { label: 'Birth Year', value: user.birthYear || ' ' },
+        { label: 'Gender', value: user.sex || ' ' },
+        { label: 'Religion', value: user.religion || ' ' },
+        { label: 'Ethnicity', value: user.ethnicity || ' ' },
+        { label: 'Province/City', value: user.city || ' ' },
+        { label: 'Hometown', value: user.hometown || ' ' },
+        { label: 'University', value: user.university || ' ' },
+        { label: 'Major', value: user.major || ' ' },
+        { label: 'Specialization', value: user.specialization || ' ' },
+        { label: 'Study Status', value: user.studyStatus === '0' ? 'Ra trường' : 'Vẫn đang học' || ' ' },
+        { label: 'Hobby', value: user.hobby || ' ' },
+        { label: 'Social Network Link', value: user.socialNetworkLink || ' ' },
+        { label: 'Join Date', value: user.created ? new Date(user.created).toLocaleDateString() : ' ' }
     ];
 };
 
