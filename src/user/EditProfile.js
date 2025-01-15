@@ -27,6 +27,7 @@ class EditProfle extends Component {
             major: "",
             specialization: "",
             studyStatus: "",
+            certificate: "",
             hobby: "",
             ethnicity: "",
             religion: "",
@@ -61,6 +62,7 @@ class EditProfle extends Component {
                         major: data.major,
                         specialization: data.specialization,
                         studyStatus: data.studyStatus,
+                        certificate: data.certificate,
                         hobby: data.hobby,
                         ethnicity: data.ethnicity,
                         religion: data.religion,
@@ -160,6 +162,7 @@ class EditProfle extends Component {
         major,
         specialization,
         studyStatus,
+        certificate,
         hobby,
         ethnicity,
         religion,
@@ -589,6 +592,31 @@ class EditProfle extends Component {
                 </div>
             </Grid>
 
+            {/* certificate */}
+            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                    Certificate (Chứng chỉ)
+                </label>
+                <input
+                    onChange={this.handleChange}
+                    name="certificate"
+                    type="text"
+                    value={certificate}
+                    style={{
+                        padding: '10px',
+                        fontSize: '16px',
+                        border: '1px solid #dadce0',
+                        borderRadius: '15px',
+                        boxShadow: 'none',
+                        transition: 'border 0.3s ease',
+                        width: '100%',
+                        outline: 'none'
+                    }}
+                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                />
+            </div>
+
             <Grid style={{ gap: 10, display: 'flex' }}>
                 {/* NICKNAME FIELD */}
                 <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
@@ -618,7 +646,7 @@ class EditProfle extends Component {
                 {/* SOCIAL NETWORK LINK FIELD */}
                 <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
                     <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                        Social Network Link (Liên kết mạng xã hội)
+                        Social Network Link (Liên kết MXH)
                     </label>
                     <input
                         onChange={this.handleChange}
@@ -748,6 +776,7 @@ class EditProfle extends Component {
             major,
             specialization,
             studyStatus,
+            certificate,
             hobby,
             ethnicity,
             religion,
@@ -827,6 +856,7 @@ class EditProfle extends Component {
                             major,
                             specialization,
                             studyStatus,
+                            certificate,
                             hobby,
                             ethnicity,
                             religion,

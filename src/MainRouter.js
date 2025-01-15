@@ -37,6 +37,7 @@ const MainRouter = () => (
             {/* NewPost (/post/create) */}
             <PrivateRoute exact path="/post/create" component={NewPost} />
 
+            {/* CreateDiscussion (/post/createDiscussion) */}
             <PrivateRoute exact path="/post/createDiscussion" component={NewDiscussionPost} />
 
             {/* SinglePost (/post/:postId) */}

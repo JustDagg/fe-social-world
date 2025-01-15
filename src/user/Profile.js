@@ -494,11 +494,12 @@ class Profile extends Component {
                                                     color: '#fff',
                                                     fontWeight: 'bold',
                                                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                                    cursor: 'pointer'
                                                 }}
                                             >
                                                 {posts.length}
                                             </span>
-                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#6c757d' }}>Posts</div>
+                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#333', fontWeight: 'bold' }}>Posts</div>
                                         </div>
 
                                         {/* followers */}
@@ -513,11 +514,12 @@ class Profile extends Component {
                                                     color: '#fff',
                                                     fontWeight: 'bold',
                                                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                                    cursor: 'pointer'
                                                 }}
                                             >
                                                 {user.followers.length}
                                             </span>
-                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#6c757d' }}>Followers</div>
+                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#333', fontWeight: 'bold' }}>Followers</div>
                                         </div>
 
                                         {/* following */}
@@ -532,11 +534,12 @@ class Profile extends Component {
                                                     color: '#fff',
                                                     fontWeight: 'bold',
                                                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                                    cursor: 'pointer'
                                                 }}
                                             >
                                                 {user.following.length}
                                             </span>
-                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#6c757d' }}>Following</div>
+                                            <div style={{ marginTop: '8px', fontSize: '14px', color: '#333', fontWeight: 'bold' }}>Following</div>
                                         </div>
                                     </div>
                                 </div>
@@ -672,6 +675,12 @@ class Profile extends Component {
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>
                                                     {user.studyStatus === '0' ? 'Ra trường' : 'Vẫn đang học'}
                                                 </td>
+                                            </tr>
+                                        )}
+                                        {user.certificate && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Certificate (Chứng chỉ)</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.certificate}</td>
                                             </tr>
                                         )}
                                         {user.hobby && (
@@ -975,7 +984,7 @@ class Profile extends Component {
                                                 style={{
                                                     fontSize: '18px',
                                                     fontWeight: 'bold',
-                                                    color: '#333', // Dark color for text
+                                                    color: '#333',
                                                     textDecoration: 'none',
                                                     transition: 'color 0.3s ease',
                                                 }}

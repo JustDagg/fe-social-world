@@ -284,6 +284,17 @@ export const ProfileShowButton = (user) => {
                                     </TableRow>
                                 )}
 
+                                {userInfo.certificate && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Certificate</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.certificate}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
                                 {/* Hobby */}
                                 {userInfo.hobby && (
                                     <TableRow>
