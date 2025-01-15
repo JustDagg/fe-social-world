@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import { Redirect, Link } from 'react-router-dom';
 import { Tabs, Tab } from 'react-bootstrap-tabs';
+
 import DefaultProfile from '../images/avatar.jpg';
 import DeleteUserButton from './DeleteUserButton';
 import { SettingButton } from './SettingButton';
@@ -564,6 +565,7 @@ class Profile extends Component {
 
                                     <Box>
                                         {/* Export Button */}
+                                        {/* EXCEL */}
                                         <button
                                             title='Export to EXCEL (.xlsx)'
                                             onClick={() => exportToExcel(user)}
@@ -583,6 +585,8 @@ class Profile extends Component {
                                             <i style={{ marginRight: '10px' }} class="fa fa-download" aria-hidden="true"></i>
                                             <span style={{ fontWeight: 'bold' }}>Export Excel</span>
                                         </button>
+
+                                        {/* PDF */}
                                         <button
                                             title='Export to PDF (.pdf)'
                                             onClick={() => exportToPDF(user)}

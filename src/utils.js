@@ -1,6 +1,7 @@
 import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
 
+// --- Profile ---
 export const prepareData = (user) => {
     return [
         { label: 'Birth Year', value: user.birthYear },
