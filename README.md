@@ -6,7 +6,7 @@
     - #### *SignUp / SignIn.*
     - #### *Google Oauth 2 Login.*
     - #### *Forgot password send email reset password.*
-    - #### *Edit (upload avatar) / Delete your profile.*
+    - #### *Edit your profile (upload avatar) / Delete your profile, Show users profile (2 export buttons .xlsx .pdf: xlsx, jspdf).*
     - #### *Follow / Unfollow users.*
     - #### *Create (upload image) / Edit / Delete posts.*
     - #### *Create / Delete post comments. (Customize the offensive restrictive phrase feature)*
