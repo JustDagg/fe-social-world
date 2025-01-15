@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     Box,
+    Divider,
     Paper
 } from '@material-ui/core';
 import { Redirect, Link } from 'react-router-dom';
@@ -545,7 +546,7 @@ class Profile extends Component {
                             <div
                                 style={{
                                     flex: '2',
-                                    backgroundColor: '#fff',
+                                    backgroundColor: 'whitesmoke',
                                     padding: '20px',
                                     borderRadius: '10px',
                                     margin: '10px',
@@ -557,11 +558,10 @@ class Profile extends Component {
                                     justifyContent="space-between"
                                     alignItems="center"
                                     width="100%"
-                                    mb={3} // Add margin-bottom for spacing
                                 >
-                                    <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#333', margin: 0 }}>
+                                    <span style={{ fontSize: '22px', fontWeight: 'bold', color: '#333', margin: 0 }}>
                                         Information
-                                    </h3>
+                                    </span>
 
                                     <Box>
                                         {/* Export Button */}
@@ -607,6 +607,9 @@ class Profile extends Component {
                                         </button>
                                     </Box>
                                 </Box>
+
+                                <Divider style={{ margin: '20px 0' }} />
+
                                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                     <tbody>
                                         {user.birthYear && (

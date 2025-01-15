@@ -39,7 +39,7 @@ export const exportToPDF = (user) => {
     doc.setFont('NotoSans');
 
     doc.setFontSize(16);
-    doc.text('User Information', 14, 20);
+    doc.text(`Social World - Information ${user.name}`, 14, 20);
 
     let yOffset = 30;
 
