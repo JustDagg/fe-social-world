@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { Redirect, Link } from 'react-router-dom';
 import { Tabs, Tab } from 'react-bootstrap-tabs';
-
+import * as XLSX from 'xlsx';
 import DefaultProfile from '../images/avatar.jpg';
 import DeleteUserButton from './DeleteUserButton';
 import { SettingButton } from './SettingButton';
@@ -186,6 +186,28 @@ class Profile extends Component {
                 [buttonName]: isVisible,
             }
         }));
+    };
+
+    exportToExcel = (user) => {
+        const data = [
+            { label: 'Birth Year', value: user.birthYear },
+            { label: 'Gender', value: user.sex },
+            { label: 'Religion', value: user.religion },
+            { label: 'Ethnicity', value: user.ethnicity },
+            { label: 'Province/City', value: user.city },
+            { label: 'Hometown', value: user.hometown },
+            { label: 'University', value: user.university },
+            { label: 'Major', value: user.major },
+            { label: 'Specialization', value: user.specialization },
+            { label: 'Study Status', value: user.studyStatus === '0' ? 'Ra trường' : 'Vẫn đang học' },
+            { label: 'Hobby', value: user.hobby },
+            { label: 'Social Network Link', value: user.socialNetworkLink },
+            { label: 'Join Date', value: user.created ? new Date(user.created).toLocaleDateString() : '' }
+        ];
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'User Information');
+        XLSX.writeFile(wb, 'user_information.xlsx');
     };
 
     renderProfile = () => {
@@ -551,12 +573,67 @@ class Profile extends Component {
                                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                                 }}
                             >
-                                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#333', marginBottom: '20px' }}>Information</h3>
+                                <Box
+                                    display="flex"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    width="100%"
+                                    mb={3} // Add margin-bottom for spacing
+                                >
+                                    <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#333', margin: 0 }}>
+                                        Information
+                                    </h3>
+                                    {/* Export Button */}
+                                    <button
+                                        title='Export to excel (xlsx)'
+                                        onClick={() => this.exportToExcel(user)}
+                                        style={{
+                                            padding: '5px 14px',
+                                            fontSize: '13px',
+                                            backgroundColor: 'black',
+                                            color: '#fff',
+                                            border: 'none',
+                                            borderRadius: '20px',
+                                            cursor: 'pointer',
+                                            transition: 'background-color 0.3s, transform 0.2s',
+                                            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                        }}
+                                        onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
+                                        onMouseLeave={(e) => (e.target.style.backgroundColor = 'black')}
+                                    >
+                                        <i style={{ marginRight: '10px' }} class="fa fa-download" aria-hidden="true"></i>
+                                        <span style={{ fontWeight: 'bold' }}>Export</span>
+                                    </button>
+                                </Box>
                                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                     <tbody>
+                                        {user.birthYear && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Birth Year (Năm sinh)</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.birthYear}</td>
+                                            </tr>
+                                        )}
+                                        {user.sex && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Gender (Giới tính)</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.sex}</td>
+                                            </tr>
+                                        )}
+                                        {user.religion && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Religion (Tôn giáo)</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.religion}</td>
+                                            </tr>
+                                        )}
+                                        {user.ethnicity && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Ethnicity (Dân tộc)</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.ethnicity}</td>
+                                            </tr>
+                                        )}
                                         {user.city && (
                                             <tr style={{ borderBottom: '1px solid #eee' }}>
-                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Province/City</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Province/City (Tỉnh/Thành phố)</td>
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>Living in {user.city}</td>
                                             </tr>
                                         )}
@@ -566,33 +643,41 @@ class Profile extends Component {
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>From {user.hometown}</td>
                                             </tr>
                                         )}
-                                        {user.birthYear && (
-                                            <tr style={{ borderBottom: '1px solid #eee' }}>
-                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Birth Year</td>
-                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.birthYear}</td>
-                                            </tr>
-                                        )}
                                         {user.university && (
                                             <tr style={{ borderBottom: '1px solid #eee' }}>
-                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>University</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>University (Đại học)</td>
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.university}</td>
                                             </tr>
                                         )}
                                         {user.major && (
                                             <tr style={{ borderBottom: '1px solid #eee' }}>
-                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Major</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Major (Nghành)</td>
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.major}</td>
+                                            </tr>
+                                        )}
+                                        {user.specialization && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Specialization (Chuyên nghành)</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.specialization}</td>
+                                            </tr>
+                                        )}
+                                        {user.studyStatus && (
+                                            <tr style={{ borderBottom: '1px solid #eee' }}>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Study status (Tình trạng học)</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>
+                                                    {user.studyStatus === '0' ? 'Ra trường' : 'Vẫn đang học'}
+                                                </td>
                                             </tr>
                                         )}
                                         {user.hobby && (
                                             <tr style={{ borderBottom: '1px solid #eee' }}>
-                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Hobby</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Hobby (Sở thích)</td>
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>{user.hobby}</td>
                                             </tr>
                                         )}
                                         {user.socialNetworkLink && (
                                             <tr style={{ borderBottom: '1px solid #eee' }}>
-                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Social Network Link</td>
+                                                <td style={{ padding: '10px', fontSize: '16px', color: '#777' }}>Social Network Link (Liên kết MXH)</td>
                                                 <td style={{ padding: '10px', fontSize: '16px', color: '#333', textAlign: 'right' }}>
                                                     <a href={user.socialNetworkLink} target="_blank" rel="noopener noreferrer">
                                                         {user.socialNetworkLink}

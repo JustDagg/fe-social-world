@@ -6,6 +6,7 @@ import DefaultProfile from '../images/avatar.jpg';
 import { isAuthenticated } from "../auth";
 import { read, update, updateUser } from "./apiUser";
 import Footer from '../component/Footer';
+import { Grid } from '@material-ui/core';
 
 class EditProfle extends Component {
 
@@ -25,7 +26,12 @@ class EditProfle extends Component {
             university: "",
             major: "",
             specialization: "",
+            studyStatus: "",
             hobby: "",
+            ethnicity: "",
+            religion: "",
+            mobile: "",
+            nationality: "",
             birthYear: "",
             loading: false,
             redirectToProfile: false,
@@ -54,7 +60,12 @@ class EditProfle extends Component {
                         university: data.university,
                         major: data.major,
                         specialization: data.specialization,
+                        studyStatus: data.studyStatus,
                         hobby: data.hobby,
+                        ethnicity: data.ethnicity,
+                        religion: data.religion,
+                        mobile: data.mobile,
+                        nationality: data.nationality,
                         birthYear: data.birthYear,
                         error: "",
                         about: data.about,
@@ -137,7 +148,28 @@ class EditProfle extends Component {
 
     };
 
-    signupForm = (name, email, sex, nickname, city, hometown, socialNetworkLink, university, major, specialization, hobby, birthYear, hashed_password, loading, about) => (
+    signupForm = (
+        name,
+        email,
+        sex,
+        nickname,
+        city,
+        hometown,
+        socialNetworkLink,
+        university,
+        major,
+        specialization,
+        studyStatus,
+        hobby,
+        ethnicity,
+        religion,
+        mobile,
+        nationality,
+        birthYear,
+        hashed_password,
+        loading,
+        about
+    ) => (
         <form style={{ padding: "0px 30px", marginBottom: "30px" }}>
 
             {/* PROFILE PHOTO FIELD */}
@@ -153,7 +185,7 @@ class EditProfle extends Component {
                             padding: '20px 40px',
                             backgroundColor: '#1a73e8',
                             color: '#fff',
-                            borderRadius: '4px',
+                            borderRadius: '15px',
                             cursor: 'pointer',
                             fontSize: '14px',
                             fontWeight: '500',
@@ -186,264 +218,433 @@ class EditProfle extends Component {
                 </div>
             </div>
 
-            {/* NAME FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Name
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="name"
-                    type="text"
-                    value={name}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+            <Grid style={{ gap: 10, display: 'flex' }}>
+                {/* NAME FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Name (Họ và tên)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="name"
+                        type="text"
+                        value={name}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
 
-            {/* EMAIL FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Email
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="email"
-                    type="email"
-                    value={email}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+                {/* EMAIL FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Email
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="email"
+                        type="email"
+                        value={email}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
 
-            {/* SEX FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Sex
-                </label>
-                <select
-                    name="sex"
-                    value={sex}
-                    onChange={this.handleChange}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        width: '100%',
-                        outline: 'none',
-                        transition: 'border 0.3s ease',
-                        backgroundColor: '#fff',
-                    }}
-                    onFocus={(e) => (e.target.style.border = '1px solid #1a73e8')}
-                    onBlur={(e) => (e.target.style.border = '1px solid #dadce0')}
-                >
-                    <option value="" disabled></option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
+                {/* BIRTH YEAR FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '50%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Birth Year (Năm sinh)
+                    </label>
+                    <select
+                        onChange={this.handleChange}
+                        name="birthYear"
+                        value={birthYear}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none',
+                            cursor: 'pointer',
+                            appearance: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    >
+                        {Array.from({ length: new Date().getFullYear() - 1900 + 1 }, (_, index) => 1900 + index).map(year => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </Grid>
 
-            {/* NICKNAME FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Nickname
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="nickname"
-                    type="text"
-                    value={nickname}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+            <Grid style={{ gap: 10, display: 'flex' }}>
+                {/* SEX FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Gender (Giới tính)
+                    </label>
+                    <select
+                        name="sex"
+                        value={sex}
+                        onChange={this.handleChange}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            width: '100%',
+                            outline: 'none',
+                            transition: 'border 0.3s ease',
+                            backgroundColor: '#fff',
+                        }}
+                        onFocus={(e) => (e.target.style.border = '1px solid #1a73e8')}
+                        onBlur={(e) => (e.target.style.border = '1px solid #dadce0')}
+                    >
+                        <option style={{ fontStyle: 'italic' }} value="">Select sex</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
 
-            {/* city FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Province/City
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="city"
-                    type="text"
-                    value={city}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+                {/* religion */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Religion (Tôn giáo)
+                    </label>
+                    <select
+                        name="religion"
+                        value={religion}
+                        onChange={this.handleChange}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                    >
+                        <option style={{ fontStyle: 'italic' }} value="">Select religion</option>
+                        <option value="Có">Có</option>
+                        <option value="Không">Không</option>
+                    </select>
+                </div>
 
-            {/* hometown FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Hometown
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="hometown"
-                    type="text"
-                    value={hometown}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+                {/* ethnicity */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Ethnicity (Dân tộc)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="ethnicity"
+                        type="text"
+                        value={ethnicity}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
 
-            {/* SOCIAL NETWORK LINK FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Social Network Link
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="socialNetworkLink"
-                    type="text"
-                    value={socialNetworkLink}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+                {/* mobile */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Mobile (SDT)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="mobile"
+                        type="text"
+                        value={mobile}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
+            </Grid>
 
-            {/* UNIVERSITY FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    University
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="university"
-                    type="text"
-                    value={university}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+            <Grid style={{ gap: 10, display: 'flex' }}>
+                {/* nationality */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Nationality (Quốc tịch)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="nationality"
+                        type="text"
+                        value={nationality}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
 
-            {/* MAJOR */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Major
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="major"
-                    type="text"
-                    value={major}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+                {/* city FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Province/City (Tỉnh/Thành phố)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="city"
+                        type="text"
+                        value={city}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
 
-            {/* Specialization */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Specialization
-                </label>
-                <input
-                    onChange={this.handleChange}
-                    name="specialization"
-                    type="text"
-                    value={specialization}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                />
-            </div>
+                {/* hometown FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Hometown
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="hometown"
+                        type="text"
+                        value={hometown}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
+            </Grid>
+
+            <Grid style={{ gap: 10, display: 'flex' }}>
+                {/* UNIVERSITY FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        University (Đại học)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="university"
+                        type="text"
+                        value={university}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
+
+                {/* MAJOR */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Major (Nghành)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="major"
+                        type="text"
+                        value={major}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
+
+                {/* Specialization */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Specialization (Chuyên nghành)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="specialization"
+                        type="text"
+                        value={specialization}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
+
+                {/* studyStatus */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '60%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Study status (Tình trạng học)
+                    </label>
+                    <select
+                        name="studyStatus"
+                        value={studyStatus}
+                        onChange={this.handleChange}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                    >
+                        <option style={{ fontStyle: 'italic' }} value="">Select status</option>
+                        <option value="0">Ra truờng</option>
+                        <option value="1">Vẫn đang học</option>
+                    </select>
+                </div>
+            </Grid>
+
+            <Grid style={{ gap: 10, display: 'flex' }}>
+                {/* NICKNAME FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Nickname (Biệt danh)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="nickname"
+                        type="text"
+                        value={nickname}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
+
+                {/* SOCIAL NETWORK LINK FIELD */}
+                <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem', width: '100%' }}>
+                    <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
+                        Social Network Link (Liên kết mạng xã hội)
+                    </label>
+                    <input
+                        onChange={this.handleChange}
+                        name="socialNetworkLink"
+                        type="text"
+                        value={socialNetworkLink}
+                        style={{
+                            padding: '10px',
+                            fontSize: '16px',
+                            border: '1px solid #dadce0',
+                            borderRadius: '15px',
+                            boxShadow: 'none',
+                            transition: 'border 0.3s ease',
+                            width: '100%',
+                            outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
+                        onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
+                    />
+                </div>
+            </Grid>
 
             {/* Hobby */}
             <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
                 <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Hobby
+                    Hobby (Sở thích)
                 </label>
                 <input
                     onChange={this.handleChange}
@@ -454,7 +655,7 @@ class EditProfle extends Component {
                         padding: '10px',
                         fontSize: '16px',
                         border: '1px solid #dadce0',
-                        borderRadius: '4px',
+                        borderRadius: '15px',
                         boxShadow: 'none',
                         transition: 'border 0.3s ease',
                         width: '100%',
@@ -463,38 +664,6 @@ class EditProfle extends Component {
                     onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
                     onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
                 />
-            </div>
-
-            {/* BIRTH YEAR FIELD */}
-            <div className="form-group" style={{ position: 'relative', marginBottom: '1.5rem' }}>
-                <label style={{ fontWeight: '500', fontSize: '14px', color: '#5f6368', display: 'block', marginBottom: '8px' }}>
-                    Birth Year
-                </label>
-                <select
-                    onChange={this.handleChange}
-                    name="birthYear"
-                    value={birthYear}
-                    style={{
-                        padding: '10px',
-                        fontSize: '16px',
-                        border: '1px solid #dadce0',
-                        borderRadius: '4px',
-                        boxShadow: 'none',
-                        transition: 'border 0.3s ease',
-                        width: '100%',
-                        outline: 'none',
-                        cursor: 'pointer',
-                        appearance: 'none'
-                    }}
-                    onFocus={(e) => e.target.style.border = '1px solid #1a73e8'}
-                    onBlur={(e) => e.target.style.border = '1px solid #dadce0'}
-                >
-                    {Array.from({ length: new Date().getFullYear() - 1900 + 1 }, (_, index) => 1900 + index).map(year => (
-                        <option key={year} value={year}>
-                            {year}
-                        </option>
-                    ))}
-                </select>
             </div>
 
             {/* ABOUT FIELD */}
@@ -510,7 +679,7 @@ class EditProfle extends Component {
                         padding: '10px',
                         fontSize: '16px',
                         border: '1px solid #dadce0',
-                        borderRadius: '4px',
+                        borderRadius: '15px',
                         boxShadow: 'none',
                         transition: 'border 0.3s ease',
                         width: '100%',
@@ -536,7 +705,7 @@ class EditProfle extends Component {
                         padding: '10px',
                         fontSize: '16px',
                         border: '1px solid #dadce0',
-                        borderRadius: '4px',
+                        borderRadius: '15px',
                         boxShadow: 'none',
                         transition: 'border 0.3s ease',
                         width: '100%',
@@ -566,7 +735,31 @@ class EditProfle extends Component {
 
     render() {
 
-        const { id, name, email, sex, nickname, city, hometown, socialNetworkLink, university, major, specialization, hobby, birthYear, hashed_password, loading, redirectToProfile, error, about } = this.state;
+        const {
+            id,
+            name,
+            email,
+            sex,
+            nickname,
+            city,
+            hometown,
+            socialNetworkLink,
+            university,
+            major,
+            specialization,
+            studyStatus,
+            hobby,
+            ethnicity,
+            religion,
+            mobile,
+            nationality,
+            birthYear,
+            hashed_password,
+            loading,
+            redirectToProfile,
+            error,
+            about
+        } = this.state;
         if (redirectToProfile) {
             return <Redirect to={`/user/${isAuthenticated().user._id}`}></Redirect>
         }
@@ -622,7 +815,28 @@ class EditProfle extends Component {
                     {loading ? (
                         <Loading />
                     ) : (
-                        this.signupForm(name, email, sex, nickname, city, hometown, socialNetworkLink, university, major, specialization, hobby, birthYear, hashed_password, loading, about)
+                        this.signupForm(
+                            name,
+                            email,
+                            sex,
+                            nickname,
+                            city,
+                            hometown,
+                            socialNetworkLink,
+                            university,
+                            major,
+                            specialization,
+                            studyStatus,
+                            hobby,
+                            ethnicity,
+                            religion,
+                            mobile,
+                            nationality,
+                            birthYear,
+                            hashed_password,
+                            loading,
+                            about
+                        )
                     )}
 
                 </div>

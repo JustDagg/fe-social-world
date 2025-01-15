@@ -111,6 +111,28 @@ export const ProfileShowButton = (user) => {
                     <TableContainer component={Paper} style={{ borderRadius: '8px' }}>
                         <Table>
                             <TableBody>
+                                {userInfo.name && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Name</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.name}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
+                                {userInfo.email && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Email</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.email}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
                                 {/* Nickname */}
                                 {userInfo.nickname && (
                                     <TableRow>
@@ -119,6 +141,74 @@ export const ProfileShowButton = (user) => {
                                         </TableCell>
                                         <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
                                             {userInfo.nickname}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
+                                {/* User Birth Year */}
+                                {userInfo.birthYear && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Birth Year</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.birthYear}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
+                                {/* Sex */}
+                                {userInfo.sex && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Gender</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.sex}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
+                                {userInfo.religion && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Religion</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.religion}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
+                                {userInfo.ethnicity && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Ethnicity</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.ethnicity}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
+                                {userInfo.mobile && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Mobile</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.mobile}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
+                                {userInfo.nationality && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Nationality</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.nationality}
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -143,30 +233,6 @@ export const ProfileShowButton = (user) => {
                                         </TableCell>
                                         <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
                                             {userInfo.hometown}
-                                        </TableCell>
-                                    </TableRow>
-                                )}
-
-                                {/* User Birth Year */}
-                                {userInfo.birthYear && (
-                                    <TableRow>
-                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                            <Typography variant="body1" color="textSecondary">Birth Year</Typography>
-                                        </TableCell>
-                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                            {userInfo.birthYear}
-                                        </TableCell>
-                                    </TableRow>
-                                )}
-
-                                {/* Sex */}
-                                {userInfo.sex && (
-                                    <TableRow>
-                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
-                                            <Typography variant="body1" color="textSecondary">Sex</Typography>
-                                        </TableCell>
-                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
-                                            {userInfo.sex}
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -203,6 +269,17 @@ export const ProfileShowButton = (user) => {
                                         </TableCell>
                                         <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
                                             {userInfo.specialization}
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+
+                                {userInfo.studyStatus && (
+                                    <TableRow>
+                                        <TableCell align="left" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #ddd' }}>
+                                            <Typography variant="body1" color="textSecondary">Study status</Typography>
+                                        </TableCell>
+                                        <TableCell align="right" style={{ borderBottom: '1px solid #ddd', fontSize: '16px', color: '#333' }}>
+                                            {userInfo.studyStatus === 0 ? 'Ra trường' : 'Vẫn đang học'}
                                         </TableCell>
                                     </TableRow>
                                 )}
