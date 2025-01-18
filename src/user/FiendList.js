@@ -13,6 +13,7 @@ const FriendsList = () => {
     const [error, setError] = useState(null);
     const history = useHistory();
     const authenticatedUser = useMemo(() => isAuthenticated(), []);
+    const [successMessage, setSuccessMessage] = useState("");
 
     // Fetch the following users
     useEffect(() => {
@@ -73,17 +74,24 @@ const FriendsList = () => {
             .then(data => {
                 if (data.error) {
                     setError(data.error);
+                    setLoading(false);
                 } else {
-                    // Add the followed user to followingUsers
                     setFollowingUsers(prevFollowing => [
                         ...prevFollowing,
                         user
                     ]);
-                    // Remove the followed user from users
+
                     let newUsers = [...users];
                     newUsers.splice(i, 1);
                     setUsers(newUsers);
+
                     setLoading(false);
+
+                    setSuccessMessage("Successfully followed the user!");
+
+                    setTimeout(() => {
+                        setSuccessMessage("");
+                    }, 3000);
                 }
             })
             .catch(err => {
@@ -217,6 +225,21 @@ const FriendsList = () => {
                     Suggested Users
                 </h4>
 
+                {/* Success message display */}
+                {successMessage && (
+                    <div style={{
+                        fontWeight: 'bold',
+                        backgroundColor: 'green',
+                        color: 'white',
+                        padding: '10px',
+                        borderRadius: '20px',
+                        marginBottom: '10px',
+                        textAlign: 'center'
+                    }}>
+                        {successMessage}
+                    </div>
+                )}
+
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -282,6 +305,7 @@ const FriendsList = () => {
                                             {user.university}
                                         </p>
                                     </div>
+
                                     <button
                                         title='Follow'
                                         onClick={() => onFollow(user, i)}

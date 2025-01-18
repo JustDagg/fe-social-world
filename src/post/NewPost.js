@@ -279,7 +279,7 @@ class NewPost extends Component {
                             fontFamily: 'monospace',
                             whiteSpace: 'pre-wrap',
                             overflowWrap: 'break-word',
-                            maxHeight: '500px',
+                            maxHeight: '200px',
                             overflowY: 'auto',
                             paddingRight: '50px'
                         }}
