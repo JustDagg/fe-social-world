@@ -92,47 +92,6 @@ const FriendsList = () => {
             });
     };
 
-    if (!authenticatedUser) {
-        return (
-            <div style={{
-                padding: '20px',
-                width: '100%',
-                maxWidth: '300px',
-                background: "#1f1f1f",
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                borderRadius: '8px',
-                overflow: 'hidden'
-            }}>
-                <h4 style={{
-                    marginBottom: '20px',
-                    fontSize: '18px',
-                    fontWeight: '600',
-                    color: 'white'
-                }}>Friends</h4>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '30vh',
-                    textAlign: 'center',
-                    color: 'white',
-                    background: '#1f1f1f',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                }}>
-                    <h4 style={{
-                        marginBottom: '20px',
-                        fontSize: '20px',
-                        fontWeight: '600',
-                        color: 'white'
-                    }}>
-                        Please sign in to view your friends.
-                    </h4>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <>
             {/* FRIEND LIST */}
@@ -265,7 +224,7 @@ const FriendsList = () => {
                 }}>
                     {users.length > 0 ? (
                         users.map((user, i) => (
-                            <div key={i} className="suggested-user" style={{ marginBottom: '20px' }}>
+                            <div key={i} className="suggested-user" style={{ marginBottom: '10px' }}>
                                 <div
                                     className="user-card"
                                     style={{

@@ -79,7 +79,7 @@ class Comment extends Component {
                             showPicker: false,
                             loading: false
                         });
-                        this.props.updateComments(data.comments);
+                        window.location.reload()
                     }
                 })
                 .catch(err => {
