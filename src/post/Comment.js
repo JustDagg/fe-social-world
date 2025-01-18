@@ -302,7 +302,7 @@ class Comment extends Component {
                                 <button
                                     style={{ borderRadius: "20px", fontWeight: "bold", width: "100%" }}
                                     type="submit"
-                                    className="btn btn-raised btn-sm btn-info pull-right mt-3 mb-4">
+                                    className="btn btn-raised btn-sm btn-info pull-right mt-1 mb-4">
                                     Add comment
                                 </button>
                             </form>
